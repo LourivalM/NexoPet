@@ -1,0 +1,65 @@
+.login-page-container {
+    width: 100%;
+    height: 100vh;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.login-page-row {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    margin-top: calc(var(--bs-gutter-y) * -1);
+    margin-right: calc(var(--bs-gutter-x) * -.5);
+    margin-left: calc(var(--bs-gutter-x) * -.5);
+}
+
+.login-page-column {
+    flex: 0 0 auto;
+    width: 50%;
+    height: 100%;
+}
+
+.login-col-half > * {
+    height: 100%;
+    width: 100%;
+}
+
+.login-page-column.login-image-column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+
+}
+
+.login-page-column.login-form-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centraliza o conteúdo verticalmente */
+    align-items: center; /* Centraliza o conteúdo horizontalmente */
+    background-color: #f0f0f0; /* Light gray background */
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+.login-image-responsive {
+    max-width: 120%;
+    height: auto;
+}
+
+.login-ford-logo-section {
+    /* Removed width: 100%; */
+    padding-top: 20px; /* Espaçamento do topo */
+    margin: 0 auto;
+}
+
+.login-welcome-message {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.right-panel {
+    background-color: var(--accent-color);
+}

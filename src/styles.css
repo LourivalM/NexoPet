@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+    --primary-color: #8BC34A; /* Um verde suave para elementos principais */
+    --secondary-color: #FFC107; /* Um amarelo/laranja quente para destaque */
+    --background-color: #F0F4C3; /* Um creme claro para o fundo */
+    --text-color: #424242; /* Cinza escuro para o texto */
+    --accent-color: #607D8B; /* Um azul acinzentado para detalhes */
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+body{
+    box-sizing: border-box;
+    height: 100vh;
+}

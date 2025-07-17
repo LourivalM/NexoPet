@@ -1,0 +1,10 @@
+.login-form-container {
+  position: absolute;
+  top: 100%; /* Posiciona abaixo da navbar */
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  z-index: 1000; /* Garante que fique acima de outros elementos */
+}

@@ -1,0 +1,9 @@
+<div *ngIf="pet" class="pet-details-container p-3 shadow rounded">
+  <h3>Detalhes do {{ pet.nome }}</h3>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><strong>Espécie:</strong> {{ pet.especie }}</li>
+    <li class="list-group-item"><strong>Raça:</strong> {{ pet.raca }}</li>
+    <li class="list-group-item"><strong>Idade:</strong> {{ pet.idade }}</li>
+    <li class="list-group-item"><strong>ONG:</strong> {{ pet.ong }}</li>
+  </ul>
+</div> 

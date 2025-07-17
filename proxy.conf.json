@@ -1,0 +1,9 @@
+{
+  // GEMINI_MODIFICATION: Configuração de proxy para a API de backend.
+  // Redireciona todas as requisições que começam com '/api' para o servidor de backend.
+  "/api": {
+    "target": "http://localhost:3001",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

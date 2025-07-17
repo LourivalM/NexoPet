@@ -1,0 +1,29 @@
+/* GEMINI_MODIFICATION: Estilos para garantir a visibilidade do ícone de hambúrguer */
+.navbar-toggler-icon {
+  /* Cor azul Ford para o ícone de hambúrguer */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2896, 125, 139, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  width: 1.5em; /* Tamanho padrão do Bootstrap */
+  height: 1.5em; /* Tamanho padrão do Bootstrap */
+}
+
+.btn.navbar-toggler {
+  width: 40px; /* Ajuste o tamanho conforme necessário */
+  height: 40px; /* Ajuste o tamanho conforme necessário */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent; /* Borda transparente no estado normal */
+  transition: all 0.3s ease; /* Transição suave para hover */
+}
+
+/* GEMINI_MODIFICATION: Estilos para hover do botão de hambúrguer */
+.btn.navbar-toggler:hover {
+  border-color: rgba(0, 51, 102, 1); /* Borda azul da Ford no hover */
+  box-shadow: 0 0 0 0.25rem rgba(0, 51, 102, 0.25); /* Sombra azul da Ford no hover */
+}
+
+/* GEMINI_MODIFICATION: Desativar estilo active por enquanto */
+.btn.navbar-toggler:active {
+  /* Nenhuma alteração de estilo para active por enquanto */
+  box-shadow: none;
+}
