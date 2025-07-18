@@ -12,30 +12,29 @@ import { Router } from '@angular/router';
 })
 export class LoginForm {
   @Output() loggedIn = new EventEmitter<void>();
+  @Output() registerClicked = new EventEmitter<void>(); // Adicionado o Output
 
   loginService = inject(loginService);
   router = inject(Router);
 
 
   loginForm = new FormGroup({
-    nome: new FormControl('', Validators.required),
+    login: new FormControl('', Validators.required),
     senha: new FormControl('', Validators.required),
-    // GEMINI_MODIFICATION: Adicionado FormControl para o checkbox 'Manter conectado'
     manterConectado: new FormControl(false)
   });
 
  onSubmitLogin() {
-    // GEMINI_MODIFICATION: Desestruturação para incluir 'manterConectado'
-    const { nome, senha, manterConectado } = this.loginForm.value;
-    if (!this.loginForm.valid || !nome || !senha){
-      alert('Por favor, preencha os campos de nome e senha corretamente.');
+    const { login, senha, manterConectado } = this.loginForm.value;
+    if (!this.loginForm.valid || !login || !senha){
+      alert('Por favor, preencha os campos de usuário/email e senha corretamente.');
       return;
     }
-    this.loginService.login(nome, senha, manterConectado || false).subscribe
+    this.loginService.login(login, senha, manterConectado || false).subscribe
     ({ 
       error: (err) => {
         if (err.status === 401) {
-          alert('O nome de usuário ou senha está incorreto ou não foi cadastrado!')
+          alert('O nome de usuário/email ou senha está incorreto ou não foi cadastrado!')
           return;
         }
         
@@ -50,5 +49,9 @@ export class LoginForm {
       }
     })
     
+  }
+
+  onRegisterClick(): void { // Novo método para emitir o evento
+    this.registerClicked.emit();
   }
 }

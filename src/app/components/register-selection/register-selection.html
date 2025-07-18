@@ -1,0 +1,36 @@
+<div class="register-selection-overlay" (click)="onClose()">
+  <div class="register-selection-content" (click)="$event.stopPropagation()">
+    <ng-container *ngIf="!selectedForm">
+      <h2>Escolha seu tipo de cadastro</h2>
+      <div class="selection-buttons">
+        <button class="btn btn-selection" (click)="selectForm('pessoa')">
+          <img src="/img/usuario.png" alt="Pessoa Física">
+          Pessoa Física
+        </button>
+        <button class="btn btn-selection" (click)="selectForm('ong')">
+          <img src="/img/NexoIMG/NexiPeticone logo fundo branco.png" alt="ONG">
+          ONG
+        </button>
+        <button class="btn btn-selection" (click)="selectForm('parceiro')">
+          <img src="/img/informacoes.png" alt="Parceiro">
+          Parceiro
+        </button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="selectedForm === 'pessoa'">
+      <button class="btn-back" (click)="goBackToSelection()">&#8592; Voltar</button>
+      <app-register-pessoa-form (formSubmitted)="onFormSubmitted($event)"></app-register-pessoa-form>
+    </ng-container>
+
+    <ng-container *ngIf="selectedForm === 'ong'">
+      <button class="btn-back" (click)="goBackToSelection()">&#8592; Voltar</button>
+      <app-register-ong-form (formSubmitted)="onFormSubmitted($event)"></app-register-ong-form>
+    </ng-container>
+
+    <ng-container *ngIf="selectedForm === 'parceiro'">
+      <button class="btn-back" (click)="goBackToSelection()">&#8592; Voltar</button>
+      <app-register-parceiro-form (formSubmitted)="onFormSubmitted($event)"></app-register-parceiro-form>
+    </ng-container>
+  </div>
+</div>

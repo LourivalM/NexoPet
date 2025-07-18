@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { loginService } from '../../service/login';
 import { LoginForm } from '../login-form/login-form';
+import { RegisterSelectionComponent } from '../register-selection/register-selection';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterLink, LoginForm],
+  imports: [CommonModule, RouterLink, LoginForm, RegisterSelectionComponent],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })
@@ -15,7 +16,8 @@ export class HeaderComponent implements OnInit {
   loginService = inject(loginService);
   isLoggedIn: boolean = false;
   showLoginForm: boolean = false;
-  userType: 'pessoa' | 'ong' | null = null;
+  showRegisterSelection: boolean = false; // Nova propriedade
+  userType: 'pessoa' | 'ong' | 'parceiro' | null = null;
 
   ngOnInit(): void {
     this.checkLoginStatus();
@@ -26,11 +28,18 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn = !!this.userType;
     if (this.isLoggedIn) {
       this.showLoginForm = false; // Esconde o formulário se o usuário estiver logado
+      this.showRegisterSelection = false; // Esconde o seletor de cadastro também
     }
   }
 
   toggleLoginForm(): void {
     this.showLoginForm = !this.showLoginForm;
+    this.showRegisterSelection = false; // Garante que o seletor de cadastro esteja fechado
+  }
+
+  toggleRegisterSelection(): void { // Novo método
+    this.showRegisterSelection = !this.showRegisterSelection;
+    this.showLoginForm = false; // Garante que o formulário de login esteja fechado
   }
 
   onLoggedIn(): void {
@@ -42,6 +51,10 @@ export class HeaderComponent implements OnInit {
     if ((event.target as HTMLElement).classList.contains('login-form-container')) {
       this.showLoginForm = false;
     }
+  }
+
+  onCloseRegisterSelection(): void { // Novo método para fechar o seletor
+    this.showRegisterSelection = false;
   }
 
   logout(): void {

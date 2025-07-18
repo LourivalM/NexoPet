@@ -1,0 +1,49 @@
+[
+  {
+    "id": 1,
+    "nickname": "admin",
+    "senha": "123",
+    "email": "admin@ong.com",
+    "tipo": "ong"
+  },
+  {
+    "id": 2,
+    "nickname": "user",
+    "senha": "123",
+    "email": "user@email.com",
+    "tipo": "pessoa"
+  },
+  {
+    "id": 3,
+    "nickname": "parceiro",
+    "senha": "123",
+    "email": "parceiro@email.com",
+    "tipo": "parceiro"
+  },
+  {
+    "id": 4,
+    "nickname": "teste1",
+    "nome": "teste",
+    "nomeSocial": null,
+    "senha": "123456",
+    "email": "teste@test.com",
+    "telefone": "(71) 9999-9999",
+    "cidade": "teste",
+    "estado": "teste",
+    "pais": "teste",
+    "tipo": "pessoa"
+  },
+  {
+    "id": 5,
+    "nickname": "a1",
+    "nome": "a",
+    "nomeSocial": null,
+    "senha": "123456",
+    "email": "a@a.com",
+    "telefone": "(99) 9999-9999",
+    "cidade": "a",
+    "estado": "a",
+    "pais": "a",
+    "tipo": "pessoa"
+  }
+]

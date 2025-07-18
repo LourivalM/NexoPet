@@ -19,3 +19,19 @@
   max-width: 400px; /* Adjust as needed */
   width: 90%;
 }
+
+.header-logo-img {
+  height: 100px; /* Aumenta o tamanho da logo */
+  margin-right: 10px;
+}
+
+.header-app-name {
+  font-size: 1.8rem; /* Tamanho da fonte do nome */
+  font-weight: bold;
+  color: var(--primary-color); /* Cor primária */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.nexo-black {
+  color: black;
+}

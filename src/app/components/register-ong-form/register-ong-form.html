@@ -1,0 +1,156 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form-wrapper">
+  <h2>Cadastro de ONG</h2>
+
+  <div class="form-section">
+    <h3>Dados da Instituição</h3>
+    <div class="form-group">
+      <label for="nomeInstituicao">Nome da Instituição</label>
+      <input type="text" id="nomeInstituicao" formControlName="nomeInstituicao" class="form-control">
+      <div *ngIf="registerForm.get('nomeInstituicao')?.invalid && registerForm.get('nomeInstituicao')?.touched" class="error-message">
+        Nome da Instituição é obrigatório.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="nickname">Apelido (Nickname)</label>
+      <input type="text" id="nickname" formControlName="nickname" class="form-control">
+      <div *ngIf="registerForm.get('nickname')?.invalid && registerForm.get('nickname')?.touched" class="error-message">
+        Apelido é obrigatório.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input type="email" id="email" formControlName="email" class="form-control">
+      <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error-message">
+        <span *ngIf="registerForm.get('email')?.errors?.['required']">E-mail é obrigatório.</span>
+        <span *ngIf="registerForm.get('email')?.errors?.['email']">E-mail inválido.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" formControlName="senha" class="form-control">
+      <div *ngIf="registerForm.get('senha')?.invalid && registerForm.get('senha')?.touched" class="error-message">
+        <span *ngIf="registerForm.get('senha')?.errors?.['required']">Senha é obrigatória.</span>
+        <span *ngIf="registerForm.get('senha')?.errors?.['minlength']">Senha deve ter no mínimo 6 caracteres.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmarSenha">Confirmar Senha</label>
+      <input type="password" id="confirmarSenha" formControlName="confirmarSenha" class="form-control">
+      <div *ngIf="registerForm.get('confirmarSenha')?.invalid && registerForm.get('confirmarSenha')?.touched" class="error-message">
+        Confirmar Senha é obrigatório.
+      </div>
+      <div *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmarSenha')?.touched" class="error-message">
+        Senhas não conferem.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="cnpj">CNPJ</label>
+      <input type="text" id="cnpj" formControlName="cnpj" class="form-control" placeholder="Ex: 00.000.000/0000-00" appCnpjMask>
+      <div *ngIf="registerForm.get('cnpj')?.invalid && registerForm.get('cnpj')?.touched" class="error-message">
+        CNPJ é obrigatório e deve estar no formato 00.000.000/0000-00.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="telefone">Telefone</label>
+      <input type="text" id="telefone" formControlName="telefone" class="form-control" placeholder="Ex: (00) 00000-0000" appPhoneMask>
+      <div *ngIf="registerForm.get('telefone')?.invalid && registerForm.get('telefone')?.touched" class="error-message">
+        Telefone inválido. Ex: (00) 00000-0000.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="rua">Rua</label>
+      <input type="text" id="rua" formControlName="rua" class="form-control">
+      <div *ngIf="registerForm.get('rua')?.invalid && registerForm.get('rua')?.touched" class="error-message">
+        Rua é obrigatória.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="numero">Número</label>
+      <input type="text" id="numero" formControlName="numero" class="form-control">
+      <div *ngIf="registerForm.get('numero')?.invalid && registerForm.get('numero')?.touched" class="error-message">
+        Número é obrigatório.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="bairro">Bairro</label>
+      <input type="text" id="bairro" formControlName="bairro" class="form-control">
+      <div *ngIf="registerForm.get('bairro')?.invalid && registerForm.get('bairro')?.touched" class="error-message">
+        Bairro é obrigatório.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="cidade">Cidade</label>
+      <input type="text" id="cidade" formControlName="cidade" class="form-control">
+      <div *ngIf="registerForm.get('cidade')?.invalid && registerForm.get('cidade')?.touched" class="error-message">
+        Cidade é obrigatória.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="estado">Estado</label>
+      <input type="text" id="estado" formControlName="estado" class="form-control">
+      <div *ngIf="registerForm.get('estado')?.invalid && registerForm.get('estado')?.touched" class="error-message">
+        Estado é obrigatório.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="pais">País</label>
+      <input type="text" id="pais" formControlName="pais" class="form-control">
+      <div *ngIf="registerForm.get('pais')?.invalid && registerForm.get('pais')?.touched" class="error-message">
+        País é obrigatório.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="cargoRepresentante">Cargo do Representante</label>
+      <input type="text" id="cargoRepresentante" formControlName="cargoRepresentante" class="form-control">
+      <div *ngIf="registerForm.get('cargoRepresentante')?.invalid && registerForm.get('cargoRepresentante')?.touched" class="error-message">
+        Cargo do Representante é obrigatório.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="areaAtuacao">Área de Atuação</label>
+      <input type="text" id="areaAtuacao" formControlName="areaAtuacao" class="form-control">
+      <div *ngIf="registerForm.get('areaAtuacao')?.invalid && registerForm.get('areaAtuacao')?.touched" class="error-message">
+        Área de Atuação é obrigatória.
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h3>Logo da ONG</h3>
+    <div class="form-group">
+      <label for="profileImage">Selecione uma imagem</label>
+      <input type="file" id="profileImage" (change)="onFileSelected($event)" accept="image/*" class="form-control">
+      <div *ngIf="imageUrl" class="image-preview">
+        <img [src]="imageUrl" alt="Pré-visualização da logo">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group lgpd-consent-group">
+    <div class="form-check">
+      <input type="checkbox" id="lgpdConsent" formControlName="lgpdConsent" class="form-check-input">
+      <label for="lgpdConsent" class="form-check-label" (click)="openLgpdModal()">
+        Eu concordo com os termos de LGPD
+      </label>
+    </div>
+    <div *ngIf="registerForm.get('lgpdConsent')?.invalid && registerForm.get('lgpdConsent')?.touched" class="error-message">
+      Você deve concordar com os termos da LGPD.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Cadastrar</button>
+</form>
+
+<app-lgpd-terms-modal
+  *ngIf="showLgpdModal"
+  (closeModal)="closeLgpdModal()">
+</app-lgpd-terms-modal>

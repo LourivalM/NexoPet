@@ -4,7 +4,7 @@
   </div>
   <div class="input-group mb-3 w-100">
     <span class="input-group-text"><img src="/img/usuario.png" alt="Usuário" style="height: 20px;"></span>
-    <input formControlName="nome" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nome">
+    <input formControlName="login" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Usuário ou E-mail">
   </div>
   <div class="input-group mb-3 w-100">
     <span class="input-group-text"><img src="/img/cadeado.png" alt="Senha" style="height: 20px;"></span>
@@ -19,5 +19,5 @@
     <a href="#" class="forgot-password-link">Esqueci a Senha</a>
   </div>
   <button type="submit" class="btn btn-primary w-100">Entrar</button>
-  <a href="#" class="register-link mt-3">Cadastre-se aqui</a>
+  <a href="#" class="register-link mt-3" (click)="onRegisterClick()">Cadastre-se aqui</a>
 </form>

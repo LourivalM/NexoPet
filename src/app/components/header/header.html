@@ -1,8 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/">
-      <img src="/img/NexoIMG/NexiPeticone logo fundo branco.png" alt="NexoPet Logo" style="height: 40px;">
-      NexoPet
+      <img src="/img/NexoIMG/NexiPeticone logo fundo branco.png" alt="NexoPet Logo" class="header-logo-img">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -19,7 +18,7 @@
       <div class="d-flex align-items-center">
         <ng-container *ngIf="!isLoggedIn">
           <button class="btn btn-outline-primary me-2" (click)="toggleLoginForm()">Login</button>
-          <button class="btn btn-primary">Cadastre-se</button>
+          <button class="btn btn-primary" (click)="toggleRegisterSelection()">Cadastre-se</button>
         </ng-container>
         <ng-container *ngIf="isLoggedIn">
           <span class="me-2">Bem-vindo(a), {{ loginService.getUserType() === 'ong' ? 'ONG' : 'Usuário' }}!</span>
@@ -31,5 +30,7 @@
 </nav>
 
 <div *ngIf="showLoginForm" class="login-form-container" (click)="onContainerClick($event)">
-  <app-login-form (loggedIn)="onLoggedIn()" (click)="$event.stopPropagation()"></app-login-form>
+  <app-login-form (loggedIn)="onLoggedIn()" (registerClicked)="toggleRegisterSelection()" (click)="$event.stopPropagation()"></app-login-form>
 </div>
+
+<app-register-selection *ngIf="showRegisterSelection" (closeSelection)="onCloseRegisterSelection()"></app-register-selection>

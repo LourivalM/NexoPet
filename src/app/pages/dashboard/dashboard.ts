@@ -17,7 +17,7 @@ export class Dashboard implements OnInit{
   dashboardService = inject(DashBoard)
   loginService = inject(loginService)
 
-  userType: 'pessoa' | 'ong' | null = null;
+  userType: 'pessoa' | 'ong' | 'parceiro' | null = null;
 
   pets: Pet[] = []
   

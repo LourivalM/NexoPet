@@ -1,10 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 /* You can add global styles to this file, and also import other style files */
 :root {
-    --primary-color: #8BC34A; /* Um verde suave para elementos principais */
-    --secondary-color: #FFC107; /* Um amarelo/laranja quente para destaque */
-    --background-color: #F0F4C3; /* Um creme claro para o fundo */
-    --text-color: #424242; /* Cinza escuro para o texto */
-    --accent-color: #607D8B; /* Um azul acinzentado para detalhes */
+    --blue-light: #63aace;
+    --blue-dark: #3477a5;
+    --green-light: #92ba76;
+    --green-dark: #6d9f56;
+    --orange-light: #f2b06f;
+    --orange-dark: #e68c49;
+    --white: #f8f9fa;
+
+    /* Mapeamento para as variáveis existentes, se necessário */
+    --primary-color: var(--green-light); /* Exemplo: usando verde claro como cor primária */
+    --secondary-color: var(--orange-light); /* Exemplo: usando laranja claro como cor secundária */
+    --background-color: var(--white); /* Exemplo: usando branco como cor de fundo */
+    --text-color: #424242; /* Mantendo o cinza escuro para o texto, ou pode ser ajustado */
+    --accent-color: var(--blue-light); /* Exemplo: usando azul claro como cor de destaque */
 }
 
 *{
@@ -15,4 +26,9 @@
 body{
     box-sizing: border-box;
     height: 100vh;
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400; /* Peso padrão */
+    font-style: normal;
+    font-variation-settings: "wdth" 100; /* Largura padrão */
 }

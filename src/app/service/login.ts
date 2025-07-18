@@ -11,8 +11,8 @@ export class loginService {
   http=inject(HttpClient);
   platformId = inject(PLATFORM_ID);
 
-  login(nome: any, senha: any, manterConectado: boolean): Observable<Usuario> {
-    return this.http.post<Usuario>('http://localhost:3001/login', { nome, senha })
+  login(login: any, senha: any, manterConectado: boolean): Observable<Usuario> {
+    return this.http.post<Usuario>('http://localhost:3001/login', { login, senha })
     .pipe( 
       tap( 
         (user)=> {
@@ -36,12 +36,23 @@ export class loginService {
     }
   }
 
-  getUserType(): 'pessoa' | 'ong' | null {
+  getUserType(): 'pessoa' | 'ong' | 'parceiro' | null {
     if (isPlatformBrowser(this.platformId)) {
       const userString = sessionStorage.getItem('user') || localStorage.getItem('user');
       if (userString) {
         const user: Usuario = JSON.parse(userString);
         return user.tipo;
+      }
+    }
+    return null;
+  }
+
+  getUserNickname(): string | null {
+    if (isPlatformBrowser(this.platformId)) {
+      const userString = sessionStorage.getItem('user') || localStorage.getItem('user');
+      if (userString) {
+        const user: Usuario = JSON.parse(userString);
+        return user.nickname || user.nome || user.nomeInstituicao || null;
       }
     }
     return null;
