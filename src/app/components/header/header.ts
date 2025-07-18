@@ -35,6 +35,13 @@ export class HeaderComponent implements OnInit {
 
   onLoggedIn(): void {
     this.checkLoginStatus();
+    this.showLoginForm = false; // Fecha o formulário após o login
+  }
+
+  onContainerClick(event: MouseEvent): void {
+    if ((event.target as HTMLElement).classList.contains('login-form-container')) {
+      this.showLoginForm = false;
+    }
   }
 
   logout(): void {

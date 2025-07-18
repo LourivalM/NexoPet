@@ -1,22 +1,30 @@
 :host {
-    height: 100%;
     display: flex;
     flex-direction: column;
 }
 
 .login-form-wrapper {
-    
-    
-    padding: 0.5rem; /* Reduzido o padding para aumentar o comprimento dos inputs */
+    padding: 1.5rem; /* Aumentado o padding para melhor visualização */
     background-color: var(--white);
     display: flex;
     flex-direction: column; /* Stack children vertically */
     flex-wrap: wrap;
-    flex-grow: 1;
     justify-content: center;
     align-items: center;
-    align-self: stretch;
-   
+    border-radius: 8px; /* Adicionado borda arredondada */
+    
+    max-width: 400px; /* Define um tamanho máximo para a caixa de login */
+    width: 100%; /* Garante que seja responsivo */
+}
+
+.login-logo-container {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.login-logo {
+    max-width: 150px; /* Tamanho da logo */
+    height: auto;
 }
 
 .login-form-group {
@@ -139,4 +147,33 @@
 .welcome-text {
     color: var(--secondary-color);
     font-weight: bold;
+}
+
+.forgot-password-link,
+.register-link {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    margin-top: 0.5rem;
+}
+
+.forgot-password-link:hover,
+.register-link:hover {
+    text-decoration: underline;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.mt-3 {
+    margin-top: 1rem;
 }

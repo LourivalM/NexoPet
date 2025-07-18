@@ -1,4 +1,7 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()" class="login-form-wrapper">
+  <div class="login-logo-container">
+    <img src="/img/NexoIMG/NexiPeticone logo fundo branco.png" alt="NexoPet Logo" class="login-logo">
+  </div>
   <div class="input-group mb-3 w-100">
     <span class="input-group-text"><img src="/img/usuario.png" alt="Usuário" style="height: 20px;"></span>
     <input formControlName="nome" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nome">
@@ -8,9 +11,13 @@
     <input formControlName="senha" type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
   </div>
   
-  <div class="form-check mb-3 w-100">
-    <input formControlName="manterConectado" type="checkbox" class="form-check-input" id="manterConectadoCheck">
-    <label class="form-check-label" for="manterConectadoCheck">Manter conectado</label>
+  <div class="form-check mb-3 w-100 d-flex justify-content-between align-items-center">
+    <div>
+      <input formControlName="manterConectado" type="checkbox" class="form-check-input" id="manterConectadoCheck">
+      <label class="form-check-label" for="manterConectadoCheck">Manter conectado</label>
+    </div>
+    <a href="#" class="forgot-password-link">Esqueci a Senha</a>
   </div>
   <button type="submit" class="btn btn-primary w-100">Entrar</button>
+  <a href="#" class="register-link mt-3">Cadastre-se aqui</a>
 </form>
