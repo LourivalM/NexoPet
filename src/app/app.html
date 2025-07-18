@@ -1,2 +1,3 @@
-<app-header></app-header>
+<app-side-menu [isOpen]="isSideMenuOpen" (menuToggled)="onSideMenuToggled($event)"></app-side-menu>
+<app-header (toggleSideMenu)="toggleSideMenu()"></app-header>
 <router-outlet *ngIf="showContent"></router-outlet>

@@ -45,5 +45,31 @@
     "estado": "a",
     "pais": "a",
     "tipo": "pessoa"
+  },
+  {
+    "id": 6,
+    "nickname": "SilverTy",
+    "nome": "Marcelo Dias",
+    "nomeSocial": "Renata ",
+    "senha": "696969",
+    "email": "renatafogosa@gmail.com",
+    "telefone": "(71) 9999-9999",
+    "cidade": "Salvador",
+    "estado": "BA",
+    "pais": "Brazil",
+    "tipo": "pessoa"
+  },
+  {
+    "id": 7,
+    "nickname": "Shinen",
+    "nome": "luã ",
+    "nomeSocial": null,
+    "senha": "123456",
+    "email": "Oliveira@gmail.com",
+    "telefone": "(71) 8646-3761",
+    "cidade": "salvador",
+    "estado": "ba",
+    "pais": "Brasil",
+    "tipo": "pessoa"
   }
 ]

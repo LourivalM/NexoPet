@@ -1,6 +1,10 @@
 :host {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center; /* Centraliza o wrapper verticalmente */
+    align-items: center; /* Centraliza o wrapper horizontalmente */
 }
 
 .login-form-wrapper {
@@ -8,7 +12,6 @@
     background-color: var(--white);
     display: flex;
     flex-direction: column; /* Stack children vertically */
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     border-radius: 8px; /* Adicionado borda arredondada */

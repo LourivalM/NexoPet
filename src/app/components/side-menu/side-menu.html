@@ -1,0 +1,19 @@
+<div class="side-menu" [class.open]="isOpen">
+  <img src="/img/NexoIMG/NexiPeticone logo fundo branco.png" alt="NexoPet Logo" class="side-menu-logo">
+  <div class="menu-header">
+    <h3>Menu</h3>
+    <button class="close-btn" (click)="toggle()">&times;</button>
+  </div>
+  <div class="user-info">
+    <span class="status-indicator"></span>
+    <p>{{ user?.nickname }}</p>
+    <p>{{ user?.email }}</p>
+  </div>
+  <ul class="menu-items">
+    <li><button class="btn btn-primary">Editar Perfil</button></li>
+  </ul>
+</div>
+
+<button class="hamburger-btn" (click)="toggle()">
+  &#9776;
+</button>

@@ -36,25 +36,23 @@ export class loginService {
     }
   }
 
-  getUserType(): 'pessoa' | 'ong' | 'parceiro' | null {
+  getUser(): Usuario | null {
     if (isPlatformBrowser(this.platformId)) {
       const userString = sessionStorage.getItem('user') || localStorage.getItem('user');
       if (userString) {
-        const user: Usuario = JSON.parse(userString);
-        return user.tipo;
+        return JSON.parse(userString);
       }
     }
     return null;
   }
 
+  getUserType(): 'pessoa' | 'ong' | 'parceiro' | null {
+    const user = this.getUser();
+    return user ? user.tipo : null;
+  }
+
   getUserNickname(): string | null {
-    if (isPlatformBrowser(this.platformId)) {
-      const userString = sessionStorage.getItem('user') || localStorage.getItem('user');
-      if (userString) {
-        const user: Usuario = JSON.parse(userString);
-        return user.nickname || user.nome || user.nomeInstituicao || null;
-      }
-    }
-    return null;
+    const user = this.getUser();
+    return user ? user.nickname || user.nome || user.nomeInstituicao || null : null;
   }
 }

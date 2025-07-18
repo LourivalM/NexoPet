@@ -1,9 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { loginService } from '../../service/login';
 import { LoginForm } from '../login-form/login-form';
 import { RegisterSelectionComponent } from '../register-selection/register-selection';
+import { Usuario } from '../../models/user';
 
 @Component({
   selector: 'app-header',
@@ -17,19 +18,25 @@ export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
   showLoginForm: boolean = false;
   showRegisterSelection: boolean = false; // Nova propriedade
-  userType: 'pessoa' | 'ong' | 'parceiro' | null = null;
+  user: Usuario | null = null; // Adicionado para armazenar o objeto do usuário
+
+  @Output() toggleSideMenu = new EventEmitter<void>(); // Novo Output
 
   ngOnInit(): void {
     this.checkLoginStatus();
   }
 
   checkLoginStatus(): void {
-    this.userType = this.loginService.getUserType();
-    this.isLoggedIn = !!this.userType;
+    this.user = this.loginService.getUser(); // Obter o objeto do usuário
+    this.isLoggedIn = !!this.user; // Verificar se o usuário existe
     if (this.isLoggedIn) {
       this.showLoginForm = false; // Esconde o formulário se o usuário estiver logado
       this.showRegisterSelection = false; // Esconde o seletor de cadastro também
     }
+  }
+
+  onToggleSideMenu(): void {
+    this.toggleSideMenu.emit();
   }
 
   toggleLoginForm(): void {

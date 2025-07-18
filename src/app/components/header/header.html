@@ -21,7 +21,10 @@
           <button class="btn btn-primary" (click)="toggleRegisterSelection()">Cadastre-se</button>
         </ng-container>
         <ng-container *ngIf="isLoggedIn">
-          <span class="me-2">Bem-vindo(a), {{ loginService.getUserType() === 'ong' ? 'ONG' : 'Usuário' }}!</span>
+          <button class="btn-status-user me-2 d-flex align-items-center" (click)="onToggleSideMenu()">
+            <span class="status-indicator me-1"></span>
+            <span>{{ user?.nickname }}</span>
+          </button>
           <button class="btn btn-danger" (click)="logout()">Logout</button>
         </ng-container>
       </div>
