@@ -1,0 +1,15 @@
+<h2>Meus Pets</h2>
+<button class="btn btn-primary" (click)="onAddNewPetClick()">Adicionar Novo Pet</button>
+
+<app-pet-form *ngIf="showPetForm" (formSubmit)="handlePetFormSubmit($event)"></app-pet-form>
+
+<div *ngIf="pets$ | async as pets">
+  <div *ngFor="let pet of pets">
+    <h3>{{ pet.nome }}</h3>
+    <p>Espécie: {{ pet.especie }}</p>
+    <p>Raça: {{ pet.raca }}</p>
+    <p>Idade: {{ pet.idade }}</p>
+    <p>ONG: {{ pet.ong }}</p>
+    <img [src]="pet.img" alt="{{ pet.nome }}" width="100">
+  </div>
+</div>

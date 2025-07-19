@@ -4,12 +4,9 @@
     <h3>Menu</h3>
     <button class="close-btn" (click)="toggle()">&times;</button>
   </div>
-  <div class="user-info">
-    <span class="status-indicator"></span>
-    <p>{{ user?.nickname }}</p>
-    <p>{{ user?.email }}</p>
-  </div>
+  
   <ul class="menu-items">
+    <li *ngIf="currentUserType === 'ong'"><button class="btn btn-primary" [routerLink]="'/ong/pet-management'">Gerenciar Pets</button></li>
     <li><button class="btn btn-primary">Editar Perfil</button></li>
   </ul>
 </div>

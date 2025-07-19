@@ -71,5 +71,23 @@
     "estado": "ba",
     "pais": "Brasil",
     "tipo": "pessoa"
+  },
+  {
+    "id": 8,
+    "nickname": "ong",
+    "nomeInstituicao": "ong",
+    "email": "ong@ong",
+    "senha": "123456",
+    "cnpj": "46.215.000/0141-00",
+    "telefone": "(71) 9999-9999",
+    "rua": "ong",
+    "numero": "00",
+    "bairro": "ong",
+    "cidade": "ong",
+    "estado": "ong",
+    "pais": "ong",
+    "cargoRepresentante": "ong",
+    "areaAtuacao": "ong",
+    "tipo": "ong"
   }
 ]

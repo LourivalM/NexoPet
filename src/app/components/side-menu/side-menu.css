@@ -38,14 +38,7 @@
   text-align: center;
 }
 
-.status-indicator {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: green;
-  margin-right: 5px;
-}
+
 
 .menu-items {
   list-style: none;

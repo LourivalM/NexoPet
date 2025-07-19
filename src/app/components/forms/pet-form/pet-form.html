@@ -1,0 +1,51 @@
+<form [formGroup]="petForm" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label for="nome" class="form-label">Nome:</label>
+    <input type="text" id="nome" formControlName="nome" class="form-control">
+    <div *ngIf="petForm.get('nome')?.invalid && petForm.get('nome')?.touched" class="text-danger">
+      Nome é obrigatório.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="especie" class="form-label">Espécie:</label>
+    <input type="text" id="especie" formControlName="especie" class="form-control">
+    <div *ngIf="petForm.get('especie')?.invalid && petForm.get('especie')?.touched" class="text-danger">
+      Espécie é obrigatória.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="raca" class="form-label">Raça:</label>
+    <input type="text" id="raca" formControlName="raca" class="form-control">
+    <div *ngIf="petForm.get('raca')?.invalid && petForm.get('raca')?.touched" class="text-danger">
+      Raça é obrigatória.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="idade" class="form-label">Idade:</label>
+    <input type="text" id="idade" formControlName="idade" class="form-control">
+    <div *ngIf="petForm.get('idade')?.invalid && petForm.get('idade')?.touched" class="text-danger">
+      Idade é obrigatória.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="ong" class="form-label">ONG:</label>
+    <input type="text" id="ong" formControlName="ong" class="form-control">
+    <div *ngIf="petForm.get('ong')?.invalid && petForm.get('ong')?.touched" class="text-danger">
+      ONG é obrigatória.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="img" class="form-label">URL da Imagem:</label>
+    <input type="text" id="img" formControlName="img" class="form-control">
+    <div *ngIf="petForm.get('img')?.invalid && petForm.get('img')?.touched" class="text-danger">
+      URL da Imagem é obrigatória.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="petForm.invalid">Salvar</button>
+</form>

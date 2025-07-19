@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { OngGuard } from './guards/ong.guard';
 
 export const routes: Routes = [
     {
@@ -18,4 +19,9 @@ export const routes: Routes = [
         path: 'dashboard',
         pathMatch: 'full',
         loadComponent: () => import('./pages/dashboard/dashboard').then(c => c.Dashboard)
+    },
+    {
+        path: 'ong/pet-management',
+        loadComponent: () => import('./pages/ong/pet-management/pet-management').then(c => c.PetManagementComponent),
+        canActivate: [OngGuard]
     }];
