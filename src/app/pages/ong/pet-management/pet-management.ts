@@ -24,14 +24,17 @@ export class PetManagementComponent implements OnInit {
   }
 
   onAddNewPetClick(): void {
+    console.log('Botão "Adicionar Novo Pet" clicado.');
     this.showPetForm = true;
   }
 
   handlePetFormSubmit(pet: Pet): void {
+    console.log('handlePetFormSubmit: Submetendo pet:', pet);
     const currentUser = this.loginService.getUser();
     if (currentUser && currentUser.tipo === 'ong') {
       pet.ong = currentUser.nickname || currentUser.nomeInstituicao || ''; // Atribui o nickname ou nome da instituição da ONG
       this.petService.addPet(pet).subscribe(() => {
+        console.log('Pet adicionado com sucesso. Recarregando pets.');
         this.showPetForm = false;
         this.pets$ = this.petService.getPets(); // Recarrega a lista de pets após adicionar um novo
       });

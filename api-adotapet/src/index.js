@@ -13,8 +13,12 @@ app.use(express.static(path.join(__dirname, "..", "public/img")));
 
 // Caminho para o arquivo JSON de usuários
 const usersFilePath = path.join(__dirname, 'users.json');
+const petsFilePath = path.join(__dirname, 'pets.json');
+const productsFilePath = path.join(__dirname, 'products.json');
 
 let users = []; // Declarar como let para poder reatribuir
+let pets = []; // Declarar como let para poder reatribuir
+let products = []; // Declarar como let para poder reatribuir
 
 // Função para carregar usuários do arquivo JSON
 const loadUsers = () => {
@@ -48,8 +52,64 @@ const saveUsers = () => {
     }
 };
 
-// Carregar usuários ao iniciar a aplicação
+// Função para carregar pets do arquivo JSON
+const loadPets = () => {
+    try {
+        if (fs.existsSync(petsFilePath)) {
+            const data = fs.readFileSync(petsFilePath, 'utf8');
+            pets = JSON.parse(data);
+            console.log('Pets carregados com sucesso do pets.json');
+        } else {
+            console.log('Arquivo pets.json não encontrado. Criando arquivo vazio...');
+            pets = [];
+            savePets(); // Salvar arquivo vazio
+        }
+    } catch (error) {
+        console.error('Erro ao carregar pets do pets.json:', error);
+    }
+};
+
+// Função para salvar pets no arquivo JSON
+const savePets = () => {
+    try {
+        fs.writeFileSync(petsFilePath, JSON.stringify(pets, null, 2), 'utf8');
+        console.log('Pets salvos com sucesso no pets.json');
+    } catch (error) {
+        console.error('Erro ao salvar pets no pets.json:', error);
+    }
+};
+
+// Função para carregar produtos do arquivo JSON
+const loadProducts = () => {
+    try {
+        if (fs.existsSync(productsFilePath)) {
+            const data = fs.readFileSync(productsFilePath, 'utf8');
+            products = JSON.parse(data);
+            console.log('Produtos carregados com sucesso do products.json');
+        } else {
+            console.log('Arquivo products.json não encontrado. Criando arquivo vazio...');
+            products = [];
+            saveProducts(); // Salvar arquivo vazio
+        }
+    } catch (error) {
+        console.error('Erro ao carregar produtos do products.json:', error);
+    }
+};
+
+// Função para salvar produtos no arquivo JSON
+const saveProducts = () => {
+    try {
+        fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2), 'utf8');
+        console.log('Produtos salvos com sucesso no products.json');
+    } catch (error) {
+        console.error('Erro ao salvar produtos no products.json:', error);
+    }
+};
+
+// Carregar usuários e pets ao iniciar a aplicação
 loadUsers();
+loadPets();
+loadProducts();
 
 app.post("/login", (req, res) => {
     try {
@@ -205,50 +265,55 @@ app.post("/register/parceiro", (req, res) => {
 
 app.get("/pets", (req, res) => {
     try {
-        const pets = [
-            {
-                id: 1,
-                nome: "Max",
-                especie: "Cachorro",
-                raca: "Golden Retriever",
-                idade: "2 anos",
-                ong: "Amigos dos Animais",
-                img: "http://placekitten.com/g/200/300"
-            },
-            {
-                id: 2,
-                nome: "Mimi",
-                especie: "Gato",
-                raca: "Siamês",
-                idade: "1 ano",
-                ong: "Patas amigas",
-                img: "http://placekitten.com/g/200/300"
-            },
-            {
-                id: 3,
-                nome: "Buddy",
-                especie: "Cachorro",
-                raca: "Labrador",
-                idade: "3 anos",
-                ong: "Amigos dos Animais",
-                img: "http://placekitten.com/g/200/300"
-            },
-            {
-                id: 4,
-                nome: "Lucy",
-                especie: "Gato",
-                raca: "Persa",
-                idade: "4 anos",
-                ong: "Patas amigas",
-                img: "http://placekitten.com/g/200/300"
-            }
-        ];
-
         return res.status(200).json(pets);
 
     } catch (error) {
+        console.error("Erro no endpoint /pets:", error);
         return res.status(500).json({
             message: "Falha na comunicação com o servidor!"
+        });
+    }
+});
+
+app.post("/pets", (req, res) => {
+    try {
+        const newPet = req.body;
+        newPet.id = pets.length > 0 ? Math.max(...pets.map(p => p.id)) + 1 : 1;
+        pets.push(newPet);
+        savePets();
+        console.log('Novo pet cadastrado:', newPet);
+        return res.status(201).json(newPet);
+    } catch (error) {
+        console.error("Erro ao cadastrar pet:", error);
+        return res.status(500).json({
+            message: "Falha ao cadastrar pet."
+        });
+    }
+});
+
+app.get("/products", (req, res) => {
+    try {
+        return res.status(200).json(products);
+    } catch (error) {
+        console.error("Erro no endpoint /products:", error);
+        return res.status(500).json({
+            message: "Falha na comunicação com o servidor!"
+        });
+    }
+});
+
+app.post("/products", (req, res) => {
+    try {
+        const newProduct = req.body;
+        newProduct.id = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+        products.push(newProduct);
+        saveProducts();
+        console.log('Novo produto cadastrado:', newProduct);
+        return res.status(201).json(newProduct);
+    } catch (error) {
+        console.error("Erro ao cadastrar produto:", error);
+        return res.status(500).json({
+            message: "Falha ao cadastrar produto."
         });
     }
 });

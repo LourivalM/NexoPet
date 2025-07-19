@@ -32,3 +32,8 @@ body{
     font-style: normal;
     font-variation-settings: "wdth" 100; /* Largura padrão */
 }
+
+.main-content {
+  margin-top: 100px; /* Ajuste conforme a altura do seu cabeçalho */
+  padding: 1rem; /* Adicione um padding para o conteúdo não ficar colado nas bordas */
+}

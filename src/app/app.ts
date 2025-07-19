@@ -38,13 +38,13 @@ export class App {
   }
 
   private checkLoginStatus(): void {
-    const sessionEmail = sessionStorage.getItem('email');
-    const localEmail = localStorage.getItem('email');
-    const isLoggedIn = !!(sessionEmail || localEmail);
+    const user = this.loginService.getUser();
+    const isLoggedIn = !!user;
 
     // Se estiver na página de login, sempre mostra o conteúdo.
     // Caso contrário, mostra o conteúdo apenas se estiver logado.
     this.showContent = this.router.url === '/login' || this.router.url === '/' || this.router.url === '/home' || this.router.url === '/dashboard' || isLoggedIn;
+    console.log('Current URL:', this.router.url, ' - showContent:', this.showContent, ' - isLoggedIn:', isLoggedIn);
   }
 
   toggleSideMenu(): void {

@@ -1,0 +1,13 @@
+<h2>Meus Produtos</h2>
+<button class="btn btn-primary" (click)="onAddNewProductClick()">Adicionar Novo Produto</button>
+
+<app-product-form *ngIf="showProductForm" (formSubmit)="handleProductFormSubmit($event)"></app-product-form>
+
+<div *ngIf="products$ | async as products">
+  <div *ngFor="let product of products">
+    <h3>{{ product.name }}</h3>
+    <p>Descrição: {{ product.description }}</p>
+    <p>Preço: {{ product.price | currency:'BRL' }}</p>
+    <p>ID do Parceiro: {{ product.partnerId }}</p>
+  </div>
+</div>

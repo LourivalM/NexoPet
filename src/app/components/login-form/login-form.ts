@@ -46,6 +46,7 @@ export class LoginForm {
         localStorage.setItem('welcomeMessage', 'Bem-vindo(a) ao AdotaPet! Juntos, vamos encontrar lares cheios de amor.');
         console.log('localStorage set: showWelcomeOverlay=', localStorage.getItem('showWelcomeOverlay'), 'welcomeMessage=', localStorage.getItem('welcomeMessage'));
         this.loggedIn.emit(); // Emit event instead of navigating
+        this.router.navigate(['/dashboard']); // Redireciona para o dashboard após o login
       }
     })
     

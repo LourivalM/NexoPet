@@ -6,7 +6,8 @@
   </div>
   
   <ul class="menu-items">
-    <li *ngIf="currentUserType === 'ong'"><button class="btn btn-primary" [routerLink]="'/ong/pet-management'">Gerenciar Pets</button></li>
+    <li *ngIf="currentUserType === 'ong'"><a class="btn btn-primary" [routerLink]="'/ong/pet-management'">Gerenciar Pets</a></li>
+    <li *ngIf="currentUserType === 'parceiro'"><a class="btn btn-primary" [routerLink]="'/partner/product-management'">Gerenciar Produtos</a></li>
     <li><button class="btn btn-primary">Editar Perfil</button></li>
   </ul>
 </div>

@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { OngGuard } from './guards/ong.guard';
+import { PartnerGuard } from './guards/partner.guard';
 
 export const routes: Routes = [
     {
@@ -24,4 +25,9 @@ export const routes: Routes = [
         path: 'ong/pet-management',
         loadComponent: () => import('./pages/ong/pet-management/pet-management').then(c => c.PetManagementComponent),
         canActivate: [OngGuard]
+    },
+    {
+        path: 'partner/product-management',
+        loadComponent: () => import('./pages/partner/product-management/product-management').then(c => c.ProductManagementComponent),
+        canActivate: [PartnerGuard]
     }];
