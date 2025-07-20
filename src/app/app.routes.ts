@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { OngGuard } from './guards/ong.guard';
 import { PartnerGuard } from './guards/partner.guard';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -20,6 +21,16 @@ export const routes: Routes = [
         path: 'dashboard',
         pathMatch: 'full',
         loadComponent: () => import('./pages/dashboard/dashboard').then(c => c.Dashboard)
+    },
+    {
+        path: 'profile',
+        loadComponent: () => import('./pages/profile/profile.component').then(c => c.ProfileComponent),
+        canActivate: [authGuard]
+    },
+    {
+        path: 'social',
+        loadComponent: () => import('./pages/social/social.component').then(c => c.SocialComponent),
+        canActivate: [authGuard]
     },
     {
         path: 'ong/pet-management',

@@ -1,0 +1,15 @@
+<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="imageUrl">Imagem:</label>
+    <button type="button" (click)="openImageSelector()">Selecionar Imagem</button>
+    <span *ngIf="postForm.get('imageUrl')?.value">{{ postForm.get('imageUrl')?.value }}</span>
+    <img *ngIf="postForm.get('imageUrl')?.value" [src]="'/assets/images/uploads/' + postForm.get('imageUrl')?.value" alt="Preview" class="image-preview">
+  </div>
+  <div>
+    <label for="caption">Legenda:</label>
+    <textarea id="caption" formControlName="caption"></textarea>
+  </div>
+  <button type="submit" [disabled]="!postForm.valid">Criar Post</button>
+</form>
+
+<app-image-selector-modal *ngIf="showImageSelector" (imageSelected)="onImageSelected($event)" (close)="onCloseImageSelector()"></app-image-selector-modal>

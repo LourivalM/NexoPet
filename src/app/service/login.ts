@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Usuario } from '../models/user';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -11,6 +11,8 @@ import { environment } from '../../environments/environment';
 export class loginService {
   http=inject(HttpClient);
   platformId = inject(PLATFORM_ID);
+  private _currentUser = new BehaviorSubject<Usuario | null>(this.getUser());
+  currentUser = this._currentUser.asObservable();
 
   login(login: any, senha: any, manterConectado: boolean): Observable<Usuario> {
     return this.http.post<Usuario>(`${environment.apiUrl}/login`, { login, senha })
@@ -25,6 +27,7 @@ export class loginService {
             } else {
               localStorage.removeItem('user');
             }
+            this._currentUser.next(user);
           }
         }
       )
@@ -35,6 +38,7 @@ export class loginService {
     if (isPlatformBrowser(this.platformId)) {
       sessionStorage.removeItem('user');
       localStorage.removeItem('user');
+      this._currentUser.next(null);
     }
   }
 

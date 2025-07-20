@@ -1,0 +1,16 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>Selecione uma Imagem</h2>
+    <div class="image-grid">
+      <img *ngFor="let image of availableImages"
+           [src]="'/assets/images/uploads/' + image"
+           [alt]="image"
+           [class.selected]="image === selectedImage"
+           (click)="selectImage(image)"/>
+    </div>
+    <div class="modal-actions">
+      <button (click)="closeModal()" class="btn-cancel">Cancelar</button>
+      <button [disabled]="!selectedImage" (click)="confirmSelection()" class="btn-confirm">Confirmar</button>
+    </div>
+  </div>
+</div>

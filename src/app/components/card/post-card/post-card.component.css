@@ -1,0 +1,24 @@
+.post-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.post-card img {
+  width: 100%;
+  height: auto;
+}
+
+.post-content {
+  padding: 16px;
+}
+
+.likes {
+  margin-top: 8px;
+  font-weight: bold;
+}
+
+.likes .liked {
+  color: red; /* Cor para o coração quando curtido */
+}

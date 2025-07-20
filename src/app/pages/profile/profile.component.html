@@ -1,0 +1,11 @@
+<h1>Meu Perfil</h1>
+
+<div *ngIf="currentUser">
+  <p><strong>Nickname:</strong> {{ currentUser.nickname }}</p>
+  <p><strong>Email:</strong> {{ currentUser.email }}</p>
+  <p><strong>Tipo de Conta:</strong> {{ currentUser.tipo }}</p>
+</div>
+
+<div *ngIf="!currentUser">
+  <p>Nenhum usuário logado.</p>
+</div>

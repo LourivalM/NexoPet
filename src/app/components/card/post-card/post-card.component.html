@@ -1,0 +1,9 @@
+<div class="post-card">
+  <img [src]="imageUrl" [alt]="post.caption || 'Post image'">
+  <div class="post-content">
+    <p *ngIf="post.caption">{{ post.caption }}</p>
+    <div class="likes">
+      <span (click)="onLikeClick()" [ngClass]="{'liked': hasLiked()}" style="cursor: pointer;">❤️ {{ post.likes }}</span>
+    </div>
+  </div>
+</div>

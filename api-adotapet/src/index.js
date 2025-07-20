@@ -15,10 +15,12 @@ app.use(express.static(path.join(__dirname, "..", "public/img")));
 const usersFilePath = path.join(__dirname, 'users.json');
 const petsFilePath = path.join(__dirname, 'pets.json');
 const productsFilePath = path.join(__dirname, 'products.json');
+const postsFilePath = path.join(__dirname, 'posts.json');
 
 let users = []; // Declarar como let para poder reatribuir
 let pets = []; // Declarar como let para poder reatribuir
 let products = []; // Declarar como let para poder reatribuir
+let posts = []; // Declarar como let para poder reatribuir
 
 // Função para carregar usuários do arquivo JSON
 const loadUsers = () => {
@@ -106,10 +108,38 @@ const saveProducts = () => {
     }
 };
 
+// Função para carregar posts do arquivo JSON
+const loadPosts = () => {
+    try {
+        if (fs.existsSync(postsFilePath)) {
+            const data = fs.readFileSync(postsFilePath, 'utf8');
+            posts = JSON.parse(data);
+            console.log('Posts carregados com sucesso do posts.json');
+        } else {
+            console.log('Arquivo posts.json não encontrado. Criando arquivo vazio...');
+            posts = [];
+            savePosts(); // Salvar arquivo vazio
+        }
+    } catch (error) {
+        console.error('Erro ao carregar posts do posts.json:', error);
+    }
+};
+
+// Função para salvar posts no arquivo JSON
+const savePosts = () => {
+    try {
+        fs.writeFileSync(postsFilePath, JSON.stringify(posts, null, 2), 'utf8');
+        console.log('Posts salvos com sucesso no posts.json');
+    } catch (error) {
+        console.error('Erro ao salvar posts no posts.json:', error);
+    }
+};
+
 // Carregar usuários e pets ao iniciar a aplicação
 loadUsers();
 loadPets();
 loadProducts();
+loadPosts();
 
 app.post("/login", (req, res) => {
     try {
@@ -314,6 +344,93 @@ app.post("/products", (req, res) => {
         console.error("Erro ao cadastrar produto:", error);
         return res.status(500).json({
             message: "Falha ao cadastrar produto."
+        });
+    }
+});
+
+app.get("/posts", (req, res) => {
+    try {
+        return res.status(200).json(posts);
+    } catch (error) {
+        console.error("Erro no endpoint /posts:", error);
+        return res.status(500).json({
+            message: "Falha na comunicação com o servidor!"
+        });
+    }
+});
+
+app.post("/posts", (req, res) => {
+    try {
+        const newPost = req.body;
+        newPost.id = posts.length > 0 ? Math.max(...posts.map(p => p.id)) + 1 : 1;
+        newPost.createdAt = new Date();
+        newPost.likes = 0; // Inicializa likes
+        newPost.likedByUsers = []; // Inicializa array de usuários que curtiram
+        posts.push(newPost);
+        savePosts();
+        console.log('Novo post cadastrado:', newPost);
+        return res.status(201).json(newPost);
+    } catch (error) {
+        console.error("Erro ao cadastrar post:", error);
+        return res.status(500).json({
+            message: "Falha ao cadastrar post."
+        });
+    }
+});
+
+app.get("/posts/:id", (req, res) => {
+    try {
+        const postId = parseInt(req.params.id);
+        const post = posts.find(p => p.id === postId);
+
+        if (!post) {
+            return res.status(404).json({ message: "Post não encontrado." });
+        }
+
+        return res.status(200).json(post);
+    } catch (error) {
+        console.error("Erro ao buscar post por ID:", error);
+        return res.status(500).json({
+            message: "Falha na comunicação com o servidor!"
+        });
+    }
+});
+
+app.patch("/posts/:id", (req, res) => {
+    try {
+        const postId = parseInt(req.params.id);
+        const { userId } = req.body; // Recebe o userId
+
+        const postIndex = posts.findIndex(p => p.id === postId);
+
+        if (postIndex === -1) {
+            return res.status(404).json({ message: "Post não encontrado." });
+        }
+
+        const post = posts[postIndex];
+
+        if (!post.likedByUsers) {
+            post.likedByUsers = []; // Garante que o array exista
+        }
+
+        const userLikedIndex = post.likedByUsers.indexOf(userId);
+
+        if (userLikedIndex === -1) {
+            // Usuário não curtiu, então adiciona o like
+            post.likedByUsers.push(userId);
+        } else {
+            // Usuário já curtiu, então remove o like
+            post.likedByUsers.splice(userLikedIndex, 1);
+        }
+
+        post.likes = post.likedByUsers.length; // Atualiza a contagem de likes
+        savePosts();
+
+        return res.status(200).json(post);
+    } catch (error) {
+        console.error("Erro ao atualizar post:", error);
+        return res.status(500).json({
+            message: "Falha ao atualizar post."
         });
     }
 });
