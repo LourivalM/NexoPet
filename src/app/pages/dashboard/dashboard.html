@@ -1,26 +1,19 @@
-<section class="d-flex gap-3 justify-content-around p-3" *ngIf="pets.length > 0">
-  <div class="shadow border border-light p-3">
-    <h2>Pets Disponíveis</h2>
-    <select (change)="onChangeSelect($event)">
-      @for (p of pets; track p.id) {
-        <option value="{{p.id}}">{{p.nome}} - {{p.raca}}</option>
-      }
-    </select>
-  </div>
-  
-  <app-card [title]="'ONG Responsável'" [valor]="petSelected.ong"></app-card>
-  <app-card [title]="'Espécie'" [valor]="petSelected.especie"></app-card>
-  <app-card [title]="'Idade'" [valor]="petSelected.idade"></app-card>
+<h1>Adote Aqui</h1>
 
+<section class="d-flex gap-3 justify-content-around p-3" *ngIf="pets.length > 0">
+  <!-- New horizontal pet list -->
+  <div class="pet-list-horizontal">
+    @for (p of pets; track p.id) {
+      <div class="pet-badge" [class.selected]="p.id === petSelected.id" (click)="selectPet(p)">
+        <img [src]="p.img" [alt]="'Foto de ' + p.nome">
+        <p>{{ p.nome }}</p>
+      </div>
+    }
+  </div>
 </section>
 
 <section class="text-center mt-4" *ngIf="pets.length > 0">
-  <h2>Conheça o {{petSelected.nome}}!</h2>
-  <img src="{{ petSelected.img }}" alt="Foto do {{petSelected.nome}}" class="img-fluid rounded shadow">
-
-  <div class="mt-4">
-    <app-pet-details [pet]="petSelected"></app-pet-details>
-  </div>
+  <app-pet-details [pet]="petSelected"></app-pet-details>
 
   <div class="mt-4">
     <button *ngIf="userType === 'ong'" class="btn btn-primary me-2">Cadastrar Novo Pet</button>

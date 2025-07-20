@@ -40,12 +40,20 @@
   </div>
 
   <div class="mb-3">
-    <label for="img" class="form-label">URL da Imagem:</label>
-    <input type="text" id="img" formControlName="img" class="form-control">
-    <div *ngIf="petForm.get('img')?.invalid && petForm.get('img')?.touched" class="text-danger">
-      URL da Imagem é obrigatória.
+    <label class="form-label">Imagem do Pet:</label>
+    <div class="image-selection-container">
+      <button type="button" class="btn btn-secondary" (click)="openImageSelector()">Selecionar Imagem</button>
+      <img *ngIf="selectedImage" [src]="'/assets/images/uploads/' + selectedImage" alt="Imagem selecionada" class="img-thumbnail mt-2" style="max-width: 150px;">
+      <div *ngIf="petForm.get('img')?.invalid && petForm.get('img')?.touched" class="text-danger">
+        A imagem é obrigatória.
+      </div>
     </div>
   </div>
+
+  <app-image-selector-modal *ngIf="showImageSelectorModal"
+    (imageSelected)="onImageSelected($event)"
+    (close)="closeImageSelector()">
+  </app-image-selector-modal>
 
   <button type="submit" class="btn btn-primary" [disabled]="petForm.invalid">Salvar</button>
 </form>

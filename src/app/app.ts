@@ -7,10 +7,11 @@ import { filter } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header';
 import { SideMenuComponent } from './components/side-menu/side-menu';
+import { FooterComponent } from './components/shared/footer/footer.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, HeaderComponent, SideMenuComponent],
+  imports: [RouterOutlet, CommonModule, HeaderComponent, SideMenuComponent, FooterComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

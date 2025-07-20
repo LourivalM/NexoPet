@@ -11,11 +11,19 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/blog" routerLinkActive="active">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contato" routerLinkActive="active">Contato</a>
+        </li>
         <li class="nav-item" *ngIf="isLoggedIn && user?.tipo === 'pessoa'">
           <a class="nav-link" routerLink="/social" routerLinkActive="active">Social</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+          <a class="nav-link btn btn-outline-danger d-flex align-items-center" routerLink="/dashboard" routerLinkActive="active">
+            <span class="me-1">&#x2764;</span> Adote Aqui
+          </a>
         </li>
       </ul>
       <div class="d-flex align-items-center">

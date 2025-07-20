@@ -293,6 +293,44 @@ app.post("/register/parceiro", (req, res) => {
 });
 
 
+app.get("/users", (req, res) => {
+    try {
+        return res.status(200).json(users);
+    } catch (error) {
+        console.error("Erro no endpoint /users:", error);
+        return res.status(500).json({
+            message: "Falha na comunicação com o servidor!"
+        });
+    }
+});
+
+app.patch("/users/:id", (req, res) => {
+    try {
+        const userId = parseInt(req.params.id);
+        const updatedData = req.body;
+
+        const userIndex = users.findIndex(u => u.id === userId);
+
+        if (userIndex === -1) {
+            return res.status(404).json({ message: "Usuário não encontrado." });
+        }
+
+        // Atualiza apenas as propriedades fornecidas no corpo da requisição
+        users[userIndex] = { ...users[userIndex], ...updatedData };
+        saveUsers();
+
+        console.log('Usuário atualizado:', users[userIndex]);
+        return res.status(200).json(users[userIndex]);
+
+    } catch (error) {
+        console.error("Erro ao atualizar usuário:", error);
+        return res.status(500).json({
+            message: "Falha ao atualizar usuário."
+        });
+    }
+});
+
+
 app.get("/pets", (req, res) => {
     try {
         return res.status(200).json(pets);

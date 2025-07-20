@@ -41,4 +41,25 @@ export const routes: Routes = [
         path: 'partner/product-management',
         loadComponent: () => import('./pages/partner/product-management/product-management').then(c => c.ProductManagementComponent),
         canActivate: [PartnerGuard]
-    }];
+    },
+    {
+        path: 'sobre-nos',
+        loadComponent: () => import('./pages/institutional/about/about.component').then(c => c.AboutComponent)
+    },
+    {
+        path: 'faq',
+        loadComponent: () => import('./pages/institutional/faq/faq.component').then(c => c.FaqComponent)
+    },
+    {
+        path: 'contato',
+        loadComponent: () => import('./pages/institutional/contact/contact.component').then(c => c.ContactComponent)
+    },
+    {
+        path: 'blog',
+        loadComponent: () => import('./pages/institutional/blog/blog.component').then(c => c.BlogComponent)
+    },
+    {
+        path: '**',
+        redirectTo: '/home'
+    }
+];

@@ -1,5 +1,6 @@
 <app-side-menu [isOpen]="isSideMenuOpen" (menuToggled)="onSideMenuToggled($event)"></app-side-menu>
 <app-header (toggleSideMenu)="toggleSideMenu()"></app-header>
 <div class="main-content">
-  <router-outlet *ngIf="showContent"></router-outlet>
+  <router-outlet></router-outlet>
 </div>
+<app-footer></app-footer>

@@ -2,11 +2,12 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Pet } from '../../../../app/models/pet';
+import { ImageSelectorModalComponent } from '../../modals/image-selector-modal.component'; // Importar o modal
 
 @Component({
   selector: 'app-pet-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, ImageSelectorModalComponent], // Adicionar o modal aos imports
   templateUrl: './pet-form.html',
   styleUrls: ['./pet-form.css']
 })
@@ -15,6 +16,8 @@ export class PetFormComponent implements OnInit, OnChanges {
   @Output() formSubmit = new EventEmitter<Pet>();
 
   petForm: FormGroup;
+  showImageSelectorModal: boolean = false;
+  selectedImage: string | null = null;
 
   constructor(private fb: FormBuilder) {
     this.petForm = this.fb.group({
@@ -24,7 +27,7 @@ export class PetFormComponent implements OnInit, OnChanges {
       raca: ['', Validators.required],
       idade: ['', Validators.required],
       ong: ['', Validators.required],
-      img: ['', Validators.required]
+      img: ['', Validators.required] // O campo img agora será preenchido pelo seletor
     });
   }
 
@@ -35,7 +38,24 @@ export class PetFormComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['initialData'] && this.initialData) {
       this.petForm.patchValue(this.initialData);
+      if (this.initialData.img) {
+        this.selectedImage = this.initialData.img;
+      }
     }
+  }
+
+  openImageSelector(): void {
+    this.showImageSelectorModal = true;
+  }
+
+  closeImageSelector(): void {
+    this.showImageSelectorModal = false;
+  }
+
+  onImageSelected(imageName: string): void {
+    this.selectedImage = imageName;
+    this.petForm.get('img')?.setValue(imageName);
+    this.closeImageSelector();
   }
 
   onSubmit(): void {

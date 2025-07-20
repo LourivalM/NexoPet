@@ -6,8 +6,9 @@
   </div>
   
   <ul class="menu-items">
-    <li *ngIf="currentUserType === 'ong'"><a class="btn btn-primary" [routerLink]="'/ong/pet-management'">Gerenciar Pets</a></li>
-    <li *ngIf="currentUserType === 'parceiro'"><a class="btn btn-primary" [routerLink]="'/partner/product-management'">Gerenciar Produtos</a></li>
+    <li *ngIf="currentUserType === 'pessoa'"><a class="btn btn-primary" [routerLink]="'/social'">Minha Galeria</a></li>
+    <li *ngIf="currentUserType === 'ong'"><a class="btn btn-primary" [routerLink]="'/ong/pet-management'">Adoções Pet</a></li>
+    <li *ngIf="currentUserType === 'parceiro'"><a class="btn btn-primary" [routerLink]="'/partner/product-management'">Meus Produtos</a></li>
     <li *ngIf="user"><a class="btn btn-primary" [routerLink]="'/profile'">Meu Perfil</a></li>
   </ul>
 </div>

@@ -1,1 +1,70 @@
-<app-bem-vindo></app-bem-vindo>
+<section class="hero-section">
+  <div class="hero-content">
+    <h1>Encontre seu Melhor Amigo Hoje!</h1>
+    <p>Milhares de pets esperando por um lar amoroso. Adote, não compre!</p>
+    <button class="btn btn-primary" routerLink="/dashboard">Encontre seu Amigo</button>
+  </div>
+</section>
+
+<section class="how-it-works-section">
+  <h2>Adotar nunca foi tão fácil</h2>
+  <div class="steps-container">
+    <div class="step-item">
+      <span class="step-icon">🐾</span>
+      <h3>1. Explore</h3>
+      <p>Navegue por perfis detalhados e encontre o companheiro que mais combina com você.</p>
+    </div>
+    <div class="step-item">
+      <span class="step-icon">🤝</span>
+      <h3>2. Conecte-se</h3>
+      <p>Entre em contato com as ONGs e tutores responsáveis para saber mais sobre o pet.</p>
+    </div>
+    <div class="step-item">
+      <span class="step-icon">❤️</span>
+      <h3>3. Adote</h3>
+      <p>Complete o processo de adoção e leve seu novo amigo para casa!</p>
+    </div>
+  </div>
+</section>
+
+<section class="featured-pets-section">
+  <h2>Olhares que Esperam por Você</h2>
+  <div class="carousel-container" *ngIf="pets$ | async as pets">
+    @for (pet of pets; track pet.id) {
+      <app-card [pet]="pet"></app-card>
+    }
+  </div>
+</section>
+
+<section class="happy-moments-section">
+  <h2>Momentos Felizes da Família Nexo Pet</h2>
+  <div class="posts-grid" *ngIf="posts$ | async as posts">
+    @for (post of posts; track post.id) {
+      <app-post-card [post]="post"></app-post-card>
+    }
+  </div>
+</section>
+
+<section class="featured-orgs-section">
+  <h2>Quem Faz Acontecer</h2>
+  
+  <h3>ONGs que Salvam Vidas</h3>
+  <div class="carousel-container" *ngIf="ongs$ | async as ongs">
+    @for (ong of ongs; track ong.id) {
+      <div class="org-card">
+        <img src="/img/NexoIMG/NexiPeticone logo trarente.png" alt="Logo da {{ ong.nickname }}" class="org-logo">
+        <p class="org-name">{{ ong.nickname }}</p>
+      </div>
+    }
+  </div>
+
+  <h3 class="mt-5">Parceiros que Apoiam a Causa</h3>
+  <div class="carousel-container" *ngIf="parceiros$ | async as parceiros">
+    @for (parceiro of parceiros; track parceiro.id) {
+      <div class="org-card">
+        <img src="/img/NexoIMG/NexiPeticone logo trarente.png" alt="Logo de {{ parceiro.nickname }}" class="org-logo">
+        <p class="org-name">{{ parceiro.nickname }}</p>
+      </div>
+    }
+  </div>
+</section>

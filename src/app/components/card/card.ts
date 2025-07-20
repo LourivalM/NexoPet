@@ -1,15 +1,14 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Pet } from '../../models/pet';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-card',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './card.html',
-  styleUrl: './card.css'
+  styleUrls: ['./card.css']
 })
 export class Card {
-
-  @Input()  title: string = '';
-  @Input()  valor: number | string = 0;
-  
-
+  @Input() pet: Pet | undefined;
 }

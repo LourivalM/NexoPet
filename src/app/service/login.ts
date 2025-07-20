@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router'; // Import Router
 import { Usuario } from '../models/user';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -11,6 +12,7 @@ import { environment } from '../../environments/environment';
 export class loginService {
   http=inject(HttpClient);
   platformId = inject(PLATFORM_ID);
+  router = inject(Router); // Inject Router
   private _currentUser = new BehaviorSubject<Usuario | null>(this.getUser());
   currentUser = this._currentUser.asObservable();
 
@@ -34,11 +36,31 @@ export class loginService {
     )
   }
 
+  updateUser(userId: number, userData: any): Observable<Usuario> {
+    return this.http.patch<Usuario>(`${environment.apiUrl}/users/${userId}`, userData)
+      .pipe(
+        tap(updatedUser => {
+          console.log('LoginService: Usuário atualizado recebido da API:', updatedUser);
+          if (isPlatformBrowser(this.platformId)) {
+            // Atualiza o sessionStorage
+            sessionStorage.setItem('user', JSON.stringify(updatedUser));
+
+            // Se o usuário estava com "manter conectado", atualiza também o localStorage
+            if (localStorage.getItem('user')) {
+              localStorage.setItem('user', JSON.stringify(updatedUser));
+            }
+            this._currentUser.next(updatedUser);
+          }
+        })
+      );
+  }
+
   logout(): void {
     if (isPlatformBrowser(this.platformId)) {
       sessionStorage.removeItem('user');
       localStorage.removeItem('user');
       this._currentUser.next(null);
+      this.router.navigate(['/home']); // Redireciona para a página inicial
     }
   }
 
@@ -47,23 +69,19 @@ export class loginService {
       const userString = sessionStorage.getItem('user') || localStorage.getItem('user');
       if (userString) {
         const user = JSON.parse(userString);
-        console.log('LoginService: Usuário recuperado do Storage:', user);
         return user;
       }
     }
-    console.log('LoginService: Nenhum usuário encontrado no Storage.');
     return null;
   }
 
   getUserType(): 'pessoa' | 'ong' | 'parceiro' | null {
     const user = this.getUser();
-    console.log('LoginService: Tipo de usuário:', user?.tipo);
     return user ? user.tipo : null;
   }
 
   getUserNickname(): string | null {
     const user = this.getUser();
-    console.log('LoginService: Nickname de usuário:', user?.nickname);
     return user ? user.nickname || user.nome || user.nomeInstituicao || null : null;
   }
 }

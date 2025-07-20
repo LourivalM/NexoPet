@@ -1,4 +1,8 @@
-<div class=" shadow border border-light p-3">
-    <h2> {{title}} </h2>
-    <p> {{ valor }} </p>
+<div *ngIf="pet" class="card-container shadow border border-light p-3">
+  <img [src]="pet.img" [alt]="pet.nome" class="card-img-top">
+  <div class="card-body">
+    <h5 class="card-title">{{ pet.nome }}</h5>
+    <p class="card-text">{{ pet.raca }}</p>
+    <p class="card-text">{{ pet.idade }}</p>
+  </div>
 </div>
