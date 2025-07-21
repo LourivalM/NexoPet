@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&family=Poppins:wght@600;700&display=swap');
 
 /* You can add global styles to this file, and also import other style files */
 :root {
@@ -9,6 +9,7 @@
     --orange-light: #f2b06f;
     --orange-dark: #e68c49;
     --white: #f8f9fa;
+    --cor-texto: #333; /* Nova variável para cor de texto */
 
     /* Mapeamento para as variáveis existentes, se necessário */
     --primary-color: var(--green-light); /* Exemplo: usando verde claro como cor primária */
@@ -18,22 +19,50 @@
     --accent-color: var(--blue-light); /* Exemplo: usando azul claro como cor de destaque */
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
-    
-}
-body{
     box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f8f9fa; /* Cinza muito claro */
+    color: var(--cor-texto); /* Cor de texto padrão */
     height: 100vh;
-    font-family: "Roboto", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400; /* Peso padrão */
-    font-style: normal;
-    font-variation-settings: "wdth" 100; /* Largura padrão */
+}
+
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif;
 }
 
 .main-content {
   margin-top: 100px; /* Ajuste conforme a altura do seu cabeçalho */
   padding: 1rem; /* Adicione um padding para o conteúdo não ficar colado nas bordas */
+}
+
+/* Estilo para botões globais */
+.btn-primary {
+    background-color: var(--blue-dark); /* Usando uma cor primária */
+    color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+.btn-primary:hover {
+    background-color: #2a5f85; /* Um tom um pouco mais escuro para o hover */
+}
+
+/* Estilo para links globais */
+a {
+    color: var(--green-dark); /* Cor de destaque */
+    text-decoration: none; /* Remove sublinhado */
+    transition: color 0.3s ease; /* Transição suave */
+}
+
+a:hover {
+    color: var(--green-light); /* Muda de cor no hover */
 }

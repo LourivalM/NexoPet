@@ -17,6 +17,12 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/contato" routerLinkActive="active">Contato</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/ongs" routerLinkActive="active">ONGs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/partners" routerLinkActive="active">Parceiros</a>
+        </li>
         <li class="nav-item" *ngIf="isLoggedIn && user?.tipo === 'pessoa'">
           <a class="nav-link" routerLink="/social" routerLinkActive="active">Social</a>
         </li>

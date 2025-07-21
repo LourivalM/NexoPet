@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "nome": "Amigo Fiel Resgate",
+    "descricao": "ONG dedicada ao resgate e reabilitação de animais abandonados e maltratados.",
+    "imagemPerfil": "/img/OngImg/Amigo Fiel Resgate.jpeg"
+  },
+  {
+    "id": 2,
+    "nome": "Anjos de 4 Patas",
+    "descricao": "Trabalhamos para encontrar lares amorosos para cães e gatos sem teto.",
+    "imagemPerfil": "/img/OngImg/Anjos de 4 Patas.jpeg"
+  },
+  {
+    "id": 3,
+    "nome": "Recomeço Pet",
+    "descricao": "Oferecemos uma segunda chance para animais idosos e com necessidades especiais.",
+    "imagemPerfil": "/img/OngImg/Recomeço Pet.jpeg"
+  }
+]

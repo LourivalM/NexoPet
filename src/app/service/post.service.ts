@@ -23,4 +23,8 @@ export class PostService {
   likePost(postId: number, userId: number): Observable<Post> {
     return this.http.patch<Post>(`${this.apiUrl}/${postId}`, { userId });
   }
+
+  deletePost(postId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${postId}`);
+  }
 }

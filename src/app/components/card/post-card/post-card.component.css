@@ -1,5 +1,5 @@
 .post-card {
-  border: 1px solid #ccc;
+  border: 2px solid var(--green-light); /* Borda verde para posts */
   border-radius: 8px;
   margin-bottom: 16px;
   overflow: hidden;
@@ -14,11 +14,15 @@
   padding: 16px;
 }
 
-.likes {
-  margin-top: 8px;
-  font-weight: bold;
+.post-actions span {
+  color: var(--green-dark); /* Cor verde para o ícone de like */
+  transition: color 0.3s ease;
 }
 
-.likes .liked {
-  color: red; /* Cor para o coração quando curtido */
+.post-actions span:hover {
+  color: var(--green-light); /* Muda para verde claro no hover */
+}
+
+.post-actions .liked {
+  color: var(--green-light); /* Cor para o coração quando curtido */
 }

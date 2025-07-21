@@ -59,6 +59,22 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/institutional/blog/blog.component').then(c => c.BlogComponent)
     },
     {
+        path: 'blog/:id',
+        loadComponent: () => import('./pages/institutional/blog/article-detail/article-detail.component').then(c => c.ArticleDetailComponent)
+    },
+    {
+        path: 'privacy',
+        loadComponent: () => import('./pages/institutional/privacy/privacy-policy.component').then(c => c.PrivacyPolicyComponent)
+    },
+    {
+        path: 'ongs',
+        loadComponent: () => import('./pages/ong-list/ong-list.component').then(c => c.OngListComponent)
+    },
+    {
+        path: 'partners',
+        loadComponent: () => import('./pages/partner-list/partner-list.component').then(c => c.PartnerListComponent)
+    },
+    {
         path: '**',
         redirectTo: '/home'
     }

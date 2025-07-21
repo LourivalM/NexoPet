@@ -52,8 +52,8 @@
   <div class="carousel-container" *ngIf="ongs$ | async as ongs">
     @for (ong of ongs; track ong.id) {
       <div class="org-card">
-        <img src="/img/NexoIMG/NexiPeticone logo trarente.png" alt="Logo da {{ ong.nickname }}" class="org-logo">
-        <p class="org-name">{{ ong.nickname }}</p>
+        <img [src]="ong.imagemPerfil" alt="Logo da {{ ong.nome }}" class="org-logo">
+        <p class="org-name">{{ ong.nome }}</p>
       </div>
     }
   </div>
@@ -62,8 +62,8 @@
   <div class="carousel-container" *ngIf="parceiros$ | async as parceiros">
     @for (parceiro of parceiros; track parceiro.id) {
       <div class="org-card">
-        <img src="/img/NexoIMG/NexiPeticone logo trarente.png" alt="Logo de {{ parceiro.nickname }}" class="org-logo">
-        <p class="org-name">{{ parceiro.nickname }}</p>
+        <img [src]="parceiro.logo" alt="Logo de {{ parceiro.nome }}" class="org-logo">
+        <p class="org-name">{{ parceiro.nome }}</p>
       </div>
     }
   </div>

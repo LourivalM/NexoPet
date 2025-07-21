@@ -2,8 +2,17 @@
   <img [src]="imageUrl" [alt]="post.caption || 'Post image'">
   <div class="post-content">
     <p *ngIf="post.caption">{{ post.caption }}</p>
-    <div class="likes">
+    <div class="post-actions">
       <span (click)="onLikeClick()" [ngClass]="{'liked': hasLiked()}" style="cursor: pointer;">❤️ {{ post.likes }}</span>
+      <button *ngIf="isMyPost()" class="btn btn-danger btn-sm" (click)="openDeleteConfirmation()">Deletar</button>
     </div>
   </div>
 </div>
+
+<app-confirmation-modal
+  *ngIf="showConfirmationModal"
+  [title]="'Confirmar Exclusão'"
+  [message]="'Tem certeza que deseja excluir este post? Esta ação não pode ser desfeita.'"
+  (confirm)="confirmDelete()"
+  (close)="closeDeleteConfirmation()"
+></app-confirmation-modal>

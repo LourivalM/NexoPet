@@ -21,4 +21,8 @@ export class ProductService {
   }
 
   // Você pode adicionar mais métodos aqui, como updateProduct, deleteProduct, getProductById
+
+  deleteProduct(productId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${productId}`);
+  }
 }

@@ -21,4 +21,8 @@ export class PetService {
   }
 
   // Você pode adicionar mais métodos aqui, como updatePet, deletePet, getPetById
+
+  deletePet(petId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${petId}`);
+  }
 }

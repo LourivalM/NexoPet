@@ -16,11 +16,17 @@ const usersFilePath = path.join(__dirname, 'users.json');
 const petsFilePath = path.join(__dirname, 'pets.json');
 const productsFilePath = path.join(__dirname, 'products.json');
 const postsFilePath = path.join(__dirname, 'posts.json');
+const ongsFilePath = path.join(__dirname, 'ongs.json');
+const partnersFilePath = path.join(__dirname, 'partners.json');
+const articlesFilePath = path.join(__dirname, 'articles.json');
 
 let users = []; // Declarar como let para poder reatribuir
 let pets = []; // Declarar como let para poder reatribuir
 let products = []; // Declarar como let para poder reatribuir
 let posts = []; // Declarar como let para poder reatribuir
+let ongs = []; // Declarar como let para poder reatribuir
+let partners = []; // Declarar como let para poder reatribuir
+let articles = []; // Declarar como let para poder reatribuir
 
 // Função para carregar usuários do arquivo JSON
 const loadUsers = () => {
@@ -135,11 +141,97 @@ const savePosts = () => {
     }
 };
 
+// Função para carregar ONGs do arquivo JSON
+const loadOngs = () => {
+    try {
+        if (fs.existsSync(ongsFilePath)) {
+            const data = fs.readFileSync(ongsFilePath, 'utf8');
+            ongs = JSON.parse(data);
+            console.log('ONGs carregadas com sucesso do ongs.json');
+        } else {
+            console.log('Arquivo ongs.json não encontrado. Criando arquivo vazio...');
+            ongs = [];
+            // Opcional: Adicionar ONGs iniciais aqui se desejar
+            saveOngs();
+        }
+    } catch (error) {
+        console.error('Erro ao carregar ONGs do ongs.json:', error);
+    }
+};
+
+// Função para salvar ONGs no arquivo JSON
+const saveOngs = () => {
+    try {
+        fs.writeFileSync(ongsFilePath, JSON.stringify(ongs, null, 2), 'utf8');
+        console.log('ONGs salvas com sucesso no ongs.json');
+    } catch (error) {
+        console.error('Erro ao salvar ONGs no ongs.json:', error);
+    }
+};
+
+// Função para carregar Parceiros do arquivo JSON
+const loadPartners = () => {
+    try {
+        if (fs.existsSync(partnersFilePath)) {
+            const data = fs.readFileSync(partnersFilePath, 'utf8');
+            partners = JSON.parse(data);
+            console.log('Parceiros carregados com sucesso do partners.json');
+        } else {
+            console.log('Arquivo partners.json não encontrado. Criando arquivo vazio...');
+            partners = [];
+            // Opcional: Adicionar Parceiros iniciais aqui se desejar
+            savePartners();
+        }
+    } catch (error) {
+        console.error('Erro ao carregar Parceiros do partners.json:', error);
+    }
+};
+
+// Função para salvar Parceiros no arquivo JSON
+const savePartners = () => {
+    try {
+        fs.writeFileSync(partnersFilePath, JSON.stringify(partners, null, 2), 'utf8');
+        console.log('Parceiros salvos com sucesso no partners.json');
+    } catch (error) {
+        console.error('Erro ao salvar Parceiros no partners.json:', error);
+    }
+};
+
+// Função para carregar Artigos do arquivo JSON
+const loadArticles = () => {
+    try {
+        if (fs.existsSync(articlesFilePath)) {
+            const data = fs.readFileSync(articlesFilePath, 'utf8');
+            articles = JSON.parse(data);
+            console.log('Artigos carregados com sucesso do articles.json');
+        } else {
+            console.log('Arquivo articles.json não encontrado. Criando arquivo vazio...');
+            articles = [];
+            saveArticles();
+        }
+    } catch (error) {
+        console.error('Erro ao carregar Artigos do articles.json:', error);
+    }
+};
+
+// Função para salvar Artigos no arquivo JSON
+const saveArticles = () => {
+    try {
+        fs.writeFileSync(articlesFilePath, JSON.stringify(articles, null, 2), 'utf8');
+        console.log('Artigos salvos com sucesso no articles.json');
+    } catch (error) {
+        console.error('Erro ao salvar Artigos no articles.json:', error);
+    }
+};
+
 // Carregar usuários e pets ao iniciar a aplicação
 loadUsers();
 loadPets();
 loadProducts();
 loadPosts();
+loadOngs();
+loadPartners();
+loadArticles();
 
 app.post("/login", (req, res) => {
     try {
@@ -359,6 +451,27 @@ app.post("/pets", (req, res) => {
     }
 });
 
+app.delete("/pets/:id", (req, res) => {
+    try {
+        const petId = parseInt(req.params.id);
+        const initialLength = pets.length;
+        pets = pets.filter(pet => pet.id !== petId);
+
+        if (pets.length === initialLength) {
+            return res.status(404).json({ message: "Pet não encontrado." });
+        }
+
+        savePets();
+        console.log(`Pet com ID ${petId} removido.`);
+        return res.status(204).send(); // 204 No Content para sucesso sem retorno
+    } catch (error) {
+        console.error("Erro ao deletar pet:", error);
+        return res.status(500).json({
+            message: "Falha ao deletar pet."
+        });
+    }
+});
+
 app.get("/products", (req, res) => {
     try {
         return res.status(200).json(products);
@@ -382,6 +495,27 @@ app.post("/products", (req, res) => {
         console.error("Erro ao cadastrar produto:", error);
         return res.status(500).json({
             message: "Falha ao cadastrar produto."
+        });
+    }
+});
+
+app.delete("/products/:id", (req, res) => {
+    try {
+        const productId = parseInt(req.params.id);
+        const initialLength = products.length;
+        products = products.filter(product => product.id !== productId);
+
+        if (products.length === initialLength) {
+            return res.status(404).json({ message: "Produto não encontrado." });
+        }
+
+        saveProducts();
+        console.log(`Produto com ID ${productId} removido.`);
+        return res.status(204).send();
+    } catch (error) {
+        console.error("Erro ao deletar produto:", error);
+        return res.status(500).json({
+            message: "Falha ao deletar produto."
         });
     }
 });
@@ -412,6 +546,78 @@ app.post("/posts", (req, res) => {
         console.error("Erro ao cadastrar post:", error);
         return res.status(500).json({
             message: "Falha ao cadastrar post."
+        });
+    }
+});
+
+app.delete("/posts/:id", (req, res) => {
+    try {
+        const postId = parseInt(req.params.id);
+        const initialLength = posts.length;
+        posts = posts.filter(post => post.id !== postId);
+
+        if (posts.length === initialLength) {
+            return res.status(404).json({ message: "Post não encontrado." });
+        }
+
+        savePosts();
+        console.log(`Post com ID ${postId} removido.`);
+        return res.status(204).send();
+    } catch (error) {
+        console.error("Erro ao deletar post:", error);
+        return res.status(500).json({
+            message: "Falha ao deletar post."
+        });
+    }
+});
+
+app.get("/ongs", (req, res) => {
+    try {
+        return res.status(200).json(ongs);
+    } catch (error) {
+        console.error("Erro no endpoint /ongs:", error);
+        return res.status(500).json({
+            message: "Falha na comunicação com o servidor!"
+        });
+    }
+});
+
+app.get("/partners", (req, res) => {
+    try {
+        return res.status(200).json(partners);
+    } catch (error) {
+        console.error("Erro no endpoint /partners:", error);
+        return res.status(500).json({
+            message: "Falha na comunicação com o servidor!"
+        });
+    }
+});
+
+app.get("/articles", (req, res) => {
+    try {
+        return res.status(200).json(articles);
+    } catch (error) {
+        console.error("Erro no endpoint /articles:", error);
+        return res.status(500).json({
+            message: "Falha na comunicação com o servidor!"
+        });
+    }
+});
+
+app.get("/articles/:id", (req, res) => {
+    try {
+        const articleId = parseInt(req.params.id);
+        const article = articles.find(a => a.id === articleId);
+
+        if (!article) {
+            return res.status(404).json({ message: "Artigo não encontrado." });
+        }
+
+        return res.status(200).json(article);
+    } catch (error) {
+        console.error("Erro ao buscar artigo por ID:", error);
+        return res.status(500).json({
+            message: "Falha na comunicação com o servidor!"
         });
     }
 });

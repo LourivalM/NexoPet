@@ -2,22 +2,24 @@ import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Post } from '../../../models/post.model';
 import { PostService } from '../../../service/post.service';
-import { loginService } from '../../../service/login'; // Importar loginService
+import { loginService } from '../../../service/login';
 import { Usuario } from '../../../models/user';
+import { ConfirmationModalComponent } from '../../modals/confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: 'app-post-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ConfirmationModalComponent],
   templateUrl: './post-card.component.html',
   styleUrls: ['./post-card.component.css']
 })
 export class PostCardComponent {
   @Input() post!: Post;
-  currentUser: Usuario | null = null; // Propriedade para armazenar o usuário logado
+  currentUser: Usuario | null = null;
+  showConfirmationModal: boolean = false;
 
   private postService = inject(PostService);
-  private loginService = inject(loginService); // Injetar loginService
+  private loginService = inject(loginService);
 
   constructor() {
     this.loginService.currentUser.subscribe((user: Usuario | null) => {
@@ -43,5 +45,33 @@ export class PostCardComponent {
       return this.post.likedByUsers.includes(this.currentUser.id);
     }
     return false;
+  }
+
+  isMyPost(): boolean {
+    return this.currentUser?.id === this.post.userId;
+  }
+
+  openDeleteConfirmation(): void {
+    this.showConfirmationModal = true;
+  }
+
+  closeDeleteConfirmation(): void {
+    this.showConfirmationModal = false;
+  }
+
+  confirmDelete(): void {
+    if (this.post && this.post.id) {
+      this.postService.deletePost(this.post.id).subscribe({
+        next: () => {
+          console.log('Post deletado com sucesso!');
+          // TODO: Emitir evento para o componente pai recarregar a lista de posts
+          this.closeDeleteConfirmation();
+        },
+        error: (err: any) => {
+          console.error('Erro ao deletar post:', err);
+          this.closeDeleteConfirmation();
+        }
+      });
+    }
   }
 }

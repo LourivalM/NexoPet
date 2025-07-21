@@ -1,24 +1,20 @@
 <h1>Blog & Notícias do Nexo Pet</h1>
 
 <div class="blog-grid">
-  <div class="blog-card">
-    <img src="https://via.placeholder.com/300x200" alt="Imagem do Artigo 1">
-    <h3>Título do Artigo 1</h3>
-    <p>Um breve resumo sobre o conteúdo do primeiro artigo. Clique para ler mais...</p>
-    <a href="#">Ler Mais</a>
+  <div *ngIf="articles$ | async as articles">
+    @for (article of articles; track article.id) {
+      <a [routerLink]="'/blog/' + article.id" class="article-card">
+        <img [src]="article.imageUrl" [alt]="article.title">
+        <div class="card-content">
+          <h3>{{ article.title }}</h3>
+          <p class="author">Por: {{ article.author }}</p>
+          <p class="summary">{{ article.summary }}</p>
+          <span>Ler Mais</span>
+        </div>
+      </a>
+    }
   </div>
-
-  <div class="blog-card">
-    <img src="https://via.placeholder.com/300x200" alt="Imagem do Artigo 2">
-    <h3>Título do Artigo 2</h3>
-    <p>Um breve resumo sobre o conteúdo do segundo artigo. Clique para ler mais...</p>
-    <a href="#">Ler Mais</a>
-  </div>
-
-  <div class="blog-card">
-    <img src="https://via.placeholder.com/300x200" alt="Imagem do Artigo 3">
-    <h3>Título do Artigo 3</h3>
-    <p>Um breve resumo sobre o conteúdo do terceiro artigo. Clique para ler mais...</p>
-    <a href="#">Ler Mais</a>
+  <div *ngIf="!(articles$ | async)?.length">
+    <p>Nenhum artigo encontrado.</p>
   </div>
 </div>

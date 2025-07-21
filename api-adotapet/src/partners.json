@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "nome": "PetShop Amigo",
+    "descricao": "Loja completa para seu pet, com rações, acessórios e brinquedos.",
+    "logo": "/img/Parceiros/PetShop Amigo.jpg"
+  },
+  {
+    "id": 2,
+    "nome": "Clínica Veterinária Saúde Animal",
+    "descricao": "Atendimento veterinário de qualidade, com consultas, vacinas e cirurgias.",
+    "logo": "/img/Parceiros/Clínica Veterinária Saúde Animal.jpg"
+  },
+  {
+    "id": 3,
+    "nome": "Adestradores Profissionais",
+    "descricao": "Serviços de adestramento para cães de todas as idades e raças.",
+    "logo": "/img/Parceiros/Adestradores Profissionais.jpg"
+  }
+]

@@ -1,0 +1,11 @@
+<div class="ong-list-container">
+  <h1>ONGs Parceiras</h1>
+  <div class="ong-grid">
+    <div *ngFor="let ong of ongs" class="ong-card">
+      <img [src]="ong.imagemPerfil" [alt]="ong.nome" class="ong-profile-img">
+      <h2>{{ ong.nome }}</h2>
+      <p>{{ ong.descricao }}</p>
+      <!-- Adicione mais detalhes da ONG aqui, se necessário -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="partner-list-container">
+  <h1>Nossos Parceiros</h1>
+  <div class="partner-grid">
+    <div *ngFor="let partner of partners" class="partner-card">
+      <img [src]="partner.logo" [alt]="partner.nome" class="partner-logo-img">
+      <h2>{{ partner.nome }}</h2>
+      <p>{{ partner.descricao }}</p>
+      <!-- Adicione mais detalhes do parceiro aqui, se necessário -->
+    </div>
+  </div>
+</div>

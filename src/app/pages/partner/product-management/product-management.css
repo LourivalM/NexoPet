@@ -1,0 +1,24 @@
+.product-item {
+  border: 2px solid var(--orange-light); /* Borda laranja para produtos */
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-item h3 {
+  color: var(--orange-dark); /* Cor laranja escura para o nome do produto */
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.product-item p {
+  margin-bottom: 4px;
+}
+
+.product-item .price {
+  font-weight: bold;
+  color: var(--orange-dark); /* Cor laranja escura para o preço */
+  font-size: 1.1em;
+}

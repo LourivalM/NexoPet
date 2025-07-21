@@ -5,17 +5,20 @@ import { PetService } from '../../../service/pet.service';
 import { Pet } from '../../../models/pet';
 import { PetFormComponent } from '../../../components/forms/pet-form/pet-form';
 import { loginService } from '../../../service/login';
+import { ConfirmationModalComponent } from '../../../components/modals/confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: 'app-pet-management',
   standalone: true,
-  imports: [CommonModule, PetFormComponent],
+  imports: [CommonModule, PetFormComponent, ConfirmationModalComponent],
   templateUrl: './pet-management.html',
   styleUrls: ['./pet-management.css']
 })
 export class PetManagementComponent implements OnInit {
   pets$!: Observable<Pet[]>;
   showPetForm: boolean = false;
+  showConfirmationModal: boolean = false;
+  selectedPetIdToDelete: number | null = null;
 
   constructor(private petService: PetService, private loginService: loginService) { }
 
@@ -40,6 +43,32 @@ export class PetManagementComponent implements OnInit {
       });
     } else {
       console.error('Usuário não é uma ONG ou não está logado.');
+    }
+  }
+
+  openDeleteConfirmation(petId: number): void {
+    this.selectedPetIdToDelete = petId;
+    this.showConfirmationModal = true;
+  }
+
+  closeDeleteConfirmation(): void {
+    this.showConfirmationModal = false;
+    this.selectedPetIdToDelete = null;
+  }
+
+  confirmDelete(): void {
+    if (this.selectedPetIdToDelete !== null) {
+      this.petService.deletePet(this.selectedPetIdToDelete).subscribe({
+        next: () => {
+          console.log('Pet deletado com sucesso!');
+          this.pets$ = this.petService.getPets(); // Recarrega a lista de pets após deletar
+          this.closeDeleteConfirmation();
+        },
+        error: (err: any) => {
+          console.error('Erro ao deletar pet:', err);
+          this.closeDeleteConfirmation();
+        }
+      });
     }
   }
 }

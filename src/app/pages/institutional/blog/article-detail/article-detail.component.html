@@ -1,0 +1,7 @@
+<div class="article-detail-container" *ngIf="article$ | async as article">
+  <img [src]="article.imageUrl" [alt]="article.title" class="article-image">
+  <h1>{{ article.title }}</h1>
+  <p class="article-meta">Por: {{ article.author }} | Publicado em: {{ article.publicationDate }}</p>
+  <div class="article-content" [innerHTML]="article.content"></div>
+  <button routerLink="/blog" class="back-button">Voltar para o Blog</button>
+</div>

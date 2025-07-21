@@ -10,6 +10,15 @@
     <p>Raça: {{ pet.raca }}</p>
     <p>Idade: {{ pet.idade }}</p>
     <p>ONG: {{ pet.ong }}</p>
-    <img [src]="pet.img" alt="{{ pet.nome }}" width="100">
+    <img [src]="'assets/images/uploads/' + pet.img" alt="{{ pet.nome }}" width="100">
+    <button class="btn btn-danger btn-sm mt-2" (click)="openDeleteConfirmation(pet.id)">Deletar</button>
   </div>
 </div>
+
+<app-confirmation-modal
+  *ngIf="showConfirmationModal"
+  [title]="'Confirmar Exclusão'"
+  [message]="'Tem certeza que deseja excluir este pet? Esta ação não pode ser desfeita.'"
+  (confirm)="confirmDelete()"
+  (close)="closeDeleteConfirmation()"
+></app-confirmation-modal>
