@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-lgpd-terms-modal',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './lgpd-terms-modal.html',
-  styleUrl: './lgpd-terms-modal.css'
+  styleUrls: ['./lgpd-terms-modal.css'],
+  standalone: true,
+  imports: [CommonModule]
 })
 export class LgpdTermsModalComponent implements AfterViewInit {
   @Output() closeModal = new EventEmitter<void>();

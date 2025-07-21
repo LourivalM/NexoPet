@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Router } from '@angular/router'; // Import Router
+import { Router } from '@angular/router';
 import { Usuario } from '../models/user';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -12,14 +12,12 @@ import { environment } from '../../environments/environment';
 export class loginService {
   http=inject(HttpClient);
   platformId = inject(PLATFORM_ID);
-  router = inject(Router); // Inject Router
-  private _currentUser = new BehaviorSubject<Usuario | null>(this.getUser());
-  currentUser = this._currentUser.asObservable();
+  router = inject(Router);
 
   login(login: any, senha: any, manterConectado: boolean): Observable<Usuario> {
     return this.http.post<Usuario>(`${environment.apiUrl}/login`, { login, senha })
-    .pipe( 
-      tap( 
+    .pipe(
+      tap(
         (user)=> {
           console.log('LoginService: Usuário recebido da API:', user);
           if (isPlatformBrowser(this.platformId)) {
@@ -29,7 +27,6 @@ export class loginService {
             } else {
               localStorage.removeItem('user');
             }
-            this._currentUser.next(user);
           }
         }
       )
@@ -42,14 +39,10 @@ export class loginService {
         tap(updatedUser => {
           console.log('LoginService: Usuário atualizado recebido da API:', updatedUser);
           if (isPlatformBrowser(this.platformId)) {
-            // Atualiza o sessionStorage
             sessionStorage.setItem('user', JSON.stringify(updatedUser));
-
-            // Se o usuário estava com "manter conectado", atualiza também o localStorage
             if (localStorage.getItem('user')) {
               localStorage.setItem('user', JSON.stringify(updatedUser));
             }
-            this._currentUser.next(updatedUser);
           }
         })
       );
@@ -59,8 +52,7 @@ export class loginService {
     if (isPlatformBrowser(this.platformId)) {
       sessionStorage.removeItem('user');
       localStorage.removeItem('user');
-      this._currentUser.next(null);
-      this.router.navigate(['/home']); // Redireciona para a página inicial
+      this.router.navigate(['/home']);
     }
   }
 

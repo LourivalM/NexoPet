@@ -2,12 +2,14 @@
   <h1>Minha Galeria</h1>
 
   <div class="gallery-grid">
-    <div *ngFor="let photo of photos" class="gallery-item">
-      <img [src]="photo.imageUrl" alt="Minha Foto">
-      <button class="delete-photo-button" (click)="deletePhoto(photo.id)">Deletar</button>
-    </div>
-    <div *ngIf="photos.length === 0" class="no-photos-message">
-      <p>Você ainda não tem fotos na sua galeria.</p>
-    </div>
+    <ng-container *ngIf="userPosts$ | async as posts">
+      <div *ngFor="let post of posts" class="gallery-item">
+        <app-post-card [post]="post"></app-post-card>
+        <button class="delete-photo-button" (click)="deletePost(post.id)">Deletar</button>
+      </div>
+      <div *ngIf="posts.length === 0" class="no-photos-message">
+        <p>Você ainda não tem fotos na sua galeria.</p>
+      </div>
+    </ng-container>
   </div>
 </div>

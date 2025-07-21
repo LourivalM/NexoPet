@@ -61,18 +61,21 @@ export class RegisterPessoaFormComponent implements OnInit {
     }
   }
 
-  openLgpdModal(): void {
+  openLgpdModal(event: Event): void {
+    event.preventDefault();
     this.showLgpdModal = true;
-    this.registerForm.get('lgpdConsent')?.enable();
-    this.registerForm.get('lgpdConsent')?.setValue(true);
   }
 
   closeLgpdModal(): void {
     this.showLgpdModal = false;
-    this.registerForm.get('lgpdConsent')?.setValue(true);
   }
 
-  onSubmit(): void {
+  onLgpdAccepted() {
+    this.registerForm.get('lgpdConsent')?.setValue(true);
+    this.closeLgpdModal();
+  }
+
+  onSubmit() {
     if (this.registerForm.valid) {
       console.log('Formulário de Pessoa Física Válido:', this.registerForm.value);
       // Enviar os dados para a API

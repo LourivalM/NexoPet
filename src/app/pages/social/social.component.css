@@ -31,13 +31,14 @@
 }
 
 .posts-list {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  justify-items: center;
+  align-items: center;
+  max-width: 600px; /* Largura máxima para o feed */
+  margin: 0 auto; /* Centraliza o feed */
 }
 
 .posts-list app-post-card {
-  width: 100%;
-  max-width: 400px; /* Limita a largura máxima do card de post */
+  width: 100%; /* O card ocupa 100% da largura do .posts-list */
 }

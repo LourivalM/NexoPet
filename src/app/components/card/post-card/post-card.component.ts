@@ -2,7 +2,7 @@ import { Component, Input, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Post } from '../../../models/post.model';
 import { PostService } from '../../../service/post.service';
-import { loginService } from '../../../service/login';
+import { UserService } from '../../../service/user.service'; // Importar UserService
 import { Usuario } from '../../../models/user';
 import { ConfirmationModalComponent } from '../../modals/confirmation-modal/confirmation-modal.component';
 
@@ -21,17 +21,17 @@ export class PostCardComponent implements OnInit {
   showConfirmationModal: boolean = false;
 
   private postService = inject(PostService);
-  private loginService = inject(loginService);
+  private userService = inject(UserService); // Injetar UserService
 
   constructor() {
-    this.loginService.currentUser.subscribe((user: Usuario | null) => {
+    this.userService.currentUser.subscribe((user: Usuario | null) => {
       this.currentUser = user;
     });
   }
 
   ngOnInit(): void {
     if (this.post && this.post.userId) {
-      this.loginService.getUserById(this.post.userId).subscribe(user => {
+      this.userService.getUserById(this.post.userId).subscribe(user => {
         if (user) {
           this.postOwnerName = user.nickname || user.nome || 'Usuário';
           this.postOwnerType = user.tipo; // Armazena o tipo do usuário

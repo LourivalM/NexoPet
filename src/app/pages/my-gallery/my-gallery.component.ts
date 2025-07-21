@@ -1,38 +1,58 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-interface Photo {
-  id: number;
-  imageUrl: string;
-}
+import { Post } from '../../models/post.model';
+import { Usuario } from '../../models/user';
+import { PostService } from '../../service/post.service';
+import { UserService } from '../../service/user.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { PostCardComponent } from '../../components/card/post-card/post-card.component';
 
 @Component({
   selector: 'app-my-gallery',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PostCardComponent],
   templateUrl: './my-gallery.component.html',
   styleUrl: './my-gallery.component.css'
 })
 export class MyGalleryComponent implements OnInit {
-  photos: Photo[] = [];
+  userPosts$: Observable<Post[]> | undefined;
+  currentUserId: number | null = null;
+
+  constructor(private postService: PostService, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.loadExamplePhotos();
+    this.userService.currentUser.subscribe((user: Usuario | null) => {
+      console.log('Current User from UserService:', user); // Adicionado para depuração
+      if (user) {
+        this.currentUserId = user.id;
+        console.log('Current User ID:', this.currentUserId); // Adicionado para depuração
+        this.loadUserPosts();
+      } else {
+        console.log('No user logged in.'); // Adicionado para depuração
+      }
+    });
   }
 
-  loadExamplePhotos(): void {
-    // Example photos - replace with actual data fetching
-    this.photos = [
-      { id: 1, imageUrl: 'https://via.placeholder.com/300x200?text=Minha+Foto+1' },
-      { id: 2, imageUrl: 'https://via.placeholder.com/300x200?text=Minha+Foto+2' },
-      { id: 3, imageUrl: 'https://via.placeholder.com/300x200?text=Minha+Foto+3' },
-      { id: 4, imageUrl: 'https://via.placeholder.com/300x200?text=Minha+Foto+4' },
-    ];
+  loadUserPosts(): void {
+    if (this.currentUserId !== null) {
+      this.userPosts$ = this.postService.getPosts().pipe(
+        map(posts => {
+          console.log('Posts from service (before filter):', posts); // Adicionado para depuração
+          const filteredPosts = posts.filter(post => post.userId === this.currentUserId);
+          console.log('Filtered Posts (after filter):', filteredPosts); // Adicionado para depuração
+          return filteredPosts;
+        })
+      );
+    }
   }
 
-  deletePhoto(photoId: number): void {
-    console.log(`Deletando foto com ID: ${photoId}`);
-    // Implement actual deletion logic (e.g., API call)
-    this.photos = this.photos.filter(photo => photo.id !== photoId);
+  deletePost(postId: number | undefined): void {
+    if (postId !== undefined) {
+      this.postService.deletePost(postId).subscribe(() => {
+        console.log(`Post com ID: ${postId} deletado com sucesso.`);
+        this.loadUserPosts(); // Recarrega os posts após a exclusão
+      });
+    }
   }
 }

@@ -68,14 +68,18 @@ export class RegisterOngFormComponent implements OnInit {
     }
   }
 
-  openLgpdModal(): void {
+  openLgpdModal(event: Event): void {
+    event.preventDefault();
     this.showLgpdModal = true;
-    this.registerForm.get('lgpdConsent')?.enable();
-    this.registerForm.get('lgpdConsent')?.setValue(true);
   }
 
   closeLgpdModal(): void {
     this.showLgpdModal = false;
+  }
+
+  onLgpdAccepted() {
+    this.registerForm.get('lgpdConsent')?.setValue(true);
+    this.closeLgpdModal();
   }
 
   onSubmit(): void {
