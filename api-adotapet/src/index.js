@@ -396,6 +396,24 @@ app.get("/users", (req, res) => {
     }
 });
 
+app.get("/users/:id", (req, res) => {
+    try {
+        const userId = parseInt(req.params.id);
+        const user = users.find(u => u.id === userId);
+
+        if (!user) {
+            return res.status(404).json({ message: "Usuário não encontrado." });
+        }
+
+        return res.status(200).json(user);
+    } catch (error) {
+        console.error("Erro no endpoint /users/:id:", error);
+        return res.status(500).json({
+            message: "Falha na comunicação com o servidor!"
+        });
+    }
+});
+
 app.patch("/users/:id", (req, res) => {
     try {
         const userId = parseInt(req.params.id);

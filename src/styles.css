@@ -9,6 +9,8 @@
     --orange-light: #f2b06f;
     --orange-dark: #e68c49;
     --white: #f8f9fa;
+    --pink-light: #ffcccc; /* Rosa claro para o botão Adote Aqui */
+    --red-active: #ff0000; /* Vermelho para o coração ativo */
     --cor-texto: #333; /* Nova variável para cor de texto */
 
     /* Mapeamento para as variáveis existentes, se necessário */
@@ -37,7 +39,7 @@ h1, h2, h3 {
 }
 
 .main-content {
-  margin-top: 100px; /* Ajuste conforme a altura do seu cabeçalho */
+  margin-top: 10px; /* Ajuste conforme a altura do seu cabeçalho */
   padding: 1rem; /* Adicione um padding para o conteúdo não ficar colado nas bordas */
 }
 

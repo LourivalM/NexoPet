@@ -1,1 +1,53 @@
-/* Estilos para faq.component.css */
+.institutional-page-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.institutional-page-container h1 {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.faq-content {
+  text-align: left;
+}
+
+.faq-content details {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.faq-content details:hover {
+  background-color: #f0f0f0;
+}
+
+.faq-content summary {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #333;
+  outline: none; /* Remove o contorno ao focar */
+}
+
+.faq-content details[open] summary {
+  margin-bottom: 10px;
+}
+
+.faq-content details p {
+  font-size: 1em;
+  line-height: 1.6;
+  color: #555;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+  margin-top: 10px;
+}

@@ -1,0 +1,160 @@
+.institutional-page-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.institutional-page-container h1 {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.add-friends-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+}
+
+.search-area {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.search-button {
+  padding: 10px 20px;
+  background-color: #00008B; /* Azul escuro */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #0000CD; /* Azul um pouco mais claro no hover */
+}
+
+.user-list-display-area {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  min-height: 150px; /* Proporção ajustada para resultados de pesquisa */
+  background-color: #f9f9f9;
+  overflow-y: auto;
+}
+
+.user-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.user-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.user-info .username {
+  font-weight: bold;
+  color: #00008B; /* Azul escuro */
+  font-size: 1.1em;
+}
+
+.send-invite-button {
+  padding: 8px 15px;
+  background-color: #28a745; /* Verde para enviar convite */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.send-invite-button:hover {
+  background-color: #218838;
+}
+
+.my-contacts-section {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.my-contacts-section h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.contact-list-display-area {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  min-height: 150px; /* Proporção ajustada para lista de contatos */
+  background-color: #f9f9f9;
+  overflow-y: auto;
+}
+
+.contact-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.contact-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.contact-info .username {
+  font-weight: bold;
+  color: #00008B; /* Azul escuro */
+  font-size: 1.1em;
+}
+
+.delete-contact-button {
+  padding: 8px 15px;
+  background-color: #dc3545; /* Vermelho para excluir */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-contact-button:hover {
+  background-color: #c82333;
+}
+
+.no-results-message,
+.no-contacts-message {
+  text-align: center;
+  color: #777;
+  padding: 20px;
+}

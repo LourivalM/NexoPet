@@ -84,4 +84,8 @@ export class loginService {
     const user = this.getUser();
     return user ? user.nickname || user.nome || user.nomeInstituicao || null : null;
   }
+
+  getUserById(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(`${environment.apiUrl}/users/${id}`);
+  }
 }

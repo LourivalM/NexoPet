@@ -1,18 +1,15 @@
-<div class="side-menu" [class.open]="isOpen">
-  <img src="/img/NexoIMG/NexiPeticone logo fundo branco.png" alt="NexoPet Logo" class="side-menu-logo">
+<div class="side-menu">
+  
   <div class="menu-header">
     <h3>Menu</h3>
-    <button class="close-btn" (click)="toggle()">&times;</button>
   </div>
   
   <ul class="menu-items">
-    <li *ngIf="currentUserType === 'pessoa'"><a class="btn btn-primary" [routerLink]="'/social'">Minha Galeria</a></li>
-    <li *ngIf="currentUserType === 'ong'"><a class="btn btn-primary" [routerLink]="'/ong/pet-management'">Adoções Pet</a></li>
-    <li *ngIf="currentUserType === 'parceiro'"><a class="btn btn-primary" [routerLink]="'/partner/product-management'">Meus Produtos</a></li>
-    <li *ngIf="user"><a class="btn btn-primary" [routerLink]="'/profile'">Meu Perfil</a></li>
+    <li *ngIf="currentUserType === 'pessoa'"><a [routerLink]="'/my-gallery'">Minha Galeria</a></li>
+    <li *ngIf="currentUserType === 'ong'"><a [routerLink]="'/ong/pet-management'">Adoções Pet</a></li>
+    <li *ngIf="currentUserType === 'parceiro'"><a [routerLink]="'/partner/product-management'">Meus Produtos</a></li>
+    <li *ngIf="user"><a [routerLink]="'/inbox'">Caixa de Entrada</a></li>
+    <li *ngIf="user"><a [routerLink]="'/add-friends'">Adicione Amigos +</a></li>
+    <li *ngIf="user"><a [routerLink]="'/profile'">Meu Perfil</a></li>
   </ul>
 </div>
-
-<button class="hamburger-btn" (click)="toggle()">
-  &#9776;
-</button>

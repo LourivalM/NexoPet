@@ -8,4 +8,23 @@
       <!-- Adicione mais detalhes do parceiro aqui, se necessário -->
     </div>
   </div>
+
+  <h2 class="products-section-title">Produtos dos Nossos Parceiros</h2>
+  <div class="product-search-panel">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar produtos..." class="search-input">
+    <button (click)="searchProducts()" class="search-button">Buscar</button>
+  </div>
+
+  <div class="product-list-grid">
+    <div *ngFor="let product of filteredProducts" class="product-item">
+      <div class="product-item-header">
+        <span class="product-name">{{ product.name }}</span>
+      </div>
+      <p>{{ product.description }}</p>
+      <p class="price">{{ product.price | currency:'BRL' }}</p>
+    </div>
+    <div *ngIf="filteredProducts.length === 0" class="no-products-message">
+      <p>Nenhum produto encontrado.</p>
+    </div>
+  </div>
 </div>

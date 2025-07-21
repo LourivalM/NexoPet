@@ -8,7 +8,7 @@
 }
 
 .header-logo-img {
-  height: 100px; /* Define a altura fixa para a logo */
+  height: 110px; /* Define a altura fixa para a logo */
 }
 
 .login-form-container {
@@ -42,5 +42,35 @@
   border-radius: 50%;
   background-color: var(--green-light); /* Alterado para verde claro */
   margin-right: 5px;
+}
+
+.navbar-nav {
+  flex-grow: 1;
+}
+
+.navbar-nav .nav-item {
+  margin-right: 1rem; /* Aumenta o espaçamento entre os itens de navegação */
+}
+
+.navbar-nav .nav-link {
+  font-size: 1.5rem; /* Aumenta a fonte para o tamanho de um h3 */
+  font-family: 'Poppins', sans-serif; /* Usa a mesma fonte dos títulos */
+  color: var(--green-dark); /* Cor verde escura para os links de navegação */
+}
+
+.btn-adote-aqui {
+  background-color: var(--pink-light);
+  color: var(--white) !important; /* Força a cor branca */
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.btn-adote-aqui:active {
+  transform: scale(1.05); /* Efeito de crescimento ao clicar */
+}
+
+.btn-adote-aqui .heart-icon {
+  color: var(--red-active); /* Cor vermelha para o coração */
 }
 

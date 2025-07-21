@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { loginService } from '../../service/login';
@@ -20,8 +20,6 @@ export class HeaderComponent implements OnInit {
   showRegisterSelection: boolean = false; // Nova propriedade
   user: Usuario | null = null; // Adicionado para armazenar o objeto do usuário
 
-  @Output() toggleSideMenu = new EventEmitter<void>(); // Novo Output
-
   ngOnInit(): void {
     this.checkLoginStatus();
   }
@@ -33,10 +31,6 @@ export class HeaderComponent implements OnInit {
       this.showLoginForm = false; // Esconde o formulário se o usuário estiver logado
       this.showRegisterSelection = false; // Esconde o seletor de cadastro também
     }
-  }
-
-  onToggleSideMenu(): void {
-    this.toggleSideMenu.emit();
   }
 
   toggleLoginForm(): void {

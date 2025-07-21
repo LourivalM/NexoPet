@@ -1,4 +1,7 @@
-<div class="post-card">
+<div class="post-card" [ngClass]="'post-card-' + postOwnerType">
+  <div class="post-card-header">
+    <span class="post-owner-name">{{ postOwnerName }}</span>
+  </div>
   <img [src]="imageUrl" [alt]="post.caption || 'Post image'">
   <div class="post-content">
     <p *ngIf="post.caption">{{ post.caption }}</p>

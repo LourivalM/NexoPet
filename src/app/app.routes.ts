@@ -75,6 +75,19 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/partner-list/partner-list.component').then(c => c.PartnerListComponent)
     },
     {
+        path: 'my-gallery',
+        loadComponent: () => import('./pages/my-gallery/my-gallery.component').then(c => c.MyGalleryComponent),
+        canActivate: [authGuard]
+    },
+    {
+        path: 'inbox',
+        loadComponent: () => import('./pages/inbox/inbox.component').then(c => c.InboxComponent)
+    },
+    {
+        path: 'add-friends',
+        loadComponent: () => import('./pages/add-friends/add-friends.component').then(c => c.AddFriendsComponent)
+    },
+    {
         path: '**',
         redirectTo: '/home'
     }

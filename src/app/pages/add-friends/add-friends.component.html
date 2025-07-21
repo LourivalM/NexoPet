@@ -1,0 +1,41 @@
+<div class="institutional-page-container">
+  <h1>Adicione Amigos +</h1>
+
+  <div class="add-friends-content">
+    <div class="search-area">
+      <input type="text" placeholder="Pesquisar usuário..." class="search-input">
+      <button class="search-button">Pesquisar</button>
+    </div>
+
+    <div class="user-list-display-area">
+      <div *ngFor="let user of searchResults" class="user-item">
+        <div class="user-info">
+          <span class="username">{{ user.name }}</span>
+        </div>
+        <div class="user-actions">
+          <button class="send-invite-button" (click)="sendInvite(user.id)">Enviar Convite</button>
+        </div>
+      </div>
+      <div *ngIf="searchResults.length === 0" class="no-results-message">
+        <p>Nenhum usuário encontrado.</p>
+      </div>
+    </div>
+
+    <div class="my-contacts-section">
+      <h2>Meus Contatos</h2>
+      <div class="contact-list-display-area">
+        <div *ngFor="let contact of myContacts" class="contact-item">
+          <div class="contact-info">
+            <span class="username">{{ contact.name }}</span>
+          </div>
+          <div class="contact-actions">
+            <button class="delete-contact-button" (click)="deleteContact(contact.id)">Excluir Contato</button>
+          </div>
+        </div>
+        <div *ngIf="myContacts.length === 0" class="no-contacts-message">
+          <p>Você ainda não tem contatos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

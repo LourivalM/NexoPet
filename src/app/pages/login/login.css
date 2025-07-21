@@ -1,8 +1,86 @@
 .login-page-container {
-    width: 100%;
-    height: 100vh;
-    margin-right: auto;
-    margin-left: auto;
+    max-width: 1200px; /* Limita a largura máxima */
+    height: 100vh; /* Mantém a altura total da viewport */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    display: flex; /* Para centralizar o conteúdo verticalmente */
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    padding: 20px; /* Adiciona um padding para não colar nas bordas */
+    box-sizing: border-box; /* Inclui padding na largura/altura */
+}
+
+.login-page-row {
+    width: 100%; /* Garante que a linha ocupe a largura total do container */
+    height: auto; /* Altura automática baseada no conteúdo */
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 10px; /* Arredonda as bordas do container principal */
+    overflow: hidden; /* Garante que o conteúdo arredondado não vaze */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra similar à da home */
+}
+
+.login-page-column {
+    flex: 1; /* Distribui o espaço igualmente */
+    height: auto; /* Altura automática */
+}
+
+.login-page-column.login-image-column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f8f8; /* Cor de fundo para a coluna da imagem */
+    padding: 20px;
+}
+
+.login-image-responsive {
+    max-width: 100%; /* Ajusta a imagem para caber na coluna */
+    height: auto;
+    border-radius: 8px; /* Leve arredondamento na imagem */
+}
+
+.login-page-column.login-form-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff; /* Fundo branco para o formulário */
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.login-ford-logo-section {
+    padding-top: 0; /* Remove padding top desnecessário */
+    margin-bottom: 30px; /* Mais espaço abaixo do título */
+}
+
+.login-welcome-message {
+    font-size: 2em; /* Aumenta o tamanho da fonte */
+    color: #333; /* Cor mais escura para o texto */
+    margin-bottom: 15px;
+}
+
+.login-page-column.login-form-column app-login-form {
+    width: 100%; /* Garante que o formulário ocupe a largura total disponível */
+    max-width: 400px; /* Limita a largura do formulário para melhor leitura */
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    .login-page-row {
+        flex-direction: column; /* Empilha as colunas em telas menores */
+    }
+
+    .login-page-column {
+        width: 100%;
+    }
+
+    .login-page-column.login-image-column {
+        height: 200px; /* Altura fixa para a imagem em mobile */
+    }
+
+    .login-page-container {
+        padding: 10px;
+    }
 }
 
 .login-page-row {

@@ -1,0 +1,13 @@
+<div class="institutional-page-container">
+  <h1>Minha Galeria</h1>
+
+  <div class="gallery-grid">
+    <div *ngFor="let photo of photos" class="gallery-item">
+      <img [src]="photo.imageUrl" alt="Minha Foto">
+      <button class="delete-photo-button" (click)="deletePhoto(photo.id)">Deletar</button>
+    </div>
+    <div *ngIf="photos.length === 0" class="no-photos-message">
+      <p>Você ainda não tem fotos na sua galeria.</p>
+    </div>
+  </div>
+</div>

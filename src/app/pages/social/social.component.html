@@ -1,8 +1,12 @@
-<h1>Feed Social</h1>
-<button (click)="toggleCreateForm()">Criar Novo Post</button>
+<div class="social-container">
+  <h1>Feed Social</h1>
+  <button (click)="toggleCreateForm()">Criar Novo Post</button>
 
-<app-create-post-form *ngIf="showCreateForm" (formSubmit)="handleFormSubmit($event)"></app-create-post-form>
+  <app-create-post-form *ngIf="showCreateForm" (formSubmit)="handleFormSubmit($event)"></app-create-post-form>
 
-<div *ngFor="let post of posts">
-  <app-post-card [post]="post"></app-post-card>
+  <div class="posts-list">
+    <div *ngFor="let post of posts">
+      <app-post-card [post]="post"></app-post-card>
+    </div>
+  </div>
 </div>

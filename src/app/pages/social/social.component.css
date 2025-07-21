@@ -1,0 +1,43 @@
+.social-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.social-container h1 {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.social-container button {
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 5px;
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.social-container button:hover {
+  background-color: #e65c50;
+}
+
+.posts-list {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  justify-items: center;
+}
+
+.posts-list app-post-card {
+  width: 100%;
+  max-width: 400px; /* Limita a largura máxima do card de post */
+}

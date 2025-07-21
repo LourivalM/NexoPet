@@ -24,8 +24,6 @@ export class App {
   // GEMINI_MODIFICATION: Controla a visibilidade do conteúdo baseado no estado de login.
   // Inicialmente false para evitar flash de conteúdo não autorizado.
   showContent = false;
-  isSideMenuOpen: boolean = false; // Nova propriedade para controlar o menu lateral
-
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
       this.checkLoginStatus();
@@ -46,13 +44,5 @@ export class App {
     // Caso contrário, mostra o conteúdo apenas se estiver logado.
     this.showContent = this.router.url === '/login' || this.router.url === '/' || this.router.url === '/home' || this.router.url === '/dashboard' || isLoggedIn;
     console.log('Current URL:', this.router.url, ' - showContent:', this.showContent, ' - isLoggedIn:', isLoggedIn);
-  }
-
-  toggleSideMenu(): void {
-    this.isSideMenuOpen = !this.isSideMenuOpen;
-  }
-
-  onSideMenuToggled(isOpen: boolean): void {
-    this.isSideMenuOpen = isOpen;
   }
 }

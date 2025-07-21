@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Post } from '../../../models/post.model';
 import { PostService } from '../../../service/post.service';
@@ -13,9 +13,11 @@ import { ConfirmationModalComponent } from '../../modals/confirmation-modal/conf
   templateUrl: './post-card.component.html',
   styleUrls: ['./post-card.component.css']
 })
-export class PostCardComponent {
+export class PostCardComponent implements OnInit {
   @Input() post!: Post;
   currentUser: Usuario | null = null;
+  postOwnerName: string = 'Desconhecido';
+  postOwnerType: string = ''; // Adicionado para armazenar o tipo do usuário
   showConfirmationModal: boolean = false;
 
   private postService = inject(PostService);
@@ -25,6 +27,18 @@ export class PostCardComponent {
     this.loginService.currentUser.subscribe((user: Usuario | null) => {
       this.currentUser = user;
     });
+  }
+
+  ngOnInit(): void {
+    if (this.post && this.post.userId) {
+      this.loginService.getUserById(this.post.userId).subscribe(user => {
+        if (user) {
+          this.postOwnerName = user.nickname || user.nome || 'Usuário';
+          this.postOwnerType = user.tipo; // Armazena o tipo do usuário
+          console.log(`Post ID: ${this.post.id}, Owner Type: ${this.postOwnerType}`); // Adicionado para depuração
+        }
+      });
+    }
   }
 
   get imageUrl(): string {

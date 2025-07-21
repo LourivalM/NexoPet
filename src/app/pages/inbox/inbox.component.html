@@ -1,0 +1,40 @@
+<div class="institutional-page-container">
+  <h1>Caixa de Entrada</h1>
+
+  <div class="inbox-main-content">
+    <div class="user-list-sidebar">
+      <div class="user-list-header">
+        <h3>Conversas</h3>
+      </div>
+      <div class="user-list">
+        <div *ngFor="let user of users" class="user-list-item" [class.active]="user.id === selectedUser?.id" (click)="selectUser(user)">
+          <span class="username">{{ user.name }}</span>
+          <button class="delete-conversation-button" (click)="deleteConversation(user.id); $event.stopPropagation();">Apagar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="message-area">
+      <div class="message-display-area">
+        <div *ngIf="selectedUser">
+          <div *ngFor="let message of selectedUser.messages" class="message-item">
+            <div class="user-info">
+              <span class="username">{{ message.sender }}</span>
+            </div>
+            <div class="message-text">
+              <p>{{ message.text }}</p>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!selectedUser" class="no-user-selected">
+          <p>Selecione uma conversa para visualizar as mensagens.</p>
+        </div>
+      </div>
+
+      <div class="reply-area">
+        <input type="text" placeholder="Digite sua resposta..." class="reply-input">
+        <button class="send-button">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>

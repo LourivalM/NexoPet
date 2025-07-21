@@ -1,6 +1,7 @@
-<h1>Meu Perfil</h1>
+<div class="profile-container">
+  <h1>Meu Perfil</h1>
 
-<div *ngIf="currentUser">
+  <div *ngIf="currentUser">
   <!-- Modo de Visualização -->
   <div *ngIf="!isEditing">
     <p><strong>Nickname:</strong> {{ currentUser.nickname }}</p>

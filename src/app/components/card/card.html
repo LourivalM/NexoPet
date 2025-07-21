@@ -1,4 +1,7 @@
-<div *ngIf="pet" class="card-container shadow border border-light p-3">
+<div *ngIf="pet" class="card-container shadow p-3">
+  <div class="pet-card-header">
+    <span class="pet-name">{{ pet.nome }}</span>
+  </div>
   <img [src]="'assets/images/uploads/' + pet.img" [alt]="pet.nome" class="card-img-top">
   <div class="card-body">
     <h5 class="card-title">{{ pet.nome }}</h5>

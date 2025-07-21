@@ -1,0 +1,30 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Garante que o corpo da página tenha pelo menos 100% da altura da viewport */
+}
+
+app-header {
+  flex-shrink: 0;
+}
+
+.main-container {
+  flex-grow: 1;
+  display: flex; /* Alterado para flex para melhor controle do layout */
+  overflow: hidden;
+}
+
+app-side-menu {
+  flex-shrink: 0; /* Impede que o menu lateral encolha */
+  overflow-y: auto;
+}
+
+.main-content {
+  flex-grow: 1; /* Permite que o conteúdo principal ocupe o espaço restante */
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+app-footer {
+  flex-shrink: 0; /* Impede que o footer encolha */
+}

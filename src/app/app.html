@@ -1,6 +1,8 @@
-<app-side-menu [isOpen]="isSideMenuOpen" (menuToggled)="onSideMenuToggled($event)"></app-side-menu>
-<app-header (toggleSideMenu)="toggleSideMenu()"></app-header>
-<div class="main-content">
-  <router-outlet></router-outlet>
+<app-header></app-header>
+<div class="main-container">
+  <app-side-menu></app-side-menu>
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
 </div>
 <app-footer></app-footer>

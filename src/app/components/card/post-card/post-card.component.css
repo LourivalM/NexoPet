@@ -1,8 +1,21 @@
 .post-card {
-  border: 2px solid var(--green-light); /* Borda verde para posts */
   border-radius: 8px;
   margin-bottom: 16px;
   overflow: hidden;
+  position: relative;
+}
+
+.post-card-header {
+  padding: 5px 10px;
+  text-align: left;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9em;
+  border-bottom: 1px solid;
+}
+
+.post-owner-name {
+  display: block;
 }
 
 .post-card img {
@@ -25,4 +38,34 @@
 
 .post-actions .liked {
   color: var(--green-light); /* Cor para o coração quando curtido */
+}
+
+/* Cores para posts de Pessoa */
+.post-card-pessoa {
+  border: 4px solid #90EE90; /* Verde claro */
+}
+
+.post-card-pessoa .post-card-header {
+  background-color: #006400; /* Verde escuro */
+  border-color: #004d00;
+}
+
+/* Cores para posts de ONG */
+.post-card-ong {
+  border: 4px solid #ADD8E6; /* Azul claro */
+}
+
+.post-card-ong .post-card-header {
+  background-color: #00008B; /* Azul escuro */
+  border-color: #000066;
+}
+
+/* Cores para posts de Parceiro */
+.post-card-parceiro {
+  border: 4px solid #FFDAB9; /* Laranja claro */
+}
+
+.post-card-parceiro .post-card-header {
+  background-color: #FF8C00; /* Laranja escuro */
+  border-color: #CC7000;
 }

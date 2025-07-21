@@ -1,23 +1,29 @@
-<h1>Adote Aqui</h1>
+<div class="dashboard-container">
+  <h1>Adote Aqui</h1>
 
-<section class="d-flex gap-3 justify-content-around p-3" *ngIf="pets.length > 0">
-  <!-- New horizontal pet list -->
-  <div class="pet-list-horizontal">
-    @for (p of pets; track p.id) {
-      <div class="pet-badge" [class.selected]="p.id === petSelected.id" (click)="selectPet(p)">
-        <img [src]="p.img" [alt]="'Foto de ' + p.nome">
-        <p>{{ p.nome }}</p>
-      </div>
-    }
+  <section class="d-flex gap-3 justify-content-around p-3" *ngIf="pets.length > 0">
+    <!-- New horizontal pet list -->
+    <div class="pet-list-horizontal">
+      @for (p of pets; track p.id) {
+        <div class="pet-badge" [class.selected]="p.id === petSelected.id" (click)="selectPet(p)">
+          <img [src]="p.img" [alt]="'Foto de ' + p.nome">
+          <p>{{ p.nome }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="text-center mt-4" *ngIf="pets.length > 0">
+    <app-pet-details [pet]="petSelected"></app-pet-details>
+
+    <div class="mt-4">
+      <button *ngIf="userType === 'ong'" class="btn btn-primary me-2">Cadastrar Novo Pet</button>
+      <button *ngIf="userType === 'pessoa'" class="btn btn-success">Quero Adotar!</button>
+    </div>
+  </section>
+
+  <div *ngIf="pets.length === 0">
+    <p>Nenhum pet disponível para adoção no momento.</p>
   </div>
-</section>
-
-<section class="text-center mt-4" *ngIf="pets.length > 0">
-  <app-pet-details [pet]="petSelected"></app-pet-details>
-
-  <div class="mt-4">
-    <button *ngIf="userType === 'ong'" class="btn btn-primary me-2">Cadastrar Novo Pet</button>
-    <button *ngIf="userType === 'pessoa'" class="btn btn-success">Quero Adotar!</button>
-  </div>
-</section>
+</div>
 
