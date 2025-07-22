@@ -1,6 +1,6 @@
+import { Card } from '../../components/card/card';
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { PetDetails } from '../../components/pet-details/pet-details';
 import { DashBoard } from '../../service/dashboard';
 import { Pet } from '../../models/pet';
 import { UserService } from '../../service/user.service';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router'; // Importar Router
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, PetDetails],
+  imports: [CommonModule, Card],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
@@ -93,5 +93,9 @@ export class Dashboard implements OnInit{
 
   goToPetManagement(): void {
     this.router.navigate(['/ong/pet-management']);
+  }
+
+  handleAdoptionStatusChange(updatedPet: Pet): void {
+    this.pets = this.pets.map(p => p.id === updatedPet.id ? updatedPet : p);
   }
 }

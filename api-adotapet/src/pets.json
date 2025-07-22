@@ -7,6 +7,15 @@
     "idade": "10 anos",
     "ong": "ong",
     "img": "Merendinha - Maria 6.jpg",
-    "adoptionStatus": "available"
+    "adoptionStatus": "pending"
+  },
+  {
+    "id": 2,
+    "nome": "Merendinha",
+    "especie": "gato",
+    "raca": "Sem definição",
+    "idade": "7 Anos",
+    "img": "Merendinha - Maria 10.jpg",
+    "ong": "ong"
   }
 ]

@@ -74,4 +74,11 @@ export class SocialComponent implements OnInit {
       this.loadPosts();
     });
   }
+
+  onPostLiked(updatedPost: Post): void {
+    const index = this.posts.findIndex(p => p.id === updatedPost.id);
+    if (index !== -1) {
+      this.posts[index] = updatedPost;
+    }
+  }
 }

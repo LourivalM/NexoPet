@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { Pet } from '../../models/pet';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../service/user.service';
@@ -14,6 +14,8 @@ import { ConfirmationModalComponent } from '../modals/confirmation-modal/confirm
 })
 export class Card {
   @Input() pet: Pet | undefined;
+  @Output() cardClick = new EventEmitter<Pet>();
+  @Output() adoptionStatusChanged = new EventEmitter<Pet>();
 
   userService = inject(UserService);
   petService = inject(PetService);
@@ -53,6 +55,44 @@ export class Card {
         error: (err) => {
           console.error('Erro ao deletar pet:', err);
           this.closeDeleteConfirmation();
+        }
+      });
+    }
+  }
+
+  onCardClick(): void {
+    if (this.pet) {
+      this.cardClick.emit(this.pet);
+    }
+  }
+
+  onAdoptClick(): void {
+    if (this.pet && this.pet.id !== -1) {
+      const updatedPet: Pet = { ...this.pet, adoptionStatus: 'pending' };
+      this.petService.updatePet(updatedPet.id!, updatedPet).subscribe({
+        next: () => {
+          alert('Sua solicitação foi enviada à ONG responsável. Ela entrará em contato em breve!');
+          this.adoptionStatusChanged.emit(updatedPet);
+        },
+        error: (err: any) => {
+          console.error('Erro ao solicitar adoção:', err);
+          alert('Ocorreu um erro ao enviar sua solicitação. Tente novamente.');
+        }
+      });
+    }
+  }
+
+  onCancelAdoptClick(): void {
+    if (this.pet && this.pet.id !== -1) {
+      const updatedPet: Pet = { ...this.pet, adoptionStatus: 'available' };
+      this.petService.updatePet(updatedPet.id!, updatedPet).subscribe({
+        next: () => {
+          alert('Solicitação de adoção cancelada com sucesso!');
+          this.adoptionStatusChanged.emit(updatedPet);
+        },
+        error: (err: any) => {
+          console.error('Erro ao cancelar solicitação de adoção:', err);
+          alert('Ocorreu um erro ao cancelar sua solicitação. Tente novamente.');
         }
       });
     }

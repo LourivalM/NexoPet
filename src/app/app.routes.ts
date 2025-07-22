@@ -86,6 +86,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/partner-list/partner-list.component').then(c => c.PartnerListComponent)
     },
     {
+        path: 'pets',
+        loadComponent: () => import('./pages/pets/pet-gallery.component').then(c => c.PetGalleryComponent)
+    },
+    {
         path: 'my-gallery',
         loadComponent: () => import('./pages/my-gallery/my-gallery.component').then(c => c.MyGalleryComponent),
         canActivate: [authGuard]

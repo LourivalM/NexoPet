@@ -30,15 +30,15 @@
   background-color: #e65c50;
 }
 
-.posts-list {
+.adoption-feed-container {
+  max-width: 700px; /* Largura máxima para o feed */
+  margin: 0 auto; /* Centraliza o feed */
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  align-items: center;
-  max-width: 600px; /* Largura máxima para o feed */
-  margin: 0 auto; /* Centraliza o feed */
+  gap: 2rem; /* Espaçamento entre os cards */
+  align-items: center; /* Centraliza os itens no eixo cruzado */
 }
 
-.posts-list app-post-card {
+.adoption-feed-container app-post-card {
   width: 100%; /* O card ocupa 100% da largura do .posts-list */
 }

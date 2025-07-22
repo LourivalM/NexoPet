@@ -4,7 +4,7 @@
 
   <app-create-post-form *ngIf="showCreateForm && userService.getUser()?.tipo === 'pessoa'" [initialData]="postToEdit" (formSubmit)="handleFormSubmit($event)"></app-create-post-form>
 
-  <div class="posts-list">
-    <app-post-card *ngFor="let post of posts" [post]="post" (edit)="onEditPostClick($event)" (delete)="onDeletePost($event)"></app-post-card>
+  <div class="adoption-feed-container">
+    <app-post-card *ngFor="let post of posts" [post]="post" (edit)="onEditPostClick($event)" (delete)="onDeletePost($event)" (liked)="onPostLiked($event)"></app-post-card>
   </div>
 </div>

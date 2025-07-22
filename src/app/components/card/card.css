@@ -20,6 +20,11 @@
   display: block;
 }
 
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
 .card-img-top {
   width: 100%;
   height: auto; /* Mantém a proporção da imagem */
@@ -41,4 +46,26 @@
 .card-text {
   color: #555;
   font-size: 1em;
+}
+
+/* Estilos para o status de adoção */
+.grayscale {
+  filter: grayscale(100%);
+}
+
+.adoption-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* Agora 100% da image-wrapper */
+  background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro semi-transparente */
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 0; /* Removido para não conflitar com o image-wrapper */
+  z-index: 1; /* Garante que o overlay fique acima da imagem */
 }

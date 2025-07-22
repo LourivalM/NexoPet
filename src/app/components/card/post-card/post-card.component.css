@@ -1,12 +1,13 @@
 .post-card {
-  border-radius: 8px;
-  margin-bottom: 16px;
-  overflow: hidden;
-  position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%; /* Faz o card ocupar a altura do contêiner app-post-card */
-  box-sizing: border-box; /* Garante que a borda seja incluída no tamanho total */
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  /* width: 300px; */ /* Removido para ser responsivo */
+  margin-bottom: 16px;
+  box-sizing: border-box;
 }
 
 .post-card-header {
@@ -24,21 +25,36 @@
 
 .post-image-container {
   width: 100%;
-  height: 250px; /* Altura fixa para a imagem */
+  height: auto; /* Altura automática para a imagem */
   overflow: hidden;
-  background-color: #fff; /* Fundo branco para a área da imagem */
+  background-color: #fff;
 }
 
 .post-image-container img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Garante que a imagem inteira apareça, sem distorcer */
+  object-fit: cover; /* Preenche o contêiner sem distorcer */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
-.post-content {
-  padding: 16px;
-  flex-grow: 1; /* Faz o conteúdo crescer para preencher o espaço restante */
-  min-height: 80px; /* Garante uma altura mínima para a área de conteúdo */
+.post-card-info {
+  padding: 15px;
+  text-align: center;
+  flex-grow: 1; /* Permite que a info cresça para preencher o espaço */
+}
+
+.post-card-info p {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 1em;
+  color: #555;
+}
+
+.post-card-actions {
+  padding: 15px;
+  text-align: center;
+  border-top: 1px solid #eee; /* Linha separadora */
 }
 
 .post-actions span {
@@ -56,7 +72,7 @@
 
 /* Cores para posts de Pessoa */
 .post-card-pessoa {
-  border: 4px solid #90EE90; /* Verde claro */
+  border: 2px solid var(--green-light); /* Borda verde clara */
 }
 
 .post-card-pessoa .post-card-header {
@@ -66,7 +82,7 @@
 
 /* Cores para posts de ONG */
 .post-card-ong {
-  border: 4px solid #ADD8E6; /* Azul claro */
+  border: 2px solid #ADD8E6; /* Azul claro */
 }
 
 .post-card-ong .post-card-header {
@@ -76,7 +92,7 @@
 
 /* Cores para posts de Parceiro */
 .post-card-parceiro {
-  border: 4px solid #FFDAB9; /* Laranja claro */
+  border: 2px solid #FFDAB9; /* Laranja claro */
 }
 
 .post-card-parceiro .post-card-header {

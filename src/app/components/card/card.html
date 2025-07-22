@@ -1,13 +1,20 @@
-<div *ngIf="pet" class="card-container shadow p-3">
+<div *ngIf="pet" class="card-container shadow p-3" (click)="onCardClick()">
   <div class="pet-card-header">
     <span class="pet-name">{{ pet.nome }}</span>
   </div>
-  <img [src]="'assets/images/uploads/' + pet.img" [alt]="pet.nome" class="card-img-top">
+  <div class="image-wrapper">
+    <img [src]="'assets/images/uploads/' + pet.img" [alt]="pet.nome" class="card-img-top" [class.grayscale]="pet.adoptionStatus === 'pending'">
+    <div *ngIf="pet.adoptionStatus === 'pending'" class="adoption-overlay">Em Processo de Adoção</div>
+  </div>
   <div class="card-body">
     <h5 class="card-title">{{ pet.nome }}</h5>
     <p class="card-text">{{ pet.raca }}</p>
     <p class="card-text">{{ pet.idade }}</p>
     <button *ngIf="isLoggedIn && userType === 'ong' && isMyPet()" class="btn btn-danger btn-sm mt-2" (click)="openDeleteConfirmation()">Deletar</button>
+    <div class="mt-2">
+      <button *ngIf="userType === 'pessoa' && pet?.adoptionStatus !== 'pending'" class="btn btn-success" (click)="onAdoptClick()">Quero Adotar!</button>
+      <button *ngIf="userType === 'pessoa' && pet?.adoptionStatus === 'pending'" class="btn btn-warning" (click)="onCancelAdoptClick()">Cancelar Adoção</button>
+    </div>
   </div>
 </div>
 

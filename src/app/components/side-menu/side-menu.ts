@@ -1,13 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { UserService } from '../../service/user.service';
 import { Usuario } from '../../models/user';
 
 @Component({
   selector: 'app-side-menu',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterLink],
   templateUrl: './side-menu.html',
   styleUrls: ['./side-menu.css']
 })

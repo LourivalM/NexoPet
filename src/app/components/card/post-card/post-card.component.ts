@@ -17,6 +17,7 @@ export class PostCardComponent implements OnInit {
   @Input() post!: Post;
   @Output() edit = new EventEmitter<Post>();
   @Output() delete = new EventEmitter<number>();
+  @Output() liked = new EventEmitter<Post>();
   currentUser: Usuario | null = null;
   postOwnerName: string = 'Desconhecido';
   postOwnerType: string = '';
@@ -51,6 +52,7 @@ export class PostCardComponent implements OnInit {
       this.postService.likePost(this.post.id, this.currentUser.id).subscribe(updatedPost => {
         this.post.likes = updatedPost.likes;
         this.post.likedByUsers = updatedPost.likedByUsers;
+        this.liked.emit(this.post);
       });
     }
   }
