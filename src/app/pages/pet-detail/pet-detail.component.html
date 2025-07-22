@@ -1,0 +1,12 @@
+<div *ngIf="pet" class="pet-detail-container">
+  <h2>{{ pet.nome }}</h2>
+  <img [src]="'assets/images/uploads/' + pet.img" alt="{{ pet.nome }}" class="pet-detail-image">
+  <p><strong>Espécie:</strong> {{ pet.especie }}</p>
+  <p><strong>Raça:</strong> {{ pet.raca }}</p>
+  <p><strong>Idade:</strong> {{ pet.idade }}</p>
+  <p><strong>ONG:</strong> {{ pet.ong }}</p>
+</div>
+
+<div *ngIf="!pet">
+  <p>Pet não encontrado.</p>
+</div>

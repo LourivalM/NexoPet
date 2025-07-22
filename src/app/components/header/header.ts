@@ -1,65 +1,74 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { loginService } from '../../service/login';
+import { RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { UserService } from '../../service/user.service';
+import { Usuario } from '../../models/user';
 import { LoginForm } from '../login-form/login-form';
 import { RegisterSelectionComponent } from '../register-selection/register-selection';
-import { Usuario } from '../../models/user';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterLink, LoginForm, RegisterSelectionComponent],
+  imports: [CommonModule, RouterLink, RouterLinkActive, LoginForm, RegisterSelectionComponent],
   templateUrl: './header.html',
-  styleUrl: './header.css'
+  styleUrls: ['./header.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent implements OnInit {
-  loginService = inject(loginService);
-  isLoggedIn: boolean = false;
+export class Header implements OnInit {
+  userService = inject(UserService);
+  router = inject(Router);
+  cdr = inject(ChangeDetectorRef);
+  user: Usuario | null = null;
   showLoginForm: boolean = false;
-  showRegisterSelection: boolean = false; // Nova propriedade
-  user: Usuario | null = null; // Adicionado para armazenar o objeto do usuário
+  showRegisterSelection: boolean = false;
 
   ngOnInit(): void {
-    this.checkLoginStatus();
+    this.userService.currentUser.subscribe(user => {
+      this.user = user;
+      this.cdr.detectChanges(); // Força a detecção de mudanças
+    });
   }
 
-  checkLoginStatus(): void {
-    this.user = this.loginService.getUser(); // Obter o objeto do usuário
-    this.isLoggedIn = !!this.user; // Verificar se o usuário existe
-    if (this.isLoggedIn) {
-      this.showLoginForm = false; // Esconde o formulário se o usuário estiver logado
-      this.showRegisterSelection = false; // Esconde o seletor de cadastro também
-    }
+  isLoggedIn(): boolean {
+    return !!this.user;
+  }
+
+  getUserNickname(): string | null {
+    return this.user?.nickname || this.user?.nome || this.user?.nomeInstituicao || null;
+  }
+
+  getUserType(): 'pessoa' | 'ong' | 'parceiro' | null {
+    return this.user?.tipo || null;
+  }
+
+  logout(): void {
+    this.userService.logout();
+    this.router.navigate(['/home']);
   }
 
   toggleLoginForm(): void {
     this.showLoginForm = !this.showLoginForm;
-    this.showRegisterSelection = false; // Garante que o seletor de cadastro esteja fechado
+    this.showRegisterSelection = false; // Fecha a seleção de registro se o login for aberto
   }
 
-  toggleRegisterSelection(): void { // Novo método
+  toggleRegisterSelection(): void {
     this.showRegisterSelection = !this.showRegisterSelection;
-    this.showLoginForm = false; // Garante que o formulário de login esteja fechado
+    this.showLoginForm = false; // Fecha o login se a seleção de registro for aberta
   }
 
-  onLoggedIn(): void {
-    this.checkLoginStatus();
-    this.showLoginForm = false; // Fecha o formulário após o login
-  }
-
-  onContainerClick(event: MouseEvent): void {
+  onContainerClick(event: Event): void {
+    // Fecha o modal se o clique for fora do formulário
     if ((event.target as HTMLElement).classList.contains('login-form-container')) {
       this.showLoginForm = false;
     }
   }
 
-  onCloseRegisterSelection(): void { // Novo método para fechar o seletor
-    this.showRegisterSelection = false;
+  onLoggedIn(): void {
+    this.showLoginForm = false;
+    // Lógica adicional após o login, se necessário
   }
 
-  logout(): void {
-    this.loginService.logout();
-    this.checkLoginStatus();
+  onCloseRegisterSelection(): void {
+    this.showRegisterSelection = false;
   }
 }

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ProductService } from '../../../service/product.service';
 import { Product } from '../../../models/product.model';
 import { ProductFormComponent } from '../../../components/forms/product-form/product-form';
-import { loginService } from '../../../service/login';
+import { UserService } from '../../../service/user.service';
 import { ConfirmationModalComponent } from '../../../components/modals/confirmation-modal/confirmation-modal.component';
 
 @Component({
@@ -19,8 +19,9 @@ export class ProductManagementComponent implements OnInit {
   showProductForm: boolean = false;
   showConfirmationModal: boolean = false;
   selectedProductIdToDelete: number | null = null;
+  productToEdit: Product | null = null;
 
-  constructor(private productService: ProductService, private loginService: loginService) { }
+  constructor(private productService: ProductService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.loadProducts();
@@ -31,19 +32,35 @@ export class ProductManagementComponent implements OnInit {
   }
 
   onAddNewProductClick(): void {
+    this.productToEdit = null;
+    this.showProductForm = true;
+  }
+
+  onEditProductClick(product: Product): void {
+    this.productToEdit = product;
     this.showProductForm = true;
   }
 
   handleProductFormSubmit(product: Product): void {
-    const currentUser = this.loginService.getUser();
-    if (currentUser && currentUser.tipo === 'parceiro') {
-      product.partnerId = currentUser.id; // Atribui o ID do parceiro logado
-      this.productService.addProduct(product).subscribe(() => {
+    if (this.productToEdit) {
+      // Modo de Edição
+      this.productService.updateProduct(this.productToEdit.id, product).subscribe(() => {
         this.showProductForm = false;
-        this.loadProducts(); // Recarrega a lista de produtos após adicionar um novo
+        this.productToEdit = null;
+        this.loadProducts();
       });
     } else {
-      console.error('Usuário não é um parceiro ou não está logado.');
+      // Modo de Adição
+      const currentUser = this.userService.getUser();
+      if (currentUser && currentUser.tipo === 'parceiro') {
+        product.partnerId = currentUser.id;
+        this.productService.addProduct(product).subscribe(() => {
+          this.showProductForm = false;
+          this.loadProducts();
+        });
+      } else {
+        console.error('Usuário não é um parceiro ou não está logado.');
+      }
     }
   }
 
@@ -62,7 +79,7 @@ export class ProductManagementComponent implements OnInit {
       this.productService.deleteProduct(this.selectedProductIdToDelete).subscribe({
         next: () => {
           console.log('Produto deletado com sucesso!');
-          this.loadProducts(); // Recarrega a lista de produtos após deletar
+          this.loadProducts();
           this.closeDeleteConfirmation();
         },
         error: (err: any) => {
@@ -74,7 +91,8 @@ export class ProductManagementComponent implements OnInit {
   }
 
   isMyProduct(product: Product): boolean {
-    const loggedInUser = this.loginService.getUser();
+    const loggedInUser = this.userService.getUser();
     return loggedInUser?.tipo === 'parceiro' && product.partnerId === loggedInUser?.id;
   }
 }
+

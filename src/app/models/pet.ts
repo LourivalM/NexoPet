@@ -6,4 +6,5 @@ export type Pet = {
     idade: string;
     ong: string;
     img: string;
+    adoptionStatus?: 'available' | 'pending' | 'adopted'; // Novo campo
 }

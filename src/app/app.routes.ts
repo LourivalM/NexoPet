@@ -3,7 +3,18 @@ import { OngGuard } from './guards/ong.guard';
 import { PartnerGuard } from './guards/partner.guard';
 import { authGuard } from './guards/auth.guard';
 
+import { PetDetailComponent } from './pages/pet-detail/pet-detail.component';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+
 export const routes: Routes = [
+    {
+        path: 'pets/:id',
+        loadComponent: () => import('./pages/pet-detail/pet-detail.component').then(c => c.PetDetailComponent)
+    },
+    {
+        path: 'products/:id',
+        loadComponent: () => import('./pages/product-detail/product-detail.component').then(c => c.ProductDetailComponent)
+    },
     {
         path: '',
         loadComponent: () => import('./pages/home/home').then(c => c.Home)

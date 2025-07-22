@@ -14,12 +14,10 @@
     "imageUrl": "Carol e Catarina 3 anos 3.jpg",
     "caption": "Amarelinha",
     "userId": 6,
-    "likes": 1,
+    "likes": 0,
     "createdAt": "2025-07-21T12:00:22.733Z",
     "id": 2,
-    "likedByUsers": [
-      6
-    ]
+    "likedByUsers": []
   },
   {
     "imageUrl": "MimosaFêmea11anos.jpg",
@@ -28,6 +26,24 @@
     "likes": 0,
     "createdAt": "2025-07-21T14:40:10.864Z",
     "id": 3,
+    "likedByUsers": []
+  },
+  {
+    "imageUrl": "Merendinha - Maria 11.jpg",
+    "caption": "teste",
+    "userId": 6,
+    "likes": 0,
+    "createdAt": "2025-07-21T16:38:11.378Z",
+    "id": 4,
+    "likedByUsers": []
+  },
+  {
+    "imageUrl": "MaiadoMacho7anos.jpg",
+    "caption": "Miado",
+    "userId": 6,
+    "likes": 0,
+    "createdAt": "2025-07-21T23:34:53.400Z",
+    "id": 5,
     "likedByUsers": []
   }
 ]

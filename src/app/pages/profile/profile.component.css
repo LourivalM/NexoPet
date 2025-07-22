@@ -1,96 +1,47 @@
 .profile-container {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 30px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.profile-container h1 {
-  font-size: 2.5em;
-  margin-bottom: 30px;
-  color: #333;
-}
-
-.profile-container p {
-  font-size: 1.1em;
-  margin-bottom: 10px;
-  color: #555;
-}
-
-.profile-container strong {
-  color: #333;
-}
-
-.profile-container button {
-  padding: 10px 20px;
-  font-size: 1em;
-  border-radius: 5px;
-  background-color: #ff6f61;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 20px;
-  margin-right: 10px;
-}
-
-.profile-container button:hover {
-  background-color: #e65c50;
-}
-
-.profile-container form div {
-  margin-bottom: 15px;
-  text-align: left;
-}
-
-.profile-container form label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #555;
-}
-
-.profile-container form input[type="text"],
-.profile-container form input[type="email"] {
-  width: calc(100% - 20px);
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 1em;
-}
-
-.profile-container form button[type="submit"] {
-  background-color: #28a745;
-}
-
-.profile-container form button[type="submit"]:hover {
-  background-color: #218838;
-}
-
-.profile-container form button[type="button"] {
-  background-color: #6c757d;
-}
-
-.profile-container form button[type="button"]:hover {
-  background-color: #5a6268;
-}
-
-.profile-container form button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
-}
-
-.profile-container .ng-container {
-  display: block;
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid #eee;
-}
-
-.profile-container .ng-container:first-of-type {
-  border-top: none;
-  padding-top: 0;
-}
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .profile-picture-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 2rem;
+  }
+  
+  .profile-picture {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .edit-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .edit-icon:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .edit-icon i {
+    font-size: 16px;
+    color: #333;
+  }
+  

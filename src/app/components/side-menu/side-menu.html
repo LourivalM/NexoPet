@@ -5,9 +5,9 @@
   </div>
   
   <ul class="menu-items">
-    <li *ngIf="currentUserType === 'pessoa'"><a [routerLink]="'/my-gallery'">Minha Galeria</a></li>
-    <li *ngIf="currentUserType === 'ong'"><a [routerLink]="'/ong/pet-management'">Adoções Pet</a></li>
-    <li *ngIf="currentUserType === 'parceiro'"><a [routerLink]="'/partner/product-management'">Meus Produtos</a></li>
+    <li *ngIf="getUserType() === 'pessoa'"><a [routerLink]="'/my-gallery'">Minha Galeria</a></li>
+    <li *ngIf="getUserType() === 'ong'"><a [routerLink]="'/ong/pet-management'">Adoções Pet</a></li>
+    <li *ngIf="getUserType() === 'parceiro'"><a [routerLink]="'/partner/product-management'">Meus Produtos</a></li>
     <li *ngIf="user"><a [routerLink]="'/inbox'">Caixa de Entrada</a></li>
     <li *ngIf="user"><a [routerLink]="'/add-friends'">Adicione Amigos +</a></li>
     <li *ngIf="user"><a [routerLink]="'/profile'">Meu Perfil</a></li>

@@ -1,15 +1,24 @@
 <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="imageUrl">Imagem:</label>
-    <button type="button" (click)="openImageSelector()">Selecionar Imagem</button>
-    <span *ngIf="postForm.get('imageUrl')?.value">{{ postForm.get('imageUrl')?.value }}</span>
-    <img *ngIf="postForm.get('imageUrl')?.value" [src]="'/assets/images/uploads/' + postForm.get('imageUrl')?.value" alt="Preview" class="image-preview">
+  <div class="mb-3">
+    <label for="title" class="form-label">Título:</label>
+    <input type="text" id="title" formControlName="title" class="form-control">
+    <div *ngIf="postForm.get('title')?.invalid && postForm.get('title')?.touched" class="text-danger">
+      Título é obrigatório.
+    </div>
   </div>
-  <div>
-    <label for="caption">Legenda:</label>
-    <textarea id="caption" formControlName="caption"></textarea>
-  </div>
-  <button type="submit" [disabled]="!postForm.valid">Criar Post</button>
-</form>
 
-<app-image-selector-modal *ngIf="showImageSelector" (imageSelected)="onImageSelected($event)" (close)="onCloseImageSelector()"></app-image-selector-modal>
+  <div class="mb-3">
+    <label for="content" class="form-label">Conteúdo:</label>
+    <textarea id="content" formControlName="content" class="form-control"></textarea>
+    <div *ngIf="postForm.get('content')?.invalid && postForm.get('content')?.touched" class="text-danger">
+      Conteúdo é obrigatório.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="imageUrl" class="form-label">URL da Imagem:</label>
+    <input type="text" id="imageUrl" formControlName="imageUrl" class="form-control">
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="postForm.invalid">Postar</button>
+</form>

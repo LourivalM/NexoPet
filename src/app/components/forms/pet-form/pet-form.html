@@ -32,14 +32,6 @@
   </div>
 
   <div class="mb-3">
-    <label for="ong" class="form-label">ONG:</label>
-    <input type="text" id="ong" formControlName="ong" class="form-control">
-    <div *ngIf="petForm.get('ong')?.invalid && petForm.get('ong')?.touched" class="text-danger">
-      ONG é obrigatória.
-    </div>
-  </div>
-
-  <div class="mb-3">
     <label class="form-label">Imagem do Pet:</label>
     <div class="image-selection-container">
       <button type="button" class="btn btn-secondary" (click)="openImageSelector()">Selecionar Imagem</button>

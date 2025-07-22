@@ -10,6 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "..", "public/img")));
+app.use(express.static(path.join(__dirname, "..", "..", "src", "assets", "images", "uploads")));
 
 // Caminho para o arquivo JSON de usuários
 const usersFilePath = path.join(__dirname, 'users.json');
@@ -490,6 +491,32 @@ app.delete("/pets/:id", (req, res) => {
     }
 });
 
+app.patch("/pets/:id", (req, res) => {
+    try {
+        const petId = parseInt(req.params.id);
+        const updatedData = req.body;
+
+        const petIndex = pets.findIndex(p => p.id === petId);
+
+        if (petIndex === -1) {
+            return res.status(404).json({ message: "Pet não encontrado." });
+        }
+
+        // Atualiza apenas as propriedades fornecidas no corpo da requisição
+        pets[petIndex] = { ...pets[petIndex], ...updatedData };
+        savePets();
+
+        console.log('Pet atualizado:', pets[petIndex]);
+        return res.status(200).json(pets[petIndex]);
+
+    } catch (error) {
+        console.error("Erro ao atualizar pet:", error);
+        return res.status(500).json({
+            message: "Falha ao atualizar pet."
+        });
+    }
+});
+
 app.get("/products", (req, res) => {
     try {
         return res.status(200).json(products);
@@ -534,6 +561,32 @@ app.delete("/products/:id", (req, res) => {
         console.error("Erro ao deletar produto:", error);
         return res.status(500).json({
             message: "Falha ao deletar produto."
+        });
+    }
+});
+
+app.patch("/products/:id", (req, res) => {
+    try {
+        const productId = parseInt(req.params.id);
+        const updatedData = req.body;
+
+        const productIndex = products.findIndex(p => p.id === productId);
+
+        if (productIndex === -1) {
+            return res.status(404).json({ message: "Produto não encontrado." });
+        }
+
+        // Atualiza apenas as propriedades fornecidas
+        products[productIndex] = { ...products[productIndex], ...updatedData };
+        saveProducts();
+
+        console.log('Produto atualizado:', products[productIndex]);
+        return res.status(200).json(products[productIndex]);
+
+    } catch (error) {
+        console.error("Erro ao atualizar produto:", error);
+        return res.status(500).json({
+            message: "Falha ao atualizar produto."
         });
     }
 });
@@ -661,7 +714,7 @@ app.get("/posts/:id", (req, res) => {
 app.patch("/posts/:id", (req, res) => {
     try {
         const postId = parseInt(req.params.id);
-        const { userId } = req.body; // Recebe o userId
+        const updatedData = req.body;
 
         const postIndex = posts.findIndex(p => p.id === postId);
 
@@ -669,26 +722,13 @@ app.patch("/posts/:id", (req, res) => {
             return res.status(404).json({ message: "Post não encontrado." });
         }
 
-        const post = posts[postIndex];
-
-        if (!post.likedByUsers) {
-            post.likedByUsers = []; // Garante que o array exista
-        }
-
-        const userLikedIndex = post.likedByUsers.indexOf(userId);
-
-        if (userLikedIndex === -1) {
-            // Usuário não curtiu, então adiciona o like
-            post.likedByUsers.push(userId);
-        } else {
-            // Usuário já curtiu, então remove o like
-            post.likedByUsers.splice(userLikedIndex, 1);
-        }
-
-        post.likes = post.likedByUsers.length; // Atualiza a contagem de likes
+        // Atualiza apenas as propriedades fornecidas
+        posts[postIndex] = { ...posts[postIndex], ...updatedData };
         savePosts();
 
-        return res.status(200).json(post);
+        console.log('Post atualizado:', posts[postIndex]);
+        return res.status(200).json(posts[postIndex]);
+
     } catch (error) {
         console.error("Erro ao atualizar post:", error);
         return res.status(500).json({

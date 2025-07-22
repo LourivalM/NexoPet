@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { PetService } from '../../../service/pet.service';
 import { Pet } from '../../../models/pet';
 import { PetFormComponent } from '../../../components/forms/pet-form/pet-form';
-import { loginService } from '../../../service/login';
+import { UserService } from '../../../service/user.service';
 import { ConfirmationModalComponent } from '../../../components/modals/confirmation-modal/confirmation-modal.component';
 
 @Component({
@@ -19,30 +19,44 @@ export class PetManagementComponent implements OnInit {
   showPetForm: boolean = false;
   showConfirmationModal: boolean = false;
   selectedPetIdToDelete: number | null = null;
+  petToEdit: Pet | null = null;
 
-  constructor(private petService: PetService, private loginService: loginService) { }
+  constructor(private petService: PetService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.pets$ = this.petService.getPets();
   }
 
   onAddNewPetClick(): void {
-    console.log('Botão "Adicionar Novo Pet" clicado.');
+    this.petToEdit = null;
+    this.showPetForm = true;
+  }
+
+  onEditPetClick(pet: Pet): void {
+    this.petToEdit = pet;
     this.showPetForm = true;
   }
 
   handlePetFormSubmit(pet: Pet): void {
-    console.log('handlePetFormSubmit: Submetendo pet:', pet);
-    const currentUser = this.loginService.getUser();
-    if (currentUser && currentUser.tipo === 'ong') {
-      pet.ong = currentUser.nickname || currentUser.nomeInstituicao || ''; // Atribui o nickname ou nome da instituição da ONG
-      this.petService.addPet(pet).subscribe(() => {
-        console.log('Pet adicionado com sucesso. Recarregando pets.');
+    if (this.petToEdit) {
+      // Modo de Edição
+      this.petService.updatePet(this.petToEdit.id, { ...pet, ong: this.petToEdit.ong }).subscribe(() => {
         this.showPetForm = false;
-        this.pets$ = this.petService.getPets(); // Recarrega a lista de pets após adicionar um novo
+        this.petToEdit = null;
+        this.pets$ = this.petService.getPets();
       });
     } else {
-      console.error('Usuário não é uma ONG ou não está logado.');
+      // Modo de Adição
+      const currentUser = this.userService.getUser();
+      if (currentUser && currentUser.tipo === 'ong') {
+        pet.ong = currentUser.nickname || currentUser.nomeInstituicao || '';
+        this.petService.addPet(pet).subscribe(() => {
+          this.showPetForm = false;
+          this.pets$ = this.petService.getPets();
+        });
+      } else {
+        console.error('Usuário não é uma ONG ou não está logado.');
+      }
     }
   }
 
@@ -61,7 +75,7 @@ export class PetManagementComponent implements OnInit {
       this.petService.deletePet(this.selectedPetIdToDelete).subscribe({
         next: () => {
           console.log('Pet deletado com sucesso!');
-          this.pets$ = this.petService.getPets(); // Recarrega a lista de pets após deletar
+          this.pets$ = this.petService.getPets();
           this.closeDeleteConfirmation();
         },
         error: (err: any) => {

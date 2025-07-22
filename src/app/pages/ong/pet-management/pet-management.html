@@ -2,7 +2,7 @@
   <h2>Meus Pets</h2>
   <button class="btn btn-primary" (click)="onAddNewPetClick()">Adicionar Novo Pet</button>
 
-  <app-pet-form *ngIf="showPetForm" (formSubmit)="handlePetFormSubmit($event)"></app-pet-form>
+  <app-pet-form *ngIf="showPetForm" [initialData]="petToEdit" (formSubmit)="handlePetFormSubmit($event)"></app-pet-form>
 
   <div class="pet-list-grid" *ngIf="pets$ | async as pets">
     <div *ngFor="let pet of pets" class="pet-card">
@@ -16,7 +16,10 @@
         <p>Idade: {{ pet.idade }}</p>
         <p>ONG: {{ pet.ong }}</p>
       </div>
-      <button class="btn btn-danger btn-sm mt-2" (click)="openDeleteConfirmation(pet.id)">Deletar</button>
+      <div class="pet-card-actions">
+        <button class="btn btn-secondary btn-sm" (click)="onEditPetClick(pet)">Editar</button>
+        <button class="btn btn-danger btn-sm" (click)="openDeleteConfirmation(pet.id)">Deletar</button>
+      </div>
     </div>
   </div>
 

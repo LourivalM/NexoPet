@@ -3,8 +3,9 @@ import { Component, inject, OnInit } from '@angular/core';
 import { PetDetails } from '../../components/pet-details/pet-details';
 import { DashBoard } from '../../service/dashboard';
 import { Pet } from '../../models/pet';
-
-import { loginService } from '../../service/login';
+import { UserService } from '../../service/user.service';
+import { PetService } from '../../service/pet.service';
+import { Router } from '@angular/router'; // Importar Router
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +15,9 @@ import { loginService } from '../../service/login';
 })
 export class Dashboard implements OnInit{
   dashboardService = inject(DashBoard)
-  loginService = inject(loginService)
+  userService = inject(UserService)
+  petService = inject(PetService)
+  router = inject(Router); // Injetar Router
 
   userType: 'pessoa' | 'ong' | 'parceiro' | null = null;
 
@@ -31,10 +34,10 @@ export class Dashboard implements OnInit{
   }
 
   ngOnInit() {
-    this.userType = this.loginService.getUserType();
+    this.userType = this.userService.getUser()?.tipo || null;
 
     this.dashboardService.getPets().subscribe({
-      error: (err) => {
+      error: (err: any) => {
         console.error('Erro ao buscar pets:', err);
       },
       next: (pets) => {
@@ -52,5 +55,43 @@ export class Dashboard implements OnInit{
 
   selectPet(pet: Pet) {
     this.petSelected = pet;
+  }
+
+  onAdoptClick(): void {
+    if (this.petSelected && this.petSelected.id !== -1) {
+      const updatedPet: Pet = { ...this.petSelected, adoptionStatus: 'pending' };
+      this.petService.updatePet(updatedPet.id!, updatedPet).subscribe({
+        next: () => {
+          alert('Sua solicitação foi enviada à ONG responsável. Ela entrará em contato em breve!');
+          this.pets = this.pets.map(p => p.id === updatedPet.id ? updatedPet : p);
+          this.petSelected = updatedPet;
+        },
+        error: (err: any) => {
+          console.error('Erro ao solicitar adoção:', err);
+          alert('Ocorreu um erro ao enviar sua solicitação. Tente novamente.');
+        }
+      });
+    }
+  }
+
+  onCancelAdoptClick(): void {
+    if (this.petSelected && this.petSelected.id !== -1) {
+      const updatedPet: Pet = { ...this.petSelected, adoptionStatus: 'available' };
+      this.petService.updatePet(updatedPet.id!, updatedPet).subscribe({
+        next: () => {
+          alert('Solicitação de adoção cancelada com sucesso!');
+          this.pets = this.pets.map(p => p.id === updatedPet.id ? updatedPet : p);
+          this.petSelected = updatedPet;
+        },
+        error: (err: any) => {
+          console.error('Erro ao cancelar solicitação de adoção:', err);
+          alert('Ocorreu um erro ao cancelar sua solicitação. Tente novamente.');
+        }
+      });
+    }
+  }
+
+  goToPetManagement(): void {
+    this.router.navigate(['/ong/pet-management']);
   }
 }

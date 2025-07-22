@@ -6,3 +6,5 @@
   </main>
 </div>
 <app-footer></app-footer>
+
+<app-welcome-overlay *ngIf="showWelcomeOverlay" [message]="welcomeMessage" (closeOverlay)="onOverlayClosed()"></app-welcome-overlay>

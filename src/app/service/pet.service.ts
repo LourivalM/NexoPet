@@ -25,4 +25,8 @@ export class PetService {
   deletePet(petId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${petId}`);
   }
+
+  updatePet(petId: number, petData: any): Observable<Pet> {
+    return this.http.patch<Pet>(`${this.apiUrl}/${petId}`, petData);
+  }
 }

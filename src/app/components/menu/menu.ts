@@ -1,28 +1,25 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { loginService } from '../../service/login'; // Importar o loginService
+import { CommonModule } from '@angular/common';
+import { RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-menu',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './menu.html',
-  styleUrl: './menu.css'
+  styleUrls: ['./menu.css']
 })
 export class Menu {
+  userService = inject(UserService);
   router = inject(Router);
-  // GEMINI_MODIFICATION: Injetado loginService para funcionalidade de logout
-  loginService = inject(loginService); 
 
-  goToDashboard() {
-    this.router.navigate(['/dashboard']);
+  isLoggedIn(): boolean {
+    return !!this.userService.getUser();
   }
 
-  goToHome() {
+  logout(): void {
+    this.userService.logout();
     this.router.navigate(['/home']);
-  }
-
-  logout() {
-    this.loginService.logout();
-    this.router.navigate(['/login']); 
   }
 }

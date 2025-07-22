@@ -1,10 +1,10 @@
 <div class="social-container">
   <h1>Feed Social</h1>
-  <button (click)="toggleCreateForm()">Criar Novo Post</button>
+  <button (click)="toggleCreateForm()" *ngIf="userService.getUser()?.tipo === 'pessoa'">Criar Novo Post</button>
 
-  <app-create-post-form *ngIf="showCreateForm" (formSubmit)="handleFormSubmit($event)"></app-create-post-form>
+  <app-create-post-form *ngIf="showCreateForm && userService.getUser()?.tipo === 'pessoa'" [initialData]="postToEdit" (formSubmit)="handleFormSubmit($event)"></app-create-post-form>
 
   <div class="posts-list">
-    <app-post-card *ngFor="let post of posts" [post]="post"></app-post-card>
+    <app-post-card *ngFor="let post of posts" [post]="post" (edit)="onEditPostClick($event)" (delete)="onDeletePost($event)"></app-post-card>
   </div>
 </div>

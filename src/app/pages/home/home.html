@@ -31,7 +31,9 @@
   <h2>Olhares que Esperam por Você</h2>
   <div class="carousel-container" *ngIf="pets$ | async as pets">
     @for (pet of pets; track pet.id) {
-      <app-card [pet]="pet"></app-card>
+      <a [routerLink]="['/pets', pet.id]">
+        <app-card [pet]="pet"></app-card>
+      </a>
     }
   </div>
 </section>
@@ -40,7 +42,9 @@
   <h2>Momentos Felizes da Família Nexo Pet</h2>
   <div class="posts-grid" *ngIf="posts$ | async as posts">
     @for (post of posts; track post.id) {
-      <app-post-card [post]="post"></app-post-card>
+      <a [routerLink]="['/social']">
+        <app-post-card [post]="post"></app-post-card>
+      </a>
     }
   </div>
 </section>

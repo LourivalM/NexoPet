@@ -1,13 +1,14 @@
-<div *ngIf="pet" class="pet-card">
-  <img [src]="pet.img" [alt]="'Foto de ' + pet.nome">
-  <div class="pet-card-info">
+<div *ngIf="pet" class="pet-detail-card">
+  <img [src]="'/assets/images/uploads/' + pet.img" [alt]="'Foto de ' + pet.nome" [class.grayscale]="pet.adoptionStatus === 'pending'">
+  <div *ngIf="pet.adoptionStatus === 'pending'" class="adoption-overlay">Em Processo de Adoção</div>
+  <div class="pet-detail-card-info">
     <h2>{{ pet.nome }}</h2>
     <p><strong>Espécie:</strong> {{ pet.especie }}</p>
     <p><strong>Raça:</strong> {{ pet.raca }}</p>
     <p><strong>Idade:</strong> {{ pet.idade }}</p>
     <p><strong>ONG:</strong> {{ pet.ong }}</p>
   </div>
-  <div class="pet-card-actions">
+  <div class="pet-detail-card-actions">
     <!-- Botões de ação, se houver -->
   </div>
 </div> 

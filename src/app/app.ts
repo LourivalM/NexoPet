@@ -1,43 +1,65 @@
-import { Component, inject, PLATFORM_ID } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
-import { loginService } from './service/login';
 import { filter } from 'rxjs/operators';
 
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './components/header/header';
-import { SideMenuComponent } from './components/side-menu/side-menu';
+import { Header } from './components/header/header';
+import { SideMenu } from './components/side-menu/side-menu';
 import { FooterComponent } from './components/shared/footer/footer.component';
+import { WelcomeOverlay } from './components/bem-vindo/welcome-overlay';
+import { UserService } from './service/user.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, HeaderComponent, SideMenuComponent, FooterComponent],
+  imports: [RouterOutlet, CommonModule, Header, SideMenu, FooterComponent, WelcomeOverlay],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit {
   protected title = 'sprint_Angular';
   router = inject(Router);
-  loginService = inject(loginService);
-  platformId = inject(PLATFORM_ID);
+  userService = inject(UserService);
+
+  showWelcomeOverlay: boolean = false;
+  welcomeMessage: string = '';
 
   // GEMINI_MODIFICATION: Controla a visibilidade do conteúdo baseado no estado de login.
   // Inicialmente false para evitar flash de conteúdo não autorizado.
   showContent = false;
   constructor() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.checkLoginStatus();
+    this.checkLoginStatus();
 
-      this.router.events.pipe(
-        filter(event => event instanceof NavigationEnd)
-      ).subscribe(() => {
-        this.checkLoginStatus();
-      });
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.checkLoginStatus();
+    });
+  }
+
+  ngOnInit(): void {
+    this.checkWelcomeOverlay();
+  }
+
+  checkWelcomeOverlay(): void {
+    if (typeof localStorage !== 'undefined') {
+      const showOverlay = localStorage.getItem('showWelcomeOverlay');
+      const message = localStorage.getItem('welcomeMessage');
+
+      if (showOverlay === 'true' && message) {
+        this.welcomeMessage = message;
+        this.showWelcomeOverlay = true;
+        localStorage.removeItem('showWelcomeOverlay');
+        localStorage.removeItem('welcomeMessage');
+      }
     }
   }
 
+  onOverlayClosed(): void {
+    this.showWelcomeOverlay = false;
+  }
+
   private checkLoginStatus(): void {
-    const user = this.loginService.getUser();
+    const user = this.userService.getUser();
     const isLoggedIn = !!user;
 
     // Se estiver na página de login, sempre mostra o conteúdo.

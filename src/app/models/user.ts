@@ -16,4 +16,5 @@ export type Usuario = {
     nomeInstituicao?: string; // Para ONGs e Parceiros
     email: string;
     tipo: 'pessoa' | 'ong' | 'parceiro'; // Adicionado 'parceiro'
+    imageUrl?: string; // Adicionado para foto de perfil
 }

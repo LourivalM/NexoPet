@@ -1,0 +1,10 @@
+<div *ngIf="product" class="product-detail-container">
+  <h2>{{ product.name }}</h2>
+  <p><strong>Descrição:</strong> {{ product.description }}</p>
+  <p><strong>Preço:</strong> {{ product.price | currency:'BRL' }}</p>
+  <p><strong>ID do Parceiro:</strong> {{ product.partnerId }}</p>
+</div>
+
+<div *ngIf="!product">
+  <p>Produto não encontrado.</p>
+</div>

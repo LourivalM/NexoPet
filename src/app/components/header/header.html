@@ -23,8 +23,8 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/partners" routerLinkActive="active">Parceiros</a>
         </li>
-        <li class="nav-item" *ngIf="isLoggedIn && user?.tipo === 'pessoa'">
-          <a class="nav-link" routerLink="/social" routerLinkActive="active">Social</a>
+        <li class="nav-item" *ngIf="isLoggedIn() && (user?.tipo === 'pessoa' || user?.tipo === 'ong' || user?.tipo === 'parceiro')">
+          <a class="nav-link" routerLink="/social" routerLinkActive="active">Social Pet</a>
         </li>
         <li class="nav-item">
           <a class="nav-link btn-adote-aqui d-flex align-items-center" routerLink="/dashboard" routerLinkActive="active">
@@ -33,11 +33,11 @@
         </li>
       </ul>
       <div class="d-flex align-items-center">
-        <ng-container *ngIf="!isLoggedIn">
+        <ng-container *ngIf="!isLoggedIn()">
           <button class="btn btn-outline-primary me-2" (click)="toggleLoginForm()">Login</button>
           <button class="btn btn-primary" (click)="toggleRegisterSelection()">Cadastre-se</button>
         </ng-container>
-        <ng-container *ngIf="isLoggedIn">
+        <ng-container *ngIf="isLoggedIn()">
           <button class="btn-status-user me-2 d-flex align-items-center">
             <span class="status-indicator me-1"></span>
             <span>{{ user?.nickname }}</span>

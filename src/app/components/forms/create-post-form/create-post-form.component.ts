@@ -1,45 +1,43 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ImageSelectorModalComponent } from '../../modals/image-selector-modal.component';
+import { Post } from '../../../../app/models/post.model';
 
 @Component({
   selector: 'app-create-post-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ImageSelectorModalComponent],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './create-post-form.component.html',
   styleUrls: ['./create-post-form.component.css']
 })
-export class CreatePostFormComponent implements OnInit {
-  @Output() formSubmit = new EventEmitter<any>();
+export class CreatePostFormComponent implements OnInit, OnChanges {
+  @Input() initialData: Post | null = null;
+  @Output() formSubmit = new EventEmitter<Post>();
   postForm: FormGroup;
-  showImageSelector = false;
 
   constructor(private fb: FormBuilder) {
     this.postForm = this.fb.group({
-      imageUrl: ['', Validators.required],
-      caption: ['']
+      id: [0],
+      title: ['', Validators.required],
+      content: ['', Validators.required],
+      imageUrl: [''],
+      userId: [0],
+      likes: [0],
+      createdAt: [new Date()]
     });
   }
 
   ngOnInit(): void { }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['initialData'] && this.initialData) {
+      this.postForm.patchValue(this.initialData);
+    }
+  }
+
   onSubmit(): void {
     if (this.postForm.valid) {
       this.formSubmit.emit(this.postForm.value);
     }
-  }
-
-  openImageSelector(): void {
-    this.showImageSelector = true;
-  }
-
-  onImageSelected(imageName: string): void {
-    this.postForm.patchValue({ imageUrl: imageName });
-    this.showImageSelector = false;
-  }
-
-  onCloseImageSelector(): void {
-    this.showImageSelector = false;
   }
 }

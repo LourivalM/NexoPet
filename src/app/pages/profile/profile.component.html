@@ -2,130 +2,136 @@
   <h1>Meu Perfil</h1>
 
   <div *ngIf="currentUser">
-  <!-- Modo de Visualização -->
-  <div *ngIf="!isEditing">
-    <p><strong>Nickname:</strong> {{ currentUser.nickname }}</p>
-    <p><strong>Email:</strong> {{ currentUser.email }}</p>
-    <p><strong>Tipo de Conta:</strong> {{ currentUser.tipo }}</p>
+    <div class="profile-picture-container">
+      <img [src]="currentUser.imageUrl || 'assets/images/default-avatar.png'" alt="Foto de Perfil" class="profile-picture">
+      <button class="edit-icon" (click)="openImageSelector()"><i class="fas fa-pencil-alt"></i></button>
+    </div>
 
-    <ng-container *ngIf="currentUser.tipo === 'pessoa'">
-      <p><strong>Nome:</strong> {{ currentUser.nome }}</p>
-      <p *ngIf="currentUser.nomeSocial"><strong>Nome Social:</strong> {{ currentUser.nomeSocial }}</p>
-      <p><strong>Telefone:</strong> {{ currentUser.telefone }}</p>
-      <p><strong>Cidade:</strong> {{ currentUser.cidade }}</p>
-      <p><strong>Estado:</strong> {{ currentUser.estado }}</p>
-      <p><strong>País:</strong> {{ currentUser.pais }}</p>
-    </ng-container>
-
-    <ng-container *ngIf="currentUser.tipo === 'ong' || currentUser.tipo === 'parceiro'">
-      <p><strong>Nome da Instituição:</strong> {{ currentUser.nomeInstituicao }}</p>
-      <p><strong>CNPJ:</strong> {{ currentUser.cnpj }}</p>
-      <p><strong>Telefone:</strong> {{ currentUser.telefone }}</p>
-      <p><strong>Rua:</strong> {{ currentUser.rua }}</p>
-      <p><strong>Número:</strong> {{ currentUser.numero }}</p>
-      <p><strong>Bairro:</strong> {{ currentUser.bairro }}</p>
-      <p><strong>Cidade:</strong> {{ currentUser.cidade }}</p>
-      <p><strong>Estado:</strong> {{ currentUser.estado }}</p>
-      <p><strong>País:</strong> {{ currentUser.pais }}</p>
-      <p><strong>Cargo do Representante:</strong> {{ currentUser.cargoRepresentante }}</p>
-      <p><strong>Área de Atuação:</strong> {{ currentUser.areaAtuacao }}</p>
-    </ng-container>
-
-    <button (click)="toggleEditMode()">Editar Perfil</button>
-  </div>
-
-  <!-- Modo de Edição -->
-  <div *ngIf="isEditing">
-    <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
-      <div>
-        <label for="nickname">Nickname:</label>
-        <input id="nickname" type="text" formControlName="nickname">
-      </div>
-      <div>
-        <label for="email">Email:</label>
-        <input id="email" type="email" formControlName="email">
-      </div>
+    <!-- Modo de Visualização -->
+    <div *ngIf="!isEditing">
+      <p><strong>Nickname:</strong> {{ currentUser.nickname }}</p>
+      <p><strong>Email:</strong> {{ currentUser.email }}</p>
+      <p><strong>Tipo de Conta:</strong> {{ currentUser.tipo }}</p>
 
       <ng-container *ngIf="currentUser.tipo === 'pessoa'">
-        <div>
-          <label for="nome">Nome:</label>
-          <input id="nome" type="text" formControlName="nome">
-        </div>
-        <div>
-          <label for="nomeSocial">Nome Social:</label>
-          <input id="nomeSocial" type="text" formControlName="nomeSocial">
-        </div>
-        <div>
-          <label for="telefone">Telefone:</label>
-          <input id="telefone" type="text" formControlName="telefone">
-        </div>
-        <div>
-          <label for="cidade">Cidade:</label>
-          <input id="cidade" type="text" formControlName="cidade">
-        </div>
-        <div>
-          <label for="estado">Estado:</label>
-          <input id="estado" type="text" formControlName="estado">
-        </div>
-        <div>
-          <label for="pais">País:</label>
-          <input id="pais" type="text" formControlName="pais">
-        </div>
+        <p><strong>Nome:</strong> {{ currentUser.nome }}</p>
+        <p *ngIf="currentUser.nomeSocial"><strong>Nome Social:</strong> {{ currentUser.nomeSocial }}</p>
+        <p><strong>Telefone:</strong> {{ currentUser.telefone }}</p>
+        <p><strong>Cidade:</strong> {{ currentUser.cidade }}</p>
+        <p><strong>Estado:</strong> {{ currentUser.estado }}</p>
+        <p><strong>País:</strong> {{ currentUser.pais }}</p>
       </ng-container>
 
       <ng-container *ngIf="currentUser.tipo === 'ong' || currentUser.tipo === 'parceiro'">
-        <div>
-          <label for="nomeInstituicao">Nome da Instituição:</label>
-          <input id="nomeInstituicao" type="text" formControlName="nomeInstituicao">
-        </div>
-        <div>
-          <label for="cnpj">CNPJ:</label>
-          <input id="cnpj" type="text" formControlName="cnpj">
-        </div>
-        <div>
-          <label for="telefone">Telefone:</label>
-          <input id="telefone" type="text" formControlName="telefone">
-        </div>
-        <div>
-          <label for="rua">Rua:</label>
-          <input id="rua" type="text" formControlName="rua">
-        </div>
-        <div>
-          <label for="numero">Número:</label>
-          <input id="numero" type="text" formControlName="numero">
-        </div>
-        <div>
-          <label for="bairro">Bairro:</label>
-          <input id="bairro" type="text" formControlName="bairro">
-        </div>
-        <div>
-          <label for="cidade">Cidade:</label>
-          <input id="cidade" type="text" formControlName="cidade">
-        </div>
-        <div>
-          <label for="estado">Estado:</label>
-          <input id="estado" type="text" formControlName="estado">
-        </div>
-        <div>
-          <label for="pais">País:</label>
-          <input id="pais" type="text" formControlName="pais">
-        </div>
-        <div>
-          <label for="cargoRepresentante">Cargo do Representante:</label>
-          <input id="cargoRepresentante" type="text" formControlName="cargoRepresentante">
-        </div>
-        <div>
-          <label for="areaAtuacao">Área de Atuação:</label>
-          <input id="areaAtuacao" type="text" formControlName="areaAtuacao">
-        </div>
+        <p><strong>Nome da Instituição:</strong> {{ currentUser.nomeInstituicao }}</p>
+        <p><strong>CNPJ:</strong> {{ currentUser.cnpj }}</p>
+        <p><strong>Telefone:</strong> {{ currentUser.telefone }}</p>
+        <p><strong>Rua:</strong> {{ currentUser.rua }}</p>
+        <p><strong>Número:</strong> {{ currentUser.numero }}</p>
+        <p><strong>Bairro:</strong> {{ currentUser.bairro }}</p>
+        <p><strong>Cidade:</strong> {{ currentUser.cidade }}</p>
+        <p><strong>Estado:</strong> {{ currentUser.estado }}</p>
+        <p><strong>País:</strong> {{ currentUser.pais }}</p>
+        <p><strong>Cargo do Representante:</strong> {{ currentUser.cargoRepresentante }}</p>
+        <p><strong>Área de Atuação:</strong> {{ currentUser.areaAtuacao }}</p>
       </ng-container>
 
-      <button type="submit" [disabled]="!profileForm.valid">Salvar</button>
-      <button type="button" (click)="toggleEditMode()">Cancelar</button>
-    </form>
-  </div>
-</div>
+      <button (click)="toggleEditMode()">Editar Perfil</button>
+    </div>
 
-<div *ngIf="!currentUser">
-  <p>Nenhum usuário logado.</p>
+    <!-- Modo de Edição -->
+    <div *ngIf="isEditing">
+      <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+        <div>
+          <label for="nickname">Nickname:</label>
+          <input id="nickname" type="text" formControlName="nickname">
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input id="email" type="email" formControlName="email">
+        </div>
+
+        <ng-container *ngIf="currentUser.tipo === 'pessoa'">
+          <div>
+            <label for="nome">Nome:</label>
+            <input id="nome" type="text" formControlName="nome">
+          </div>
+          <div>
+            <label for="nomeSocial">Nome Social:</label>
+            <input id="nomeSocial" type="text" formControlName="nomeSocial">
+          </div>
+          <div>
+            <label for="telefone">Telefone:</label>
+            <input id="telefone" type="text" formControlName="telefone">
+          </div>
+          <div>
+            <label for="cidade">Cidade:</label>
+            <input id="cidade" type="text" formControlName="cidade">
+          </div>
+          <div>
+            <label for="estado">Estado:</label>
+            <input id="estado" type="text" formControlName="estado">
+          </div>
+          <div>
+            <label for="pais">País:</label>
+            <input id="pais" type="text" formControlName="pais">
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="currentUser.tipo === 'ong' || currentUser.tipo === 'parceiro'">
+          <div>
+            <label for="nomeInstituicao">Nome da Instituição:</label>
+            <input id="nomeInstituicao" type="text" formControlName="nomeInstituicao">
+          </div>
+          <div>
+            <label for="cnpj">CNPJ:</label>
+            <input id="cnpj" type="text" formControlName="cnpj">
+          </div>
+          <div>
+            <label for="telefone">Telefone:</label>
+            <input id="telefone" type="text" formControlName="telefone">
+          </div>
+          <div>
+            <label for="rua">Rua:</label>
+            <input id="rua" type="text" formControlName="rua">
+          </div>
+          <div>
+            <label for="numero">Número:</label>
+            <input id="numero" type="text" formControlName="numero">
+          </div>
+          <div>
+            <label for="bairro">Bairro:</label>
+            <input id="bairro" type="text" formControlName="bairro">
+          </div>
+          <div>
+            <label for="cidade">Cidade:</label>
+            <input id="cidade" type="text" formControlName="cidade">
+          </div>
+          <div>
+            <label for="estado">Estado:</label>
+            <input id="estado" type="text" formControlName="estado">
+          </div>
+          <div>
+            <label for="pais">País:</label>
+            <input id="pais" type="text" formControlName="pais">
+          </div>
+          <div>
+            <label for="cargoRepresentante">Cargo do Representante:</label>
+            <input id="cargoRepresentante" type="text" formControlName="cargoRepresentante">
+          </div>
+          <div>
+            <label for="areaAtuacao">Área de Atuação:</label>
+            <input id="areaAtuacao" type="text" formControlName="areaAtuacao">
+          </div>
+        </ng-container>
+
+        <button type="submit" [disabled]="!profileForm.valid">Salvar</button>
+        <button type="button" (click)="toggleEditMode()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="!currentUser">
+    <p>Nenhum usuário logado.</p>
+  </div>
 </div>

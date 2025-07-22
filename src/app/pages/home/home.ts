@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { PetService } from '../../service/pet.service';
 import { PostService } from '../../service/post.service';
 import { OngService } from '../../service/ong.service'; // Importar OngService
@@ -17,7 +18,7 @@ import { Usuario } from '../../models/user';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, Card, PostCardComponent],
+  imports: [CommonModule, Card, PostCardComponent, RouterLink],
   standalone: true,
   providers: [],
   templateUrl: './home.html',

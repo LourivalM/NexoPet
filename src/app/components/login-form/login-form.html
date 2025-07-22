@@ -16,8 +16,25 @@
       <input formControlName="manterConectado" type="checkbox" class="form-check-input" id="manterConectadoCheck">
       <label class="form-check-label" for="manterConectadoCheck">Manter conectado</label>
     </div>
-    <a href="#" class="forgot-password-link">Esqueci a Senha</a>
+    <a href="#" (click)="openForgotPasswordModal()" class="forgot-password-link">Esqueci a Senha</a>
   </div>
   <button type="submit" class="btn btn-primary w-100">Entrar</button>
   <a href="#" class="register-link mt-3" (click)="onRegisterClick()">Cadastre-se aqui</a>
 </form>
+
+<!-- Modal de Recuperação de Senha -->
+<div *ngIf="showForgotPasswordModal" class="modal-overlay">
+  <div class="modal-content">
+    <form [formGroup]="forgotPasswordForm" (ngSubmit)="onSubmitForgotPassword()">
+      <h2>Recuperar Senha</h2>
+      <p>Digite seu e-mail para receber um link de recuperação.</p>
+      <div class="input-group mb-3">
+        <input formControlName="email" type="email" class="form-control" placeholder="Seu e-mail">
+      </div>
+      <div class="modal-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="!forgotPasswordForm.valid">Enviar Link</button>
+        <button type="button" class="btn btn-secondary" (click)="closeForgotPasswordModal()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>

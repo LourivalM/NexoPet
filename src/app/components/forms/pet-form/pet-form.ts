@@ -26,7 +26,6 @@ export class PetFormComponent implements OnInit, OnChanges {
       especie: ['', Validators.required],
       raca: ['', Validators.required],
       idade: ['', Validators.required],
-      ong: ['', Validators.required],
       img: ['', Validators.required] // O campo img agora será preenchido pelo seletor
     });
   }

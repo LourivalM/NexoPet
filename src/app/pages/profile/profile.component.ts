@@ -1,18 +1,21 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { loginService } from '../../service/login';
+import { UserService } from '../../service/user.service';
 import { Usuario } from '../../models/user';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ImageSelectorModalComponent } from '../../components/modals/image-selector-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, ImageSelectorModalComponent],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  authService = inject(loginService);
+  userService = inject(UserService);
+  dialog = inject(MatDialog);
   currentUser: Usuario | null = null;
   isEditing: boolean = false;
   profileForm: FormGroup;
@@ -38,7 +41,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentUser = this.authService.getUser();
+    this.currentUser = this.userService.getUser();
     if (this.currentUser) {
       this.profileForm.patchValue(this.currentUser);
     }
@@ -54,7 +57,7 @@ export class ProfileComponent implements OnInit {
   saveProfile(): void {
     if (this.profileForm.valid && this.currentUser) {
       const updatedData = this.profileForm.value;
-      this.authService.updateUser(this.currentUser.id, updatedData).subscribe({
+      this.userService.updateUser(this.currentUser.id, updatedData).subscribe({
         next: (user) => {
           this.currentUser = user;
           this.isEditing = false;
@@ -66,5 +69,30 @@ export class ProfileComponent implements OnInit {
         }
       });
     }
+  }
+
+  openImageSelector(): void {
+    const dialogRef = this.dialog.open(ImageSelectorModalComponent);
+
+    dialogRef.componentInstance.imageSelected.subscribe((imageName: string) => {
+      if (this.currentUser) {
+        const updatedData = { imageUrl: imageName };
+        this.userService.updateUser(this.currentUser.id, updatedData).subscribe({
+          next: (user) => {
+            this.currentUser = user;
+            dialogRef.close();
+            alert('Foto de perfil atualizada com sucesso!');
+          },
+          error: (err) => {
+            console.error('Erro ao atualizar foto de perfil:', err);
+            alert('Erro ao atualizar foto de perfil. Tente novamente.');
+          }
+        });
+      }
+    });
+
+    dialogRef.componentInstance.close.subscribe(() => {
+      dialogRef.close();
+    });
   }
 }

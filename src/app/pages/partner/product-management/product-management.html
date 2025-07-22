@@ -2,7 +2,7 @@
   <h2>Meus Produtos</h2>
   <button class="btn btn-primary" (click)="onAddNewProductClick()">Adicionar Novo Produto</button>
 
-  <app-product-form *ngIf="showProductForm" (formSubmit)="handleProductFormSubmit($event)"></app-product-form>
+  <app-product-form *ngIf="showProductForm" [initialData]="productToEdit" (formSubmit)="handleProductFormSubmit($event)"></app-product-form>
 
   <div class="product-list-grid" *ngIf="products$ | async as products">
     <div *ngFor="let product of products" class="product-item">
@@ -12,7 +12,10 @@
       <p>Descrição: {{ product.description }}</p>
       <p class="price">Preço: {{ product.price | currency:'BRL' }}</p>
       <p>ID do Parceiro: {{ product.partnerId }}</p>
-      <button *ngIf="isMyProduct(product)" class="btn btn-danger btn-sm mt-2" (click)="openDeleteConfirmation(product.id)">Deletar</button>
+      <div class="product-card-actions" *ngIf="isMyProduct(product)">
+        <button class="btn btn-secondary btn-sm" (click)="onEditProductClick(product)">Editar</button>
+        <button class="btn btn-danger btn-sm" (click)="openDeleteConfirmation(product.id)">Deletar</button>
+      </div>
     </div>
   </div>
 

@@ -1,24 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { loginService } from '../service/login';
+import { UserService } from '../service/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PartnerGuard implements CanActivate {
-
-  constructor(private loginService: loginService, private router: Router) { }
+  private userService = inject(UserService);
+  private router = inject(Router);
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (this.loginService.getUserType() === 'parceiro') {
+    if (this.userService.getUser()?.tipo === 'parceiro') {
       return true;
     } else {
-      // Redireciona para a página de login ou home se não for um parceiro
-      return this.router.createUrlTree(['/login']); // Ou '/home'
+      return this.router.createUrlTree(['/login']);
     }
   }
 }

@@ -8,9 +8,8 @@
     
   </div>
   <div class="offcanvas-body d-flex flex-column">
-   <button class= "btn btn-primary mb-2" (click)="goToHome()">Home</button>
-   <button class= "btn btn-primary" (click)="goToDashboard()">Dashboard</button>
-   <a href="/dashboard"></a>
+   <a class= "btn btn-primary mb-2" routerLink="/home" routerLinkActive="active">Home</a>
+   <a class= "btn btn-primary" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
    
    <button class="btn btn-danger mt-auto w-100" (click)="logout()">Logout</button>
   </div>
