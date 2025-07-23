@@ -48,3 +48,6 @@ userAction.txt
 # Gemini files
 prompt.txt
 userAction.txt
+
+# Vercel configuration
+vercel.json
