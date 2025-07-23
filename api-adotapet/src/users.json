@@ -123,5 +123,18 @@
     "pais": "ford",
     "tipo": "pessoa",
     "imageUrl": "Napoelao1 anomacho.jpg"
+  },
+  {
+    "id": 11,
+    "nickname": "live",
+    "nome": "live",
+    "nomeSocial": null,
+    "senha": "123456",
+    "email": "live@LIVE",
+    "telefone": "(00) 00000-0000",
+    "cidade": "LIVE",
+    "estado": "LIVE",
+    "pais": "LIVE",
+    "tipo": "pessoa"
   }
 ]

@@ -7,7 +7,7 @@ import { Partner } from '../models/partner';
   providedIn: 'root'
 })
 export class PartnerService {
-  private apiUrl = 'http://localhost:3001/partners'; // Assumindo que sua API Node.js está rodando na porta 3000
+  private apiUrl = 'https://backend-api-tcc.onrender.com/partners';
 
   constructor(private http: HttpClient) { }
 

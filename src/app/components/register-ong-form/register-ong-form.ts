@@ -86,7 +86,7 @@ export class RegisterOngFormComponent implements OnInit {
     if (this.registerForm.valid) {
       console.log('Formulário de ONG Válido:', this.registerForm.value);
       // Enviar os dados para a API
-      this.http.post('http://localhost:3001/register/ong', this.registerForm.value).subscribe({
+      this.http.post('https://backend-api-tcc.onrender.com/register/ong', this.registerForm.value).subscribe({
         next: (response) => {
           console.log('Cadastro de ONG bem-sucedido:', response);
           alert('Cadastro realizado com sucesso!');

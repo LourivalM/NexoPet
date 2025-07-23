@@ -7,7 +7,7 @@ import { Article } from '../models/article';
   providedIn: 'root'
 })
 export class ArticleService {
-  private apiUrl = 'http://localhost:3001/articles';
+  private apiUrl = 'https://backend-api-tcc.onrender.com/articles';
 
   constructor(private http: HttpClient) { }
 

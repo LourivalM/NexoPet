@@ -7,7 +7,7 @@ import { Ong } from '../models/ong';
   providedIn: 'root'
 })
 export class OngService {
-  private apiUrl = 'http://localhost:3001/ongs'; // Assumindo que sua API Node.js está rodando na porta 3000
+  private apiUrl = 'https://backend-api-tcc.onrender.com/ongs';
 
   constructor(private http: HttpClient) { }
 

@@ -79,7 +79,7 @@ export class RegisterPessoaFormComponent implements OnInit {
     if (this.registerForm.valid) {
       console.log('Formulário de Pessoa Física Válido:', this.registerForm.value);
       // Enviar os dados para a API
-      this.http.post('http://localhost:3001/register/pessoa', this.registerForm.value).subscribe({
+      this.http.post('https://backend-api-tcc.onrender.com/register/pessoa', this.registerForm.value).subscribe({
         next: (response) => {
           console.log('Cadastro de Pessoa Física bem-sucedido:', response);
           alert('Cadastro realizado com sucesso!');
