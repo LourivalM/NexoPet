@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 export class LgpdTermsModalComponent implements AfterViewInit {
   @Output() closeModal = new EventEmitter<void>();
+  @Output() termsAccepted = new EventEmitter<void>();
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;
 
   ngAfterViewInit(): void {
@@ -17,6 +18,11 @@ export class LgpdTermsModalComponent implements AfterViewInit {
   }
 
   onClose(): void {
+    this.closeModal.emit();
+  }
+
+  onAccept(): void {
+    this.termsAccepted.emit();
     this.closeModal.emit();
   }
 }

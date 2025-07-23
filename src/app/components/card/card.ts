@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject, HostBinding } from '@angular/core';
 import { Pet } from '../../models/pet';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../service/user.service';
@@ -14,8 +14,14 @@ import { ConfirmationModalComponent } from '../modals/confirmation-modal/confirm
 })
 export class Card {
   @Input() pet: Pet | undefined;
+  @Input() context: 'home' | 'default' = 'default';
   @Output() cardClick = new EventEmitter<Pet>();
   @Output() adoptionStatusChanged = new EventEmitter<Pet>();
+
+  @HostBinding('class.home-view')
+  get isHomeView() {
+    return this.context === 'home';
+  }
 
   userService = inject(UserService);
   petService = inject(PetService);

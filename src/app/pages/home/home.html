@@ -43,7 +43,7 @@
   <div class="posts-grid" *ngIf="posts$ | async as posts">
     @for (post of posts; track post.id) {
       <a [routerLink]="['/social']">
-        <app-post-card [post]="post"></app-post-card>
+        <app-post-card [post]="post" [context]="'home'"></app-post-card>
       </a>
     }
   </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ArticleService } from '../../../../service/article.service';
 import { Article } from '../../../../models/article';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { switchMap } from 'rxjs/operators';
 @Component({
   selector: 'app-article-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './article-detail.component.html',
   styleUrl: './article-detail.component.css'
 })

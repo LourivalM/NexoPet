@@ -1,9 +1,9 @@
-<div *ngIf="pet" class="card-container shadow p-3" (click)="onCardClick()">
+<div *ngIf="pet" class="card-container shadow p-3 h-100  " (click)="onCardClick()">
   <div class="pet-card-header">
     <span class="pet-name">{{ pet.nome }}</span>
   </div>
   <div class="image-wrapper">
-    <img [src]="'assets/images/uploads/' + pet.img" [alt]="pet.nome" class="card-img-top" [class.grayscale]="pet.adoptionStatus === 'pending'">
+    <img [src]="'assets/images/uploads/' + pet.img" [alt]="pet.nome" class="card-img-top h-100 img-cover" [class.grayscale]="pet.adoptionStatus === 'pending'">
     <div *ngIf="pet.adoptionStatus === 'pending'" class="adoption-overlay">Em Processo de Adoção</div>
   </div>
   <div class="card-body">

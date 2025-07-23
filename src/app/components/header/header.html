@@ -11,20 +11,17 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/blog" routerLinkActive="active">Blog</a>
+        <li class="nav-item" *ngIf="isLoggedIn() && (user?.tipo === 'pessoa' || user?.tipo === 'ong' || user?.tipo === 'parceiro')">
+          <a class="nav-link" routerLink="/social" routerLinkActive="active">Social Pet</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/contato" routerLinkActive="active">Contato</a>
+          <a class="nav-link" routerLink="/blog" routerLinkActive="active">Blog</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/ongs" routerLinkActive="active">ONGs</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/partners" routerLinkActive="active">Parceiros</a>
-        </li>
-        <li class="nav-item" *ngIf="isLoggedIn() && (user?.tipo === 'pessoa' || user?.tipo === 'ong' || user?.tipo === 'parceiro')">
-          <a class="nav-link" routerLink="/social" routerLinkActive="active">Social Pet</a>
         </li>
         <li class="nav-item">
           <a class="nav-link btn-adote-aqui d-flex align-items-center" routerLink="/dashboard" routerLinkActive="active">

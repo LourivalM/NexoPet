@@ -3,7 +3,7 @@
     <span class="post-owner-name">{{ postOwnerName }}</span>
   </div>
   <div class="post-image-container">
-    <img [src]="imageUrl" [alt]="post.caption || 'Post image'">
+    <img [src]="imageUrl" [alt]="post.caption || 'Post image'" class="h-100 img-cover">
   </div>
   <div class="post-card-info">
     <p *ngIf="post.caption">{{ post.caption }}</p>

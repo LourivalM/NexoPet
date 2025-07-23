@@ -109,5 +109,19 @@
     "cargoRepresentante": "parceiro",
     "areaAtuacao": "parceiro",
     "tipo": "parceiro"
+  },
+  {
+    "id": 10,
+    "nickname": "Ford",
+    "nome": "Ford",
+    "nomeSocial": null,
+    "senha": "123456",
+    "email": "ford@ford",
+    "telefone": "(00) 00000-0000",
+    "cidade": "ford",
+    "estado": "ford",
+    "pais": "ford",
+    "tipo": "pessoa",
+    "imageUrl": "Napoelao1 anomacho.jpg"
   }
 ]

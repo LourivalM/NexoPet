@@ -36,7 +36,7 @@ export class RegisterPessoaFormComponent implements OnInit {
       cidade: ['', Validators.required],
       estado: ['', Validators.required],
       pais: ['', Validators.required],
-      lgpdConsent: [{ value: false, disabled: true }]
+      lgpdConsent: [false, Validators.requiredTrue]
     }, { validators: this.passwordMatchValidator });
   }
 

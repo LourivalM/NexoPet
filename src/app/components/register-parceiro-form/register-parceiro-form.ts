@@ -43,7 +43,7 @@ export class RegisterParceiroFormComponent implements OnInit {
       pais: ['', Validators.required],
       cargoRepresentante: ['', Validators.required],
       areaAtuacao: ['', Validators.required],
-      lgpdConsent: [{ value: false, disabled: true }]
+      lgpdConsent: [false, Validators.requiredTrue]
     }, { validators: this.passwordMatchValidator });
   }
 

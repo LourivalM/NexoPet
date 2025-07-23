@@ -68,3 +68,9 @@ a {
 a:hover {
     color: var(--green-light); /* Muda de cor no hover */
 }
+
+/* Classe para object-fit: cover */
+.img-cover {
+  width: 100%;
+  object-fit: cover;
+}

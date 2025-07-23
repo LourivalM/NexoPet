@@ -14,14 +14,14 @@ export class PhoneMaskDirective {
     let formattedValue = '';
 
     if (value.length > 0) {
-      if (value.length > 10) { // (XX) XXXXX-XXXX
+      if (value.length <= 2) { // (XX
+        formattedValue = `(${value}`;
+      } else if (value.length <= 7) { // (XX) XXXXX
+        formattedValue = `(${value.substring(0, 2)}) ${value.substring(2, 7)}`;
+      } else if (value.length <= 11) { // (XX) XXXXX-XXXX
         formattedValue = `(${value.substring(0, 2)}) ${value.substring(2, 7)}-${value.substring(7, 11)}`;
-      } else if (value.length > 6) { // (XX) XXXX-XXXX
-        formattedValue = `(${value.substring(0, 2)}) ${value.substring(2, 6)}-${value.substring(6, 10)}`;
-      } else if (value.length > 2) { // (XX) XXXX
-        formattedValue = `(${value.substring(0, 2)}) ${value.substring(2, 6)}`;
-      } else { // (XX)
-        formattedValue = `(${value.substring(0, 2)}`;
+      } else { // More than 11 digits, truncate to 11
+        formattedValue = `(${value.substring(0, 2)}) ${value.substring(2, 7)}-${value.substring(7, 11)}`;
       }
     }
 

@@ -99,3 +99,9 @@
   background-color: #FF8C00; /* Laranja escuro */
   border-color: #CC7000;
 }
+
+:host(.home-view) .post-image-container img {
+  height: 180px !important;
+  width: 100% !important;
+  object-fit: cover !important;
+}

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, inject, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject, OnInit, HostBinding } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Post } from '../../../models/post.model';
 import { PostService } from '../../../service/post.service';
@@ -15,9 +15,16 @@ import { ConfirmationModalComponent } from '../../modals/confirmation-modal/conf
 })
 export class PostCardComponent implements OnInit {
   @Input() post!: Post;
+  @Input() context: 'home' | 'default' = 'default';
   @Output() edit = new EventEmitter<Post>();
   @Output() delete = new EventEmitter<number>();
   @Output() liked = new EventEmitter<Post>();
+
+  @HostBinding('class.home-view')
+  get isHomeView() {
+    return this.context === 'home';
+  }
+
   currentUser: Usuario | null = null;
   postOwnerName: string = 'Desconhecido';
   postOwnerType: string = '';
