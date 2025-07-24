@@ -4,7 +4,7 @@
   <div *ngIf="currentUser">
     <div class="profile-picture-container">
       <img [src]="currentUser.imageUrl || 'assets/images/default-avatar.png'" alt="Foto de Perfil" class="profile-picture">
-      <button class="edit-icon" (click)="openImageSelector()"><i class="fas fa-pencil-alt"></i></button>
+      <input type="file" (change)="onFileSelected($event)" accept="image/*">
     </div>
 
     <!-- Modo de Visualização -->

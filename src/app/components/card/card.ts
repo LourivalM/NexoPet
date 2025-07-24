@@ -75,7 +75,7 @@ export class Card {
   onAdoptClick(): void {
     if (this.pet && this.pet.id !== -1) {
       const updatedPet: Pet = { ...this.pet, adoptionStatus: 'pending' };
-      this.petService.updatePet(updatedPet.id!, updatedPet).subscribe({
+      this.petService.updatePet(updatedPet.id!, updatedPet, null).subscribe({
         next: () => {
           alert('Sua solicitação foi enviada à ONG responsável. Ela entrará em contato em breve!');
           this.adoptionStatusChanged.emit(updatedPet);
@@ -91,7 +91,7 @@ export class Card {
   onCancelAdoptClick(): void {
     if (this.pet && this.pet.id !== -1) {
       const updatedPet: Pet = { ...this.pet, adoptionStatus: 'available' };
-      this.petService.updatePet(updatedPet.id!, updatedPet).subscribe({
+      this.petService.updatePet(updatedPet.id!, updatedPet, null).subscribe({
         next: () => {
           alert('Solicitação de adoção cancelada com sucesso!');
           this.adoptionStatusChanged.emit(updatedPet);

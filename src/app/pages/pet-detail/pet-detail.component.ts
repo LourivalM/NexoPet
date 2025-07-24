@@ -19,9 +19,10 @@ export class PetDetailComponent implements OnInit {
   ngOnInit(): void {
     const petId = Number(this.route.snapshot.paramMap.get('id'));
     if (petId) {
-      this.petService.getPets().subscribe(pets => {
-        this.pet = pets.find(p => p.id === petId);
+      this.petService.pets$.subscribe(pets => {
+        this.pet = pets.find((p: Pet) => p.id === petId);
       });
+      this.petService.loadPets(); // Garante que os pets sejam carregados
     }
   }
 }

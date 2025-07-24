@@ -23,6 +23,12 @@
     </div>
   </div>
 
+  <div class="mb-3">
+    <label for="image" class="form-label">Imagem do Produto:</label>
+    <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" class="form-control">
+    <img *ngIf="selectedImage" [src]="selectedImage" alt="Imagem selecionada" class="img-thumbnail mt-2" style="max-width: 150px;">
+  </div>
+
   <!-- partnerId será preenchido automaticamente pelo componente pai -->
 
   <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Salvar Produto</button>

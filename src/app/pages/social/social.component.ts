@@ -40,11 +40,13 @@ export class SocialComponent implements OnInit {
     this.showCreateForm = true;
   }
 
-  handleFormSubmit(postData: any): void {
+  handleFormSubmit(formData: { post: Post, file: File | null }): void {
+    const { post, file } = formData;
+
     if (this.postToEdit) {
       // Modo de Edição
       if (this.postToEdit.id !== undefined) {
-        this.postService.updatePost(this.postToEdit.id, postData).subscribe(() => {
+        this.postService.updatePost(this.postToEdit.id, post, file).subscribe(() => {
           this.showCreateForm = false;
           this.postToEdit = null;
           this.loadPosts();
@@ -55,13 +57,13 @@ export class SocialComponent implements OnInit {
       const user = this.userService.getUser();
       if (user) {
         const newPost: Post = {
-          ...postData,
+          ...post,
           userId: user.id,
           likes: 0,
           createdAt: new Date()
         };
 
-        this.postService.createPost(newPost).subscribe(() => {
+        this.postService.createPost(newPost, file).subscribe(() => {
           this.showCreateForm = false;
           this.loadPosts();
         });

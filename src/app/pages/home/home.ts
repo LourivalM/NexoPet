@@ -36,7 +36,8 @@ export class Home implements OnInit {
   parceiros$: Observable<Partner[]> | undefined; // Usar modelo Partner
 
   ngOnInit(): void {
-    this.pets$ = this.petService.getPets();
+    this.petService.loadPets(); // Carrega os pets no serviço
+    this.pets$ = this.petService.pets$; // Assina o BehaviorSubject do serviço
     this.posts$ = this.postService.getPosts().pipe(
       map(posts => posts.slice(0, 4))
     );

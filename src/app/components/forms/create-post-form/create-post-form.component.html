@@ -16,8 +16,8 @@
   </div>
 
   <div class="mb-3">
-    <label for="imageUrl" class="form-label">URL da Imagem:</label>
-    <input type="text" id="imageUrl" formControlName="imageUrl" class="form-control">
+    <label for="image" class="form-label">Imagem:</label>
+    <input type="file" id="image" (change)="onFileSelected($event)" class="form-control">
   </div>
 
   <button type="submit" class="btn btn-primary" [disabled]="postForm.invalid">Postar</button>

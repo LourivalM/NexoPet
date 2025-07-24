@@ -41,10 +41,12 @@ export class ProductManagementComponent implements OnInit {
     this.showProductForm = true;
   }
 
-  handleProductFormSubmit(product: Product): void {
+  handleProductFormSubmit(formData: { product: Product, file: File | null }): void {
+    const { product, file } = formData;
+
     if (this.productToEdit) {
       // Modo de Edição
-      this.productService.updateProduct(this.productToEdit.id, product).subscribe(() => {
+      this.productService.updateProduct(this.productToEdit.id, product, file).subscribe(() => {
         this.showProductForm = false;
         this.productToEdit = null;
         this.loadProducts();
@@ -54,7 +56,7 @@ export class ProductManagementComponent implements OnInit {
       const currentUser = this.userService.getUser();
       if (currentUser && currentUser.tipo === 'parceiro') {
         product.partnerId = currentUser.id;
-        this.productService.addProduct(product).subscribe(() => {
+        this.productService.addProduct(product, file).subscribe(() => {
           this.showProductForm = false;
           this.loadProducts();
         });

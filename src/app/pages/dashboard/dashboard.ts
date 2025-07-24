@@ -60,7 +60,7 @@ export class Dashboard implements OnInit{
   onAdoptClick(): void {
     if (this.petSelected && this.petSelected.id !== -1) {
       const updatedPet: Pet = { ...this.petSelected, adoptionStatus: 'pending' };
-      this.petService.updatePet(updatedPet.id!, updatedPet).subscribe({
+      this.petService.updatePet(updatedPet.id!, updatedPet, null).subscribe({
         next: () => {
           alert('Sua solicitação foi enviada à ONG responsável. Ela entrará em contato em breve!');
           this.pets = this.pets.map(p => p.id === updatedPet.id ? updatedPet : p);
@@ -77,7 +77,7 @@ export class Dashboard implements OnInit{
   onCancelAdoptClick(): void {
     if (this.petSelected && this.petSelected.id !== -1) {
       const updatedPet: Pet = { ...this.petSelected, adoptionStatus: 'available' };
-      this.petService.updatePet(updatedPet.id!, updatedPet).subscribe({
+      this.petService.updatePet(updatedPet.id!, updatedPet, null).subscribe({
         next: () => {
           alert('Solicitação de adoção cancelada com sucesso!');
           this.pets = this.pets.map(p => p.id === updatedPet.id ? updatedPet : p);

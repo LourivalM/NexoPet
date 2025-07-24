@@ -51,7 +51,7 @@ export class PostCardComponent implements OnInit {
   }
 
   get imageUrl(): string {
-    return `/assets/images/uploads/${this.post.imageUrl}`;
+    return this.post.imageUrl;
   }
 
   onLikeClick(): void {

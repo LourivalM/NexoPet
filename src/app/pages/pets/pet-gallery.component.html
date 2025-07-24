@@ -4,4 +4,8 @@
   <div *ngIf="pets.length === 0" class="no-pets-message">
     <p>Nenhum pet disponível para adoção no momento.</p>
   </div>
+
+  <div class="pet-list">
+    <app-card *ngFor="let pet of pets" [pet]="pet"></app-card>
+  </div>
 </div>

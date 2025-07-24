@@ -1,5 +1,5 @@
 <div *ngIf="pet" class="pet-detail-card">
-  <img [src]="'/assets/images/uploads/' + pet.img" [alt]="'Foto de ' + pet.nome" [class.grayscale]="pet.adoptionStatus === 'pending'">
+  <img [src]="pet.img" [alt]="'Foto de ' + pet.nome" [class.grayscale]="pet.adoptionStatus === 'pending'">
   <div *ngIf="pet.adoptionStatus === 'pending'" class="adoption-overlay">Em Processo de Adoção</div>
   <div class="pet-detail-card-info">
     <h2>{{ pet.nome }}</h2>

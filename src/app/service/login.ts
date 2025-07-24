@@ -9,8 +9,15 @@ import { environment } from '../../environments/environment';
 })
 export class loginService {
   http = inject(HttpClient);
+  private uploadUrl = `${environment.apiUrl}/upload`;
 
   login(login: any, senha: any): Observable<Usuario> {
     return this.http.post<Usuario>(`${environment.apiUrl}/login`, { login, senha });
+  }
+
+  uploadImage(file: File): Observable<{ imageUrl: string }> {
+    const formData = new FormData();
+    formData.append('image', file, file.name);
+    return this.http.post<{ imageUrl: string }>(this.uploadUrl, formData);
   }
 }

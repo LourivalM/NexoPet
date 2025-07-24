@@ -9,7 +9,7 @@
       <div class="pet-card-header">
         <span class="pet-name">{{ pet.nome }}</span>
       </div>
-      <img [src]="'assets/images/uploads/' + pet.img" alt="{{ pet.nome }}">
+      <img [src]="pet.img" alt="{{ pet.nome }}">
       <div class="pet-details">
         <p>Espécie: {{ pet.especie }}</p>
         <p>Raça: {{ pet.raca }}</p>

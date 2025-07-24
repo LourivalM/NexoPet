@@ -12,15 +12,15 @@ import { Post } from '../../../../app/models/post.model';
 })
 export class CreatePostFormComponent implements OnInit, OnChanges {
   @Input() initialData: Post | null = null;
-  @Output() formSubmit = new EventEmitter<Post>();
+  @Output() formSubmit = new EventEmitter<{ post: Post, file: File | null }>();
   postForm: FormGroup;
+  private selectedFile: File | null = null;
 
   constructor(private fb: FormBuilder) {
     this.postForm = this.fb.group({
       id: [0],
       title: ['', Validators.required],
       content: ['', Validators.required],
-      imageUrl: [''],
       userId: [0],
       likes: [0],
       createdAt: [new Date()]
@@ -35,9 +35,16 @@ export class CreatePostFormComponent implements OnInit, OnChanges {
     }
   }
 
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
+
   onSubmit(): void {
     if (this.postForm.valid) {
-      this.formSubmit.emit(this.postForm.value);
+      this.formSubmit.emit({ post: this.postForm.value, file: this.selectedFile });
     }
   }
 }

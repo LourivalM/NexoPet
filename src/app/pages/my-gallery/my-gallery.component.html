@@ -4,8 +4,7 @@
   <div class="gallery-grid">
     <ng-container *ngIf="userPosts$ | async as posts">
       <div *ngFor="let post of posts" class="gallery-item">
-        <app-post-card [post]="post"></app-post-card>
-        <button class="delete-photo-button" (click)="deletePost(post.id)">Deletar</button>
+        <app-post-card [post]="post" (delete)="deletePost($event)"></app-post-card>
       </div>
       <div *ngIf="posts.length === 0" class="no-photos-message">
         <p>Você ainda não tem fotos na sua galeria.</p>

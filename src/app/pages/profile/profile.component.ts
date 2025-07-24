@@ -3,22 +3,24 @@ import { CommonModule } from '@angular/common';
 import { UserService } from '../../service/user.service';
 import { Usuario } from '../../models/user';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ImageSelectorModalComponent } from '../../components/modals/image-selector-modal.component';
-import { MatDialog } from '@angular/material/dialog';
+import { loginService } from '../../service/login'; // Removido .ts
+import { switchMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs'; // Adicionado Observable
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ImageSelectorModalComponent],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
   userService = inject(UserService);
-  dialog = inject(MatDialog);
+  loginService = inject(loginService);
   currentUser: Usuario | null = null;
   isEditing: boolean = false;
   profileForm: FormGroup;
+  selectedFile: File | null = null;
 
   constructor() {
     this.profileForm = new FormGroup({
@@ -55,45 +57,43 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
+
   saveProfile(): void {
     if (this.profileForm.valid && this.currentUser) {
       const updatedData = this.profileForm.value;
-      this.userService.updateUser(this.currentUser.id, updatedData).subscribe({
-        next: (user) => {
+
+      let uploadImageObservable: Observable<{ imageUrl: string }> = of({ imageUrl: this.currentUser.imageUrl || '' });
+
+      if (this.selectedFile) {
+        uploadImageObservable = this.loginService.uploadImage(this.selectedFile);
+      }
+
+      uploadImageObservable.pipe(
+        switchMap((uploadResponse: { imageUrl: string }) => {
+          if (this.selectedFile) {
+            updatedData.imageUrl = uploadResponse.imageUrl;
+          }
+          return this.userService.updateUser(this.currentUser!.id, updatedData);
+        })
+      ).subscribe({
+        next: (user: Usuario) => {
           this.currentUser = user;
+          this.userService.setCurrentUser(user); // Atualiza o usuário no serviço
           this.isEditing = false;
+          this.selectedFile = null; // Limpa o arquivo selecionado
           alert('Perfil atualizado com sucesso!');
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error('Erro ao atualizar perfil:', err);
           alert('Erro ao atualizar perfil. Tente novamente.');
         }
       });
     }
-  }
-
-  openImageSelector(): void {
-    const dialogRef = this.dialog.open(ImageSelectorModalComponent);
-
-    dialogRef.componentInstance.imageSelected.subscribe((imageName: string) => {
-      if (this.currentUser) {
-        const updatedData = { imageUrl: imageName };
-        this.userService.updateUser(this.currentUser.id, updatedData).subscribe({
-          next: (user) => {
-            this.currentUser = user;
-            dialogRef.close();
-            alert('Foto de perfil atualizada com sucesso!');
-          },
-          error: (err) => {
-            console.error('Erro ao atualizar foto de perfil:', err);
-            alert('Erro ao atualizar foto de perfil. Tente novamente.');
-          }
-        });
-      }
-    });
-
-    dialogRef.componentInstance.close.subscribe(() => {
-      dialogRef.close();
-    });
   }
 }
