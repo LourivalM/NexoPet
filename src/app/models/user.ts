@@ -17,4 +17,5 @@ export type Usuario = {
     email: string;
     tipo: 'pessoa' | 'ong' | 'parceiro'; // Adicionado 'parceiro'
     imageUrl?: string; // Adicionado para foto de perfil
+    bio?: string; // Adicionado para biografia do usuário
 }

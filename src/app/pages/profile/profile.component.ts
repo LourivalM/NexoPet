@@ -37,6 +37,7 @@ export class ProfileComponent implements OnInit {
       bairro: new FormControl(''),
       cargoRepresentante: new FormControl(''),
       areaAtuacao: new FormControl(''),
+      bio: new FormControl(''),
     });
   }
 

@@ -1,4 +1,5 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()" class="login-form-wrapper">
+  <button type="button" class="close-modal-btn" (click)="onCloseButtonClick()">×</button>
   <div class="login-logo-container">
     <img src="/img/NexoIMG/NexiPeticone logo fundo branco.png" alt="NexoPet Logo" class="login-logo">
   </div>
@@ -23,8 +24,8 @@
 </form>
 
 <!-- Modal de Recuperação de Senha -->
-<div *ngIf="showForgotPasswordModal" class="modal-overlay">
-  <div class="modal-content">
+<div *ngIf="showForgotPasswordModal" class="modal-overlay" (click)="closeForgotPasswordModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
     <form [formGroup]="forgotPasswordForm" (ngSubmit)="onSubmitForgotPassword()">
       <h2>Recuperar Senha</h2>
       <p>Digite seu e-mail para receber um link de recuperação.</p>

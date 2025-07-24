@@ -4,21 +4,24 @@
     "nickname": "admin",
     "senha": "123",
     "email": "admin@ong.com",
-    "tipo": "ong"
+    "tipo": "ong",
+    "bio": ""
   },
   {
     "id": 2,
     "nickname": "user",
     "senha": "123",
     "email": "user@email.com",
-    "tipo": "pessoa"
+    "tipo": "pessoa",
+    "bio": ""
   },
   {
     "id": 3,
     "nickname": "parceiro",
     "senha": "123",
     "email": "parceiro@email.com",
-    "tipo": "parceiro"
+    "tipo": "parceiro",
+    "bio": ""
   },
   {
     "id": 4,
@@ -31,7 +34,8 @@
     "cidade": "teste",
     "estado": "teste",
     "pais": "teste",
-    "tipo": "pessoa"
+    "tipo": "pessoa",
+    "bio": ""
   },
   {
     "id": 5,
@@ -44,7 +48,8 @@
     "cidade": "a",
     "estado": "a",
     "pais": "a",
-    "tipo": "pessoa"
+    "tipo": "pessoa",
+    "bio": ""
   },
   {
     "id": 6,
@@ -57,7 +62,8 @@
     "cidade": "Salvador",
     "estado": "BA",
     "pais": "Brazil",
-    "tipo": "pessoa"
+    "tipo": "pessoa",
+    "bio": ""
   },
   {
     "id": 7,
@@ -70,7 +76,8 @@
     "cidade": "salvador",
     "estado": "ba",
     "pais": "Brasil",
-    "tipo": "pessoa"
+    "tipo": "pessoa",
+    "bio": ""
   },
   {
     "id": 8,
@@ -90,7 +97,8 @@
     "areaAtuacao": "ong",
     "tipo": "ong",
     "nome": "",
-    "nomeSocial": ""
+    "nomeSocial": "",
+    "bio": ""
   },
   {
     "id": 9,
@@ -108,7 +116,8 @@
     "pais": "parceiro",
     "cargoRepresentante": "parceiro",
     "areaAtuacao": "parceiro",
-    "tipo": "parceiro"
+    "tipo": "parceiro",
+    "bio": ""
   },
   {
     "id": 10,
@@ -122,7 +131,8 @@
     "estado": "ford",
     "pais": "ford",
     "tipo": "pessoa",
-    "imageUrl": "Napoelao1 anomacho.jpg"
+    "imageUrl": "Napoelao1 anomacho.jpg",
+    "bio": ""
   },
   {
     "id": 11,
@@ -135,6 +145,7 @@
     "cidade": "LIVE",
     "estado": "LIVE",
     "pais": "LIVE",
-    "tipo": "pessoa"
+    "tipo": "pessoa",
+    "bio": ""
   }
 ]

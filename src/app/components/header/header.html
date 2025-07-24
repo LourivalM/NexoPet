@@ -47,7 +47,7 @@
 </nav>
 
 <div *ngIf="showLoginForm" class="login-form-container" (click)="onContainerClick($event)">
-  <app-login-form (loggedIn)="onLoggedIn()" (registerClicked)="toggleRegisterSelection()" (click)="$event.stopPropagation()"></app-login-form>
+  <app-login-form (loggedIn)="onLoggedIn()" (registerClicked)="toggleRegisterSelection()" (closeLoginForm)="toggleLoginForm()" (click)="$event.stopPropagation()"></app-login-form>
 </div>
 
 <app-register-selection *ngIf="showRegisterSelection" (closeSelection)="onCloseRegisterSelection()"></app-register-selection>

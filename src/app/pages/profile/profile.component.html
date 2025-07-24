@@ -36,6 +36,9 @@
         <p><strong>Área de Atuação:</strong> {{ currentUser.areaAtuacao }}</p>
       </ng-container>
 
+      <!-- Bio para todos os tipos de usuário -->
+      <p *ngIf="currentUser.bio"><strong>Bio:</strong> {{ currentUser.bio }}</p>
+
       <button (click)="toggleEditMode()">Editar Perfil</button>
     </div>
 
@@ -124,6 +127,11 @@
             <input id="areaAtuacao" type="text" formControlName="areaAtuacao">
           </div>
         </ng-container>
+
+        <div>
+          <label for="bio">Bio:</label>
+          <textarea id="bio" formControlName="bio" placeholder="Fale um pouco sobre você, sua ONG ou seu negócio. Qual a sua história com os pets?"></textarea>
+        </div>
 
         <button type="submit" [disabled]="!profileForm.valid">Salvar</button>
         <button type="button" (click)="toggleEditMode()">Cancelar</button>

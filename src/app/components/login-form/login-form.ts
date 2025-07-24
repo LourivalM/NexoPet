@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-form.css']
 })
 export class LoginForm {
+  @Output() closeLoginForm = new EventEmitter<void>();
   @Output() loggedIn = new EventEmitter<void>();
   @Output() registerClicked = new EventEmitter<void>();
 
@@ -81,5 +82,9 @@ export class LoginForm {
         }
       });
     }
+  }
+
+  onCloseButtonClick(): void {
+    this.closeLoginForm.emit();
   }
 }

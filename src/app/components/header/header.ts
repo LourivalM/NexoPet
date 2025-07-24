@@ -58,7 +58,7 @@ export class Header implements OnInit {
 
   onContainerClick(event: Event): void {
     // Fecha o modal se o clique for fora do formulário
-    if ((event.target as HTMLElement).classList.contains('login-form-container')) {
+    if (event.target === event.currentTarget) {
       this.showLoginForm = false;
     }
   }

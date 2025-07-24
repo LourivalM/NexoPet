@@ -8,6 +8,7 @@
 }
 
 .login-form-wrapper {
+    position: relative; /* Adicionado para posicionar o botão de fechar */
     padding: 1.5rem; /* Aumentado o padding para melhor visualização */
     background-color: var(--white);
     display: flex;
@@ -209,4 +210,20 @@
   justify-content: flex-end;
   gap: 1rem;
   margin-top: 1.5rem;
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  color: #333;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1060; /* Garante que o botão esteja acima do conteúdo do modal */
+}
+
+.close-modal-btn:hover {
+  color: #000;
 }
