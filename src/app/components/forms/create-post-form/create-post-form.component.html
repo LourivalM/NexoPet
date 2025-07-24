@@ -8,14 +8,6 @@
   </div>
 
   <div class="mb-3">
-    <label for="content" class="form-label">Conteúdo:</label>
-    <textarea id="content" formControlName="content" class="form-control"></textarea>
-    <div *ngIf="postForm.get('content')?.invalid && postForm.get('content')?.touched" class="text-danger">
-      Conteúdo é obrigatório.
-    </div>
-  </div>
-
-  <div class="mb-3">
     <label for="image" class="form-label">Imagem:</label>
     <input type="file" id="image" (change)="onFileSelected($event)" class="form-control">
   </div>

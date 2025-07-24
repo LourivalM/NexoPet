@@ -5,6 +5,7 @@ import { PostService } from '../../service/post.service';
 import { CreatePostFormComponent } from '../../components/forms/create-post-form/create-post-form.component';
 import { PostCardComponent } from '../../components/card/post-card/post-card.component';
 import { UserService } from '../../service/user.service';
+import { map } from 'rxjs/operators'; // Importar o operador map
 
 @Component({
   selector: 'app-social',
@@ -25,7 +26,9 @@ export class SocialComponent implements OnInit {
   }
 
   loadPosts(): void {
-    this.postService.getPosts().subscribe(posts => {
+    this.postService.getPosts().pipe(
+      map((posts: Post[]) => posts.reverse()) // Reverte a ordem dos posts e tipa
+    ).subscribe((posts: Post[]) => {
       this.posts = posts;
     });
   }

@@ -20,7 +20,7 @@ export class CreatePostFormComponent implements OnInit, OnChanges {
     this.postForm = this.fb.group({
       id: [0],
       title: ['', Validators.required],
-      content: ['', Validators.required],
+      imageUrl: [''],
       userId: [0],
       likes: [0],
       createdAt: [new Date()]
